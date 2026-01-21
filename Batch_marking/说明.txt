@@ -1,0 +1,36 @@
+运行里面的代码，会在数据库的Traffic表中的Reason字段进行修改，填入对应目录名称作为原因
+
+一、缺货：
+通过数据库导出
+·查询sql代码：
+SELECT *
+FROM `ROA1_IT`
+WHERE detail_status = 'Out of stock';
+·注意：
+格式选择CSV文件
+每次导入导对应国家目录是要提前清空之前的文件
+
+二、二次限价：
+通过temu后台pricing health直接导出
+
+!!! 注意，手动Reason中只能填写 !!!
+OK(Out_of_stock)
+OK(Secondary_traffic_restricted)
+Out_of_stock
+Secondary_traffic_restricted
+
+
+cursor提示词
+@ROA1_NL 再这个目录中增加add.py的代码，点击的时候会联系数据库的ROA1_NL表（来自于目录名称），找到列Status不为空值的所有goods_id，然后去重。如果这些goods_id同时存在这个目录中的 @NL.csv 文件的goods_id列之中（如果多个文件要全部遍历，遍历当前国家之中的全部文件），就在数据库ROA1_NL表（不同国家用不同表）中对应goods_id和对应date_label为查询日期的昨天（2025-12-16）的Reason字段标记为“Out_of_stock”
+返回：
+已创建 add.py 文件。代码功能：
+从目录名获取表名（ROA1_NL）
+使用 DEFAULT_SALES_DB_CONFIG 连接数据库
+查询表中 Status 不为空的所有 goods_id 并去重
+读取目录中所有 CSV 文件的 goods_id
+找出同时存在于数据库和 CSV 中的 goods_id
+更新这些 goods_id 在 2025-12-16 的记录的 Reason 字段为 "Out_of_stock"
+
+ @ROA1_NL在这个目录中增加add.py的代码，点击的时候会联系数据库的ROA1_NL表（来自于目录名称），找到列Status不为空值的所有goods_id，然后去重。如果这些goods_id同时存在这个目录中的 @NL2.xlsx 文件的Goods ID列之中（如果多个文件要全部遍历，遍历当前国家之中的全部文件），就在数据库ROA1_NL表（不同国家用不同表）中对应goods_id和对应date_label为查询日期的昨天（2025-12-16）的Reason字段标记为“Secondary_traffic_restricted”” 
+
+如果"昨天"没有数据，就标记到这个goods id最近的有数据的时间上

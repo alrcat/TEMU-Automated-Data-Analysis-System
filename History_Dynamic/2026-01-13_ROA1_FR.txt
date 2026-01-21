@@ -1,0 +1,128 @@
+================================================================================
+动销品管理记录 - 2026-01-13
+表名: ROA1_FR
+记录时间: 2026-01-15 17:09:15
+================================================================================
+
+【统计信息】
+日期：2026-01-13
+前一天上升期：11个
+计算上升期：0个（前一天上升期 + 新增上升期 + 更新为上升期 + 由非上升期重回上升期 - 由上升期到非上升期）
+实际上升期：0个（选定日期Status=1的数量）
+差值：0个
+非上升期：409个
+新增上升期：0个
+新增非上升期：0个
+更新为上升期：0个
+由非上升期重回上升期：0个
+！！！由上升期到非上升期：11个
+
+【！！！由上升期到非上升期商品ID】
+商品数量: 11个
+goods_id: 603452482629945, 603607839658953, 603688705862923, 603701590757140, 603733266112553, 603967878718093, 604029082025376, 604030155727874, 604043577549363, 604085990307586, 604198196362102
+
+【非上升期商品】
+商品数量: 100个
+
+603306990610108 - 加入时间: 2025-12-17, Reason: Secondary_traffic_restricted
+603323633637769 - 加入时间: 2025-11-24, Reason: Secondary_traffic_restricted
+603330076096248 - 加入时间: 2025-12-04, Reason: Out_of_stock
+603345108451752 - 加入时间: 2025-12-11, Reason: Out_of_stock
+603347255981378 - 加入时间: 2025-10-05, Reason: Secondary_traffic_restricted
+603356382780120 - 加入时间: 2025-12-06, Reason: None
+603356919635450 - 加入时间: 2025-12-29, Reason: Secondary_traffic_restricted
+603367321481738 - 加入时间: 2025-12-02, Reason: Secondary_traffic_restricted
+603378931336593 - 加入时间: 2025-11-30, Reason: Blocked
+603415438528852 - 加入时间: 2025-12-01, Reason: Secondary_traffic_restricted
+603418861112625 - 加入时间: 2025-11-29, Reason: Secondary_traffic_restricted
+603420807238222 - 加入时间: 2025-11-15, Reason: Blocked
+603428323486093 - 加入时间: 2025-11-29, Reason: Out_of_stock
+603440134631294 - 加入时间: 2025-11-28, Reason: None
+603443892741227 - 加入时间: 2025-11-26, Reason: Out_of_stock
+603460535720673 - 加入时间: 2025-10-31, Reason: Secondary_traffic_restricted
+603462683166194 - 加入时间: 2025-11-14, Reason: Secondary_traffic_restricted
+603466978154121 - 加入时间: 2025-11-29, Reason: Secondary_traffic_restricted
+603528718302167 - 加入时间: 2025-11-09, Reason: Secondary_traffic_restricted
+603538650443087 - 加入时间: 2025-12-07, Reason: Blocked
+603539992606934 - 加入时间: 2025-11-23, Reason: Secondary_traffic_restricted
+603547710100622 - 加入时间: 2025-12-02, Reason: Secondary_traffic_restricted
+603578647329891 - 加入时间: 2025-12-05, Reason: Secondary_traffic_restricted
+603599585305781 - 加入时间: 2025-11-15, Reason: Secondary_traffic_restricted
+603621597002191 - 加入时间: 2025-12-12, Reason: Secondary_traffic_restricted
+603635018785356 - 加入时间: 2025-12-01, Reason: Secondary_traffic_restricted
+603636092482087 - 加入时间: 2025-11-03, Reason: Secondary_traffic_restricted (Blocked)
+603641461207901 - 加入时间: 2025-11-23, Reason: Secondary_traffic_restricted
+603655956718955 - 加入时间: 2025-12-05, Reason: None
+603677431530137 - 加入时间: 2025-10-19, Reason: Secondary_traffic_restricted (Blocked)
+603679579072654 - 加入时间: 2025-11-18, Reason: Secondary_traffic_restricted
+603682800258594 - 加入时间: 2025-12-12, Reason: None
+603688705867107 - 加入时间: 2025-11-25, Reason: Secondary_traffic_restricted
+603710918875079 - 加入时间: 2025-11-23, Reason: Secondary_traffic_restricted
+603720381250504 - 加入时间: 2025-10-26, Reason: Secondary_traffic_restricted
+603724676178475 - 加入时间: 2025-11-04, Reason: Secondary_traffic_restricted
+603726286796911 - 加入时间: 2025-10-29, Reason: Secondary_traffic_restricted
+603737561118299 - 加入时间: 2025-11-09, Reason: Secondary_traffic_restricted
+603741856069157 - 加入时间: 2025-11-05, Reason: Secondary_traffic_restricted
+603744540424544 - 加入时间: 2025-11-16, Reason: Secondary_traffic_restricted
+603754740945428 - 加入时间: 2025-11-23, Reason: Secondary_traffic_restricted
+603766015289520 - 加入时间: 2025-12-05, Reason: Secondary_traffic_restricted
+603769236470667 - 加入时间: 2025-10-05, Reason: Secondary_traffic_restricted
+603802522504043 - 加入时间: 2025-11-28, Reason: Secondary_traffic_restricted
+603826144811342 - 加入时间: 2025-11-09, Reason: Secondary_traffic_restricted
+603839566603049 - 加入时间: 2025-10-30, Reason: Out_of_stock
+603852451502298 - 加入时间: 2025-11-24, Reason: Blocked
+603856209591024 - 加入时间: 2025-12-07, Reason: Secondary_traffic_restricted (Blocked)
+603863188873441 - 加入时间: 2025-11-17, Reason: Secondary_traffic_restricted (Blocking)
+603863725750664 - 加入时间: 2025-12-04, Reason: Out_of_stock
+603866410126687 - 加入时间: 2025-12-06, Reason: Secondary_traffic_restricted
+603870168243092 - 加入时间: 2025-11-29, Reason: Secondary_traffic_restricted
+603876073778575 - 加入时间: 2025-11-28, Reason: Secondary_traffic_restricted
+603881979403687 - 加入时间: 2025-12-10, Reason: None
+603907749172779 - 加入时间: 2025-11-20, Reason: Secondary_traffic_restricted
+603930834644952 - 加入时间: 2025-12-02, Reason: Secondary_traffic_restricted
+603946403858914 - 加入时间: 2025-12-08, Reason: Secondary_traffic_restricted
+603948551362845 - 加入时间: 2025-11-06, Reason: Secondary_traffic_restricted
+603952309499990 - 加入时间: 2025-12-11, Reason: Out_of_stock
+603967878718093 - 加入时间: 2025-12-04, Reason: Secondary_traffic_restricted
+603967878735526 - 加入时间: 2025-12-01, Reason: None
+603999554094772 - 加入时间: 2025-11-11, Reason: Secondary_traffic_restricted
+604003849051640 - 加入时间: 2025-11-28, Reason: Secondary_traffic_restricted
+604020492049401 - 加入时间: 2025-10-15, Reason: Secondary_traffic_restricted
+604023176450583 - 加入时间: 2025-11-14, Reason: Out_of_stock
+604030692602861 - 加入时间: 2025-11-28, Reason: Secondary_traffic_restricted
+604033913861925 - 加入时间: 2025-12-05, Reason: Secondary_traffic_restricted
+604039819425299 - 加入时间: 2025-11-06, Reason: Secondary_traffic_restricted
+604085453485918 - 加入时间: 2025-12-23, Reason: Secondary_traffic_restricted (Blocked)
+604085990307586 - 加入时间: 2025-12-04, Reason: Blocked
+604091895926869 - 加入时间: 2025-12-04, Reason: Secondary_traffic_restricted
+604095117154721 - 加入时间: 2025-12-05, Reason: Out_of_stock
+604100485863043 - 加入时间: 2025-12-16, Reason: Secondary_traffic_restricted
+604107465146953 - 加入时间: 2025-11-08, Reason: Blocked
+604109075764855 - 加入时间: 2025-12-28, Reason: Secondary_traffic_restricted
+604161689134798 - 加入时间: 2025-12-01, Reason: Blocked
+604172963391957 - 加入时间: 2025-11-27, Reason: Out_of_stock
+604181553361271 - 加入时间: 2025-10-26, Reason: Secondary_traffic_restricted
+604185311464262 - 加入时间: 2025-12-03, Reason: Secondary_traffic_restricted
+604192827609043 - 加入时间: 2025-11-21, Reason: Secondary_traffic_restricted
+604194438219378 - 加入时间: 2025-10-12, Reason: Out_of_stock
+604198196362102 - 加入时间: 2026-01-05, Reason: Secondary_traffic_restricted
+604198733216324 - 加入时间: 2025-11-19, Reason: Blocked
+604204101916828 - 加入时间: 2025-11-07, Reason: Secondary_traffic_restricted
+604221281827925 - 加入时间: 2025-11-11, Reason: Out_of_stock
+604232556053216 - 加入时间: 2025-11-20, Reason: Secondary_traffic_restricted
+604244367222542 - 加入时间: 2025-11-02, Reason: Out_of_stock
+604252084791138 - 加入时间: 2025-11-09, Reason: Secondary_traffic_restricted
+604257788988741 - 加入时间: 2025-12-02, Reason: Secondary_traffic_restricted
+604258862771553 - 加入时间: 2025-12-28, Reason: Blocked
+604329394166711 - 加入时间: 2025-12-03, Reason: Secondary_traffic_restricted
+604349593941184 - 加入时间: 2025-10-27, Reason: Out_of_stock
+604355499531666 - 加入时间: 2025-12-05, Reason: Secondary_traffic_restricted
+604355499538478 - 加入时间: 2025-11-26, Reason: Blocked
+604360868229680 - 加入时间: 2025-10-30, Reason: Secondary_traffic_restricted
+604363015726706 - 加入时间: 2025-12-20, Reason: Secondary_traffic_restricted
+604371068750407 - 加入时间: 2025-11-30, Reason: Secondary_traffic_restricted
+604375900621847 - 加入时间: 2025-11-14, Reason: Secondary_traffic_restricted
+604380933810334 - 加入时间: 2025-12-30, Reason: Out_of_stock
+604386101159419 - 加入时间: 2025-12-14, Reason: Secondary_traffic_restricted
+
+================================================================================

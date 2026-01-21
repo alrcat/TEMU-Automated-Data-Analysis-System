@@ -1,0 +1,286 @@
+{
+  "statistics": {
+    "date": "2026-01-13",
+    "rising_count": 1,
+    "declined_count": 426,
+    "new_rising": 0,
+    "new_declined": 0,
+    "updated_to_rising": 0,
+    "back_to_rising": 1,
+    "declined_from_rising": 10,
+    "special_notes": [
+      "goods id 603524960252619查询日期的前一日(2026-01-12)单独没有status数据，可能缺货下架了",
+      "goods id 603680115935982查询日期的前一日(2026-01-12)单独没有status数据，可能缺货下架了",
+      "goods id 603724139343999查询日期的前一日(2026-01-12)单独没有status数据，可能缺货下架了",
+      "goods id 603801985636247查询日期的前一日(2026-01-12)单独没有status数据，可能缺货下架了",
+      "goods id 603883589983695查询日期的前一日(2026-01-12)单独没有status数据，可能缺货下架了",
+      "goods id 604003849047286查询日期的前一日(2026-01-12)单独没有status数据，可能缺货下架了",
+      "goods id 604048946244037查询日期的前一日(2026-01-12)单独没有status数据，可能缺货下架了",
+      "goods id 604075789753313查询日期的前一日(2026-01-12)单独没有status数据，可能缺货下架了",
+      "goods id 604146656714352查询日期的前一日(2026-01-12)单独没有status数据，可能缺货下架了",
+      "goods id 604196585737355查询日期的前一日(2026-01-12)单独没有status数据，可能缺货下架了",
+      "goods id 604283021974638查询日期的前一日(2026-01-12)单独没有status数据，可能缺货下架了"
+    ],
+    "elapsed_time": 41.62199807167053
+  },
+  "rising": {
+    "goods_info": [],
+    "summary": {}
+  },
+  "declined": {
+    "goods_info": [
+      {
+        "goods_id": "603306453776259",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-19"
+      },
+      {
+        "goods_id": "603314506828325",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-25"
+      },
+      {
+        "goods_id": "603327391735530",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-05"
+      },
+      {
+        "goods_id": "603409533008324",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-25"
+      },
+      {
+        "goods_id": "603452482650318",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-10-17"
+      },
+      {
+        "goods_id": "603466978135470",
+        "reason": "None",
+        "join_date": "2025-10-29"
+      },
+      {
+        "goods_id": "603471273106281",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-10-19"
+      },
+      {
+        "goods_id": "603507780379360",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-15"
+      },
+      {
+        "goods_id": "603507780380512",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-10-25"
+      },
+      {
+        "goods_id": "603560393682204",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-30"
+      },
+      {
+        "goods_id": "603576499830640",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-04"
+      },
+      {
+        "goods_id": "603578647287820",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-02"
+      },
+      {
+        "goods_id": "603613007063519",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-07"
+      },
+      {
+        "goods_id": "603619449527264",
+        "reason": "Blocked (Children)",
+        "join_date": "2025-10-24"
+      },
+      {
+        "goods_id": "603621596957529",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-07"
+      },
+      {
+        "goods_id": "603633408179507",
+        "reason": "Out_of_stock",
+        "join_date": "2025-11-13"
+      },
+      {
+        "goods_id": "603688168985531",
+        "reason": "Blocked",
+        "join_date": "2025-10-28"
+      },
+      {
+        "goods_id": "603727360561717",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-10-25"
+      },
+      {
+        "goods_id": "603728971169311",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-06"
+      },
+      {
+        "goods_id": "603740245436184",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-10-26"
+      },
+      {
+        "goods_id": "603800375033754",
+        "reason": "Out_of_stock",
+        "join_date": "2025-11-07"
+      },
+      {
+        "goods_id": "603801985636247",
+        "reason": "Blocked",
+        "join_date": "2025-11-21"
+      },
+      {
+        "goods_id": "603821849817640",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-05"
+      },
+      {
+        "goods_id": "603834734717812",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-01"
+      },
+      {
+        "goods_id": "603873926347197",
+        "reason": "Out_of_stock",
+        "join_date": "2025-11-12"
+      },
+      {
+        "goods_id": "603890032436844",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-27"
+      },
+      {
+        "goods_id": "603902917313780",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-10-17"
+      },
+      {
+        "goods_id": "603932982145278",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-03"
+      },
+      {
+        "goods_id": "603945867014438",
+        "reason": "Blocked",
+        "join_date": "2025-11-02"
+      },
+      {
+        "goods_id": "603960899385563",
+        "reason": "Out_of_stock",
+        "join_date": "2025-11-23"
+      },
+      {
+        "goods_id": "604003849076516",
+        "reason": "Blocked (Children)",
+        "join_date": "2025-11-29"
+      },
+      {
+        "goods_id": "604029618858815",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-02"
+      },
+      {
+        "goods_id": "604036061356938",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-03"
+      },
+      {
+        "goods_id": "604066126111985",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-10-17"
+      },
+      {
+        "goods_id": "604074716008041",
+        "reason": "Blocked (Children)",
+        "join_date": "2025-11-19"
+      },
+      {
+        "goods_id": "604080084777782",
+        "reason": "Blocked",
+        "join_date": "2025-11-29"
+      },
+      {
+        "goods_id": "604081158518752",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-13"
+      },
+      {
+        "goods_id": "604140214280310",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-12"
+      },
+      {
+        "goods_id": "604171352784549",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-19"
+      },
+      {
+        "goods_id": "604171889668196",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-04"
+      },
+      {
+        "goods_id": "604179942742258",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-10-30"
+      },
+      {
+        "goods_id": "604214302485195",
+        "reason": "Blocked",
+        "join_date": "2025-10-29"
+      },
+      {
+        "goods_id": "604227187360348",
+        "reason": "Out_of_stock",
+        "join_date": "2025-11-09"
+      },
+      {
+        "goods_id": "604242756662811",
+        "reason": "Out_of_stock",
+        "join_date": "2025-11-29"
+      },
+      {
+        "goods_id": "604248662198873",
+        "reason": "Normal",
+        "join_date": "2025-11-11"
+      },
+      {
+        "goods_id": "604304496792517",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-28"
+      },
+      {
+        "goods_id": "604325971638522",
+        "reason": "Normal",
+        "join_date": "2025-11-12"
+      },
+      {
+        "goods_id": "604367310681100",
+        "reason": "Out_of_stock",
+        "join_date": "2025-11-01"
+      },
+      {
+        "goods_id": "604373216294439",
+        "reason": "Blocked",
+        "join_date": "2025-10-28"
+      }
+    ],
+    "summary": {
+      "total_records": 3557,
+      "unique_goods": 49,
+      "min_date": "2025-10-16",
+      "max_date": "2026-01-13",
+      "date_range": 90
+    }
+  }
+}

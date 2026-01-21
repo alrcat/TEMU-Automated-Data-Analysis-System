@@ -1,0 +1,81 @@
+================================================================================
+动销品管理记录 - 2026-01-13
+表名: ROA1_DE
+记录时间: 2026-01-15 17:14:34
+================================================================================
+
+【统计信息】
+日期：2026-01-13
+前一天上升期：10个
+计算上升期：1个（前一天上升期 + 新增上升期 + 更新为上升期 + 由非上升期重回上升期 - 由上升期到非上升期）
+实际上升期：1个（选定日期Status=1的数量）
+差值：0个
+非上升期：426个
+新增上升期：0个
+新增非上升期：0个
+更新为上升期：0个
+由非上升期重回上升期：1个
+！！！由上升期到非上升期：10个
+
+【由非上升期重回上升期商品ID】
+商品数量: 1个
+goods_id: 603484694904179
+
+【！！！由上升期到非上升期商品ID】
+商品数量: 10个
+goods_id: 603631260675638, 603744003577834, 603759035943080, 603890032436844, 604029618912363, 604136993088854, 604226113628785, 604240609162233, 604362478849827, 604394691125344
+
+【非上升期商品】
+商品数量: 49个
+
+603306453776259 - 加入时间: 2025-11-19, Reason: Secondary_traffic_restricted
+603314506828325 - 加入时间: 2025-11-25, Reason: Secondary_traffic_restricted
+603327391735530 - 加入时间: 2025-11-05, Reason: Secondary_traffic_restricted
+603409533008324 - 加入时间: 2025-11-25, Reason: Secondary_traffic_restricted
+603452482650318 - 加入时间: 2025-10-17, Reason: Secondary_traffic_restricted
+603466978135470 - 加入时间: 2025-10-29, Reason: None
+603471273106281 - 加入时间: 2025-10-19, Reason: Secondary_traffic_restricted
+603507780379360 - 加入时间: 2025-11-15, Reason: Secondary_traffic_restricted
+603507780380512 - 加入时间: 2025-10-25, Reason: Secondary_traffic_restricted
+603560393682204 - 加入时间: 2025-11-30, Reason: Secondary_traffic_restricted
+603576499830640 - 加入时间: 2025-12-04, Reason: Secondary_traffic_restricted
+603578647287820 - 加入时间: 2025-11-02, Reason: Secondary_traffic_restricted
+603613007063519 - 加入时间: 2025-11-07, Reason: Secondary_traffic_restricted
+603619449527264 - 加入时间: 2025-10-24, Reason: Blocked (Children)
+603621596957529 - 加入时间: 2025-11-07, Reason: Secondary_traffic_restricted
+603633408179507 - 加入时间: 2025-11-13, Reason: Out_of_stock
+603688168985531 - 加入时间: 2025-10-28, Reason: Blocked
+603727360561717 - 加入时间: 2025-10-25, Reason: Secondary_traffic_restricted
+603728971169311 - 加入时间: 2025-12-06, Reason: Secondary_traffic_restricted
+603740245436184 - 加入时间: 2025-10-26, Reason: Secondary_traffic_restricted
+603800375033754 - 加入时间: 2025-11-07, Reason: Out_of_stock
+603801985636247 - 加入时间: 2025-11-21, Reason: Blocked
+603821849817640 - 加入时间: 2025-11-05, Reason: Secondary_traffic_restricted
+603834734717812 - 加入时间: 2025-11-01, Reason: Secondary_traffic_restricted
+603873926347197 - 加入时间: 2025-11-12, Reason: Out_of_stock
+603890032436844 - 加入时间: 2025-11-27, Reason: Secondary_traffic_restricted
+603902917313780 - 加入时间: 2025-10-17, Reason: Secondary_traffic_restricted
+603932982145278 - 加入时间: 2025-11-03, Reason: Secondary_traffic_restricted
+603945867014438 - 加入时间: 2025-11-02, Reason: Blocked
+603960899385563 - 加入时间: 2025-11-23, Reason: Out_of_stock
+604003849076516 - 加入时间: 2025-11-29, Reason: Blocked (Children)
+604029618858815 - 加入时间: 2025-11-02, Reason: Secondary_traffic_restricted
+604036061356938 - 加入时间: 2025-12-03, Reason: Secondary_traffic_restricted
+604066126111985 - 加入时间: 2025-10-17, Reason: Secondary_traffic_restricted
+604074716008041 - 加入时间: 2025-11-19, Reason: Blocked (Children)
+604080084777782 - 加入时间: 2025-11-29, Reason: Blocked
+604081158518752 - 加入时间: 2025-11-13, Reason: Secondary_traffic_restricted
+604140214280310 - 加入时间: 2025-11-12, Reason: Secondary_traffic_restricted
+604171352784549 - 加入时间: 2025-11-19, Reason: Secondary_traffic_restricted
+604171889668196 - 加入时间: 2025-12-04, Reason: Secondary_traffic_restricted
+604179942742258 - 加入时间: 2025-10-30, Reason: Secondary_traffic_restricted
+604214302485195 - 加入时间: 2025-10-29, Reason: Blocked
+604227187360348 - 加入时间: 2025-11-09, Reason: Out_of_stock
+604242756662811 - 加入时间: 2025-11-29, Reason: Out_of_stock
+604248662198873 - 加入时间: 2025-11-11, Reason: Normal
+604304496792517 - 加入时间: 2025-11-28, Reason: Secondary_traffic_restricted
+604325971638522 - 加入时间: 2025-11-12, Reason: Normal
+604367310681100 - 加入时间: 2025-11-01, Reason: Out_of_stock
+604373216294439 - 加入时间: 2025-10-28, Reason: Blocked
+
+================================================================================

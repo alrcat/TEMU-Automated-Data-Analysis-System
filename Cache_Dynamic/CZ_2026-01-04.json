@@ -1,0 +1,848 @@
+{
+  "statistics": {
+    "date": "2026-01-04",
+    "rising_count": 8,
+    "declined_count": 155,
+    "new_rising": 1,
+    "new_declined": 0,
+    "updated_to_rising": 0,
+    "back_to_rising": 0,
+    "declined_from_rising": 3,
+    "special_notes": [
+      "goods id 603432618433261查询日期的前一日(2026-01-03)单独没有status数据，可能缺货下架了",
+      "goods id 603526235289579查询日期的前一日(2026-01-03)单独没有status数据，可能缺货下架了",
+      "goods id 603563614899971查询日期的前一日(2026-01-03)单独没有status数据，可能缺货下架了",
+      "goods id 603864799512818查询日期的前一日(2026-01-03)单独没有status数据，可能缺货下架了",
+      "goods id 603877147533466查询日期的前一日(2026-01-03)单独没有status数据，可能缺货下架了",
+      "goods id 604010828399392查询日期的前一日(2026-01-03)单独没有status数据，可能缺货下架了",
+      "goods id 604184237691943查询日期的前一日(2026-01-03)单独没有status数据，可能缺货下架了",
+      "goods id 604192827663747查询日期的前一日(2026-01-03)单独没有status数据，可能缺货下架了",
+      "goods id 604234904895797查询日期的前一日(2026-01-03)单独没有status数据，可能缺货下架了"
+    ],
+    "elapsed_time": 3.143122434616089
+  },
+  "rising": {
+    "goods_info": [
+      {
+        "goods_id": "603315043674288",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2026-01-03"
+      },
+      {
+        "goods_id": "603368193904906",
+        "reason": "Blocking",
+        "join_date": "2025-11-06"
+      },
+      {
+        "goods_id": "603508317238898",
+        "reason": "Out_of_stock",
+        "join_date": "2026-01-02"
+      },
+      {
+        "goods_id": "603524960199951",
+        "reason": "None",
+        "join_date": "2025-12-10"
+      },
+      {
+        "goods_id": "604119813220328",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2026-01-04"
+      },
+      {
+        "goods_id": "604154709799312",
+        "reason": "None",
+        "join_date": "2026-01-02"
+      },
+      {
+        "goods_id": "604274431988712",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2026-01-01"
+      },
+      {
+        "goods_id": "604294296234751",
+        "reason": "None",
+        "join_date": "2026-01-01"
+      }
+    ],
+    "summary": {
+      "total_records": 403,
+      "unique_goods": 8,
+      "min_date": "2025-10-28",
+      "max_date": "2026-01-14",
+      "date_range": 79
+    }
+  },
+  "declined": {
+    "goods_info": [
+      {
+        "goods_id": "603302158786988",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-04"
+      },
+      {
+        "goods_id": "603303769421738",
+        "reason": "None",
+        "join_date": "2025-11-12"
+      },
+      {
+        "goods_id": "603313433052557",
+        "reason": "None",
+        "join_date": "2025-11-21"
+      },
+      {
+        "goods_id": "603316654310430",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-07"
+      },
+      {
+        "goods_id": "603327928595218",
+        "reason": "None",
+        "join_date": "2025-11-12"
+      },
+      {
+        "goods_id": "603330612946565",
+        "reason": "None",
+        "join_date": "2025-12-06"
+      },
+      {
+        "goods_id": "603347792809269",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-26"
+      },
+      {
+        "goods_id": "603357993349144",
+        "reason": "None",
+        "join_date": "2025-12-28"
+      },
+      {
+        "goods_id": "603359604004332",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-10-16"
+      },
+      {
+        "goods_id": "603364972672572",
+        "reason": "None",
+        "join_date": "2025-11-01"
+      },
+      {
+        "goods_id": "603375710103167",
+        "reason": "None",
+        "join_date": "2025-12-16"
+      },
+      {
+        "goods_id": "603397184932661",
+        "reason": "None",
+        "join_date": "2025-12-07"
+      },
+      {
+        "goods_id": "603398258712347",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-18"
+      },
+      {
+        "goods_id": "603404701136521",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-12"
+      },
+      {
+        "goods_id": "603414364818605",
+        "reason": "None",
+        "join_date": "2025-12-11"
+      },
+      {
+        "goods_id": "603415438535197",
+        "reason": "None",
+        "join_date": "2025-12-10"
+      },
+      {
+        "goods_id": "603415975457972",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-01"
+      },
+      {
+        "goods_id": "603432618433252",
+        "reason": "None",
+        "join_date": "2025-11-24"
+      },
+      {
+        "goods_id": "603432618433261",
+        "reason": "None",
+        "join_date": "2025-12-11"
+      },
+      {
+        "goods_id": "603443355832103",
+        "reason": "None",
+        "join_date": "2025-11-22"
+      },
+      {
+        "goods_id": "603443892738961",
+        "reason": "None",
+        "join_date": "2025-12-09"
+      },
+      {
+        "goods_id": "603445503335599",
+        "reason": "None",
+        "join_date": "2025-11-30"
+      },
+      {
+        "goods_id": "603445503343547",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-26"
+      },
+      {
+        "goods_id": "603447650833824",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-22"
+      },
+      {
+        "goods_id": "603453220844366",
+        "reason": "None",
+        "join_date": "2025-11-26"
+      },
+      {
+        "goods_id": "603469662496997",
+        "reason": "None",
+        "join_date": "2025-12-06"
+      },
+      {
+        "goods_id": "603478252443997",
+        "reason": "Out_of_stock",
+        "join_date": "2025-12-18"
+      },
+      {
+        "goods_id": "603478789303116",
+        "reason": "None",
+        "join_date": "2025-11-19"
+      },
+      {
+        "goods_id": "603486305537160",
+        "reason": "None",
+        "join_date": "2025-12-09"
+      },
+      {
+        "goods_id": "603486842403303",
+        "reason": "None",
+        "join_date": "2025-12-29"
+      },
+      {
+        "goods_id": "603504022256758",
+        "reason": "None",
+        "join_date": "2025-12-12"
+      },
+      {
+        "goods_id": "603514222788356",
+        "reason": "None",
+        "join_date": "2025-12-03"
+      },
+      {
+        "goods_id": "603516370290938",
+        "reason": "None",
+        "join_date": "2025-11-07"
+      },
+      {
+        "goods_id": "603526235289579",
+        "reason": "None",
+        "join_date": "2025-12-10"
+      },
+      {
+        "goods_id": "603537845140509",
+        "reason": "None",
+        "join_date": "2026-01-04"
+      },
+      {
+        "goods_id": "603544287557765",
+        "reason": "None",
+        "join_date": "2025-12-26"
+      },
+      {
+        "goods_id": "603546971944866",
+        "reason": "None",
+        "join_date": "2025-11-25"
+      },
+      {
+        "goods_id": "603563614899971",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-19"
+      },
+      {
+        "goods_id": "603570057391407",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-10-27"
+      },
+      {
+        "goods_id": "603570594218116",
+        "reason": "None",
+        "join_date": "2025-12-07"
+      },
+      {
+        "goods_id": "603578647341394",
+        "reason": "None",
+        "join_date": "2025-12-16"
+      },
+      {
+        "goods_id": "603581331678874",
+        "reason": "None",
+        "join_date": "2025-12-16"
+      },
+      {
+        "goods_id": "603595827173012",
+        "reason": "None",
+        "join_date": "2025-12-09"
+      },
+      {
+        "goods_id": "603603343392543",
+        "reason": "None",
+        "join_date": "2025-11-20"
+      },
+      {
+        "goods_id": "603619449474918",
+        "reason": "Out_of_stock",
+        "join_date": "2025-11-25"
+      },
+      {
+        "goods_id": "603619986406974",
+        "reason": "None",
+        "join_date": "2025-12-14"
+      },
+      {
+        "goods_id": "603631260694230",
+        "reason": "None",
+        "join_date": "2025-12-18"
+      },
+      {
+        "goods_id": "603653809272789",
+        "reason": "None",
+        "join_date": "2025-12-17"
+      },
+      {
+        "goods_id": "603681726507653",
+        "reason": "None",
+        "join_date": "2025-11-24"
+      },
+      {
+        "goods_id": "603688168981768",
+        "reason": "Out_of_stock",
+        "join_date": "2025-12-09"
+      },
+      {
+        "goods_id": "603697295779627",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-12"
+      },
+      {
+        "goods_id": "603725749958822",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-05"
+      },
+      {
+        "goods_id": "603726823667994",
+        "reason": "None",
+        "join_date": "2025-12-26"
+      },
+      {
+        "goods_id": "603731118683172",
+        "reason": "None",
+        "join_date": "2025-11-24"
+      },
+      {
+        "goods_id": "603731655505714",
+        "reason": "Out_of_stock",
+        "join_date": "2025-11-19"
+      },
+      {
+        "goods_id": "603745077308490",
+        "reason": "Blocked",
+        "join_date": "2025-11-11"
+      },
+      {
+        "goods_id": "603746151028095",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-10-03"
+      },
+      {
+        "goods_id": "603746151045428",
+        "reason": "None",
+        "join_date": "2025-11-23"
+      },
+      {
+        "goods_id": "603755814700047",
+        "reason": "None",
+        "join_date": "2025-12-21"
+      },
+      {
+        "goods_id": "603763330922125",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-05"
+      },
+      {
+        "goods_id": "603766015274227",
+        "reason": "None",
+        "join_date": "2025-11-18"
+      },
+      {
+        "goods_id": "603774605174924",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-23"
+      },
+      {
+        "goods_id": "603780510796513",
+        "reason": "Out_of_stock",
+        "join_date": "2025-11-20"
+      },
+      {
+        "goods_id": "603784805741923",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-08"
+      },
+      {
+        "goods_id": "603800375029375",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-24"
+      },
+      {
+        "goods_id": "603801985593057",
+        "reason": "None",
+        "join_date": "2025-11-21"
+      },
+      {
+        "goods_id": "603810575525573",
+        "reason": "None",
+        "join_date": "2025-11-17"
+      },
+      {
+        "goods_id": "603821849833267",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-05"
+      },
+      {
+        "goods_id": "603827755417129",
+        "reason": "None",
+        "join_date": "2025-12-14"
+      },
+      {
+        "goods_id": "603835472907968",
+        "reason": "None",
+        "join_date": "2025-12-06"
+      },
+      {
+        "goods_id": "603849230264358",
+        "reason": "None",
+        "join_date": "2025-12-09"
+      },
+      {
+        "goods_id": "603853525251903",
+        "reason": "None",
+        "join_date": "2025-11-20"
+      },
+      {
+        "goods_id": "603864799512818",
+        "reason": "None",
+        "join_date": "2025-12-07"
+      },
+      {
+        "goods_id": "603867483882812",
+        "reason": "None",
+        "join_date": "2025-12-07"
+      },
+      {
+        "goods_id": "603869631327003",
+        "reason": "None",
+        "join_date": "2025-12-06"
+      },
+      {
+        "goods_id": "603875000043879",
+        "reason": "None",
+        "join_date": "2025-12-13"
+      },
+      {
+        "goods_id": "603877147533466",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-22"
+      },
+      {
+        "goods_id": "603877147563517",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-18"
+      },
+      {
+        "goods_id": "603880368789731",
+        "reason": "None",
+        "join_date": "2025-12-08"
+      },
+      {
+        "goods_id": "603882717590020",
+        "reason": "None",
+        "join_date": "2025-12-02"
+      },
+      {
+        "goods_id": "603886811244561",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-14"
+      },
+      {
+        "goods_id": "603890569282339",
+        "reason": "None",
+        "join_date": "2025-11-18"
+      },
+      {
+        "goods_id": "603924392166760",
+        "reason": "None",
+        "join_date": "2025-12-16"
+      },
+      {
+        "goods_id": "603926539650310",
+        "reason": "None",
+        "join_date": "2025-11-16"
+      },
+      {
+        "goods_id": "603932982105182",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-12"
+      },
+      {
+        "goods_id": "603934055850591",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-24"
+      },
+      {
+        "goods_id": "603945867034849",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-12"
+      },
+      {
+        "goods_id": "603950698868539",
+        "reason": "None",
+        "join_date": "2025-12-05"
+      },
+      {
+        "goods_id": "603951235720302",
+        "reason": "None",
+        "join_date": "2025-11-06"
+      },
+      {
+        "goods_id": "603954993822749",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-14"
+      },
+      {
+        "goods_id": "603956604444584",
+        "reason": "None",
+        "join_date": "2025-12-02"
+      },
+      {
+        "goods_id": "603975931811826",
+        "reason": "None",
+        "join_date": "2025-12-18"
+      },
+      {
+        "goods_id": "603980763641401",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-13"
+      },
+      {
+        "goods_id": "603989353535079",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-16"
+      },
+      {
+        "goods_id": "603990964181566",
+        "reason": "None",
+        "join_date": "2025-11-09"
+      },
+      {
+        "goods_id": "603993648546713",
+        "reason": "None",
+        "join_date": "2025-12-08"
+      },
+      {
+        "goods_id": "604008144050752",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-20"
+      },
+      {
+        "goods_id": "604009217762708",
+        "reason": "None",
+        "join_date": "2025-11-04"
+      },
+      {
+        "goods_id": "604010828399392",
+        "reason": "None",
+        "join_date": "2025-12-13"
+      },
+      {
+        "goods_id": "604032303265728",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-02"
+      },
+      {
+        "goods_id": "604037336407073",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-03"
+      },
+      {
+        "goods_id": "604040356303191",
+        "reason": "None",
+        "join_date": "2025-12-26"
+      },
+      {
+        "goods_id": "604042503794664",
+        "reason": "None",
+        "join_date": "2025-11-18"
+      },
+      {
+        "goods_id": "604045188124388",
+        "reason": "None",
+        "join_date": "2025-11-17"
+      },
+      {
+        "goods_id": "604045725015177",
+        "reason": "None",
+        "join_date": "2025-11-22"
+      },
+      {
+        "goods_id": "604045926319063",
+        "reason": "None",
+        "join_date": "2025-11-23"
+      },
+      {
+        "goods_id": "604048946257483",
+        "reason": "None",
+        "join_date": "2025-12-02"
+      },
+      {
+        "goods_id": "604051630581074",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-30"
+      },
+      {
+        "goods_id": "604051630599479",
+        "reason": "Out_of_stock",
+        "join_date": "2025-12-05"
+      },
+      {
+        "goods_id": "604055388675238",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-06"
+      },
+      {
+        "goods_id": "604072568564609",
+        "reason": "None",
+        "join_date": "2025-11-24"
+      },
+      {
+        "goods_id": "604109612646107",
+        "reason": "None",
+        "join_date": "2025-12-04"
+      },
+      {
+        "goods_id": "604113370738746",
+        "reason": "None",
+        "join_date": "2025-11-14"
+      },
+      {
+        "goods_id": "604119813164850",
+        "reason": "None",
+        "join_date": "2025-11-10"
+      },
+      {
+        "goods_id": "604120886943845",
+        "reason": "None",
+        "join_date": "2025-12-18"
+      },
+      {
+        "goods_id": "604127329405772",
+        "reason": "Out_of_stock",
+        "join_date": "2025-11-12"
+      },
+      {
+        "goods_id": "604130550579766",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-08"
+      },
+      {
+        "goods_id": "604131624355392",
+        "reason": "None",
+        "join_date": "2025-12-27"
+      },
+      {
+        "goods_id": "604131825652721",
+        "reason": "None",
+        "join_date": "2025-12-18"
+      },
+      {
+        "goods_id": "604148267361368",
+        "reason": "None",
+        "join_date": "2026-01-04"
+      },
+      {
+        "goods_id": "604160615384890",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-04"
+      },
+      {
+        "goods_id": "604175647796495",
+        "reason": "None",
+        "join_date": "2025-12-10"
+      },
+      {
+        "goods_id": "604176721505706",
+        "reason": "None",
+        "join_date": "2025-11-23"
+      },
+      {
+        "goods_id": "604177795219636",
+        "reason": "None",
+        "join_date": "2025-12-10"
+      },
+      {
+        "goods_id": "604184237691943",
+        "reason": "None",
+        "join_date": "2025-11-14"
+      },
+      {
+        "goods_id": "604184237712843",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-25"
+      },
+      {
+        "goods_id": "604192827663747",
+        "reason": "None",
+        "join_date": "2025-12-22"
+      },
+      {
+        "goods_id": "604195511999802",
+        "reason": "None",
+        "join_date": "2025-12-30"
+      },
+      {
+        "goods_id": "604208933790014",
+        "reason": "Blocked",
+        "join_date": "2025-12-21"
+      },
+      {
+        "goods_id": "604227187361374",
+        "reason": "None",
+        "join_date": "2025-11-20"
+      },
+      {
+        "goods_id": "604234703550948",
+        "reason": "None",
+        "join_date": "2025-12-14"
+      },
+      {
+        "goods_id": "604234904895797",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-21"
+      },
+      {
+        "goods_id": "604238461665330",
+        "reason": "None",
+        "join_date": "2025-12-16"
+      },
+      {
+        "goods_id": "604242756610696",
+        "reason": "None",
+        "join_date": "2025-11-18"
+      },
+      {
+        "goods_id": "604243293483394",
+        "reason": "None",
+        "join_date": "2025-12-23"
+      },
+      {
+        "goods_id": "604245440967874",
+        "reason": "None",
+        "join_date": "2025-11-05"
+      },
+      {
+        "goods_id": "604279800749404",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-23"
+      },
+      {
+        "goods_id": "604287316914000",
+        "reason": "Out_of_stock",
+        "join_date": "2025-12-06"
+      },
+      {
+        "goods_id": "604292148772248",
+        "reason": "None",
+        "join_date": "2025-11-16"
+      },
+      {
+        "goods_id": "604302886187712",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-15"
+      },
+      {
+        "goods_id": "604306644238930",
+        "reason": "Blocked",
+        "join_date": "2025-11-18"
+      },
+      {
+        "goods_id": "604306644275062",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-03"
+      },
+      {
+        "goods_id": "604315771108855",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-10"
+      },
+      {
+        "goods_id": "604323824127780",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-10-06"
+      },
+      {
+        "goods_id": "604336709011772",
+        "reason": "None",
+        "join_date": "2025-11-26"
+      },
+      {
+        "goods_id": "604336709056819",
+        "reason": "Out_of_stock",
+        "join_date": "2025-11-24"
+      },
+      {
+        "goods_id": "604341540876855",
+        "reason": "Blocked",
+        "join_date": "2025-12-02"
+      },
+      {
+        "goods_id": "604343151511167",
+        "reason": "None",
+        "join_date": "2025-11-24"
+      },
+      {
+        "goods_id": "604353888935741",
+        "reason": "None",
+        "join_date": "2025-12-14"
+      },
+      {
+        "goods_id": "604354425786435",
+        "reason": "None",
+        "join_date": "2025-11-24"
+      },
+      {
+        "goods_id": "604356036381140",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-14"
+      }
+    ],
+    "summary": {
+      "total_records": 6294,
+      "unique_goods": 151,
+      "min_date": "2025-10-01",
+      "max_date": "2026-01-04",
+      "date_range": 96
+    }
+  },
+  "total_summary": {
+    "total_records": 6697,
+    "unique_goods": 159,
+    "min_date": "2025-10-01",
+    "max_date": "2026-01-14",
+    "date_range": 106
+  }
+}

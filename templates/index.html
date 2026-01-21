@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据分析系统</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container-fluid">
+        <!-- 顶部导航栏 -->
+        <nav class="navbar navbar-dark mb-4">
+            <div class="container-fluid">
+                <div class="d-flex align-items-center">
+                    <span class="navbar-brand mb-0 h1 me-4">
+                        <span class="me-2">📊</span>
+                        数据分析系统
+                    </span>
+                    <div class="status-indicator">
+                        <span class="badge bg-success me-2">
+                            <span class="status-dot"></span>
+                            在线
+                        </span>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center">
+                    <div class="current-table-info me-3">
+                        <small class="text-white-50 d-block">当前数据表</small>
+                        <span class="fw-bold text-white" id="current-table">{{ current_table }}</span>
+                    </div>
+                    <button class="btn btn-light btn-sm d-flex align-items-center" onclick="showConfigModal()">
+                        <span class="me-1">⚙️</span>
+                        配置
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- 表选择区域 -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row table-selection-row">
+                    <div class="col-md-6">
+                        <label for="table-input" class="form-label d-flex align-items-center mb-2">
+                            <span class="me-2">📋</span>
+                            选择数据表
+                        </label>
+                        <input type="text" class="form-control form-control-lg" id="table-input" placeholder="例如: ROA1_NL" value="{{ current_table }}">
+                        <small class="form-text text-muted mt-1">输入您要分析的数据表名称</small>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label" style="visibility: hidden;">占位</label>
+                        <button class="btn btn-primary btn-lg w-100 d-flex align-items-center justify-content-center" onclick="setTable()">
+                            <span class="me-2">✅</span>
+                            确认选择
+                        </button>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label small text-muted">快速选择</label>
+                        <select class="form-select form-select-lg" onchange="if(this.value) { document.getElementById('table-input').value = this.value; setTable(); }">
+                            <option value="">常用表名</option>
+                            <option value="ROA1_NL">ROA1_NL (荷兰)</option>
+                            <option value="ROA1_DE">ROA1_DE (德国)</option>
+                            <option value="ROA1_FR">ROA1_FR (法国)</option>
+                            <option value="ROA1_IT">ROA1_IT (意大利)</option>
+                            <option value="ROA1_BE">ROA1_BE (比利时)</option>
+                            <option value="ROA1_CZ">ROA1_CZ (捷克)</option>
+                            <option value="ROA1_PL">ROA1_PL (波兰)</option>
+                            <option value="ROA1_RO">ROA1_RO (罗马尼亚)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 功能按钮区域 -->
+        <div id="function-buttons">
+            <div class="function-btn-card" onclick="showFunction1()">
+                <span class="icon">🔍</span>
+                <h5>快速查找</h5>
+                <p>根据商品ID快速查询数据并生成趋势图表</p>
+            </div>
+            <div class="function-btn-card" onclick="showFunction2()">
+                <span class="icon">📊</span>
+                <h5>动销品管理</h5>
+                <p>分析商品动销状态，管理上升期和非上升期商品</p>
+            </div>
+            <div class="function-btn-card" onclick="showFunction3()">
+                <span class="icon">📈</span>
+                <h5>优化效果数据</h5>
+                <p>查看和分析优化措施的效果统计数据</p>
+            </div>
+            <div class="function-btn-card" onclick="showFunction4()">
+                <span class="icon">✏️</span>
+                <h5>手动更新记录</h5>
+                <p>手动更新商品状态、价格和原因说明</p>
+            </div>
+            <div class="function-btn-card" onclick="showFunction5()">
+                <span class="icon">🔧</span>
+                <h5>数据筛选</h5>
+                <p>根据条件筛选和导出数据</p>
+            </div>
+            <div class="function-btn-card" onclick="showFunction6()">
+                <span class="icon">📊</span>
+                <h5>指标计算</h5>
+                <p>计算关键业务指标并生成分析图表</p>
+            </div>
+        </div>
+
+        <!-- 功能内容区域 -->
+        <div id="function-content" class="card">
+            <div class="card-body text-center py-5">
+                <div class="mb-4">
+                    <span style="font-size: 4rem; opacity: 0.3;">🚀</span>
+                </div>
+                <h4 class="text-muted mb-3">欢迎使用数据分析系统</h4>
+                <p class="text-muted mb-4">请选择上方的一个功能模块开始您的分析工作</p>
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div class="alert alert-info border-0" style="background: linear-gradient(135deg, #ecfeff 0%, #cffafe 100%); border-left: 4px solid #0891b2;">
+                            <small class="fw-semibold">💡 提示：</small>
+                            <small>每个功能模块都配备了强大的数据处理和可视化能力，帮助您深入理解业务数据。</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 功能6：指标计算 -->
+        <div id="function6-content" class="function-panel" style="display: none;">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    <span class="me-2">📊</span>
+                    指标计算
+                </h5>
+                <div>
+                    <button class="btn btn-outline-primary btn-sm me-2" onclick="showIndicatorConfigModal()">
+                        <span class="me-1">⚙️</span>
+                        配置数据目录
+                    </button>
+                    <button class="btn btn-success btn-sm me-2" onclick="saveIndicatorData()">
+                        <span class="me-1">💾</span>
+                        保存指标数据
+                    </button>
+                    <button class="btn btn-primary btn-sm" onclick="calculateIndicators()">
+                        <span class="me-1">🔄</span>
+                        计算指标
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <!-- 日期选择区域 -->
+                <div class="mb-3">
+                    <label for="indicator-date-input" class="form-label">查询日期 (默认昨天，可修改):</label>
+                    <div class="input-group" style="max-width: 400px;">
+                        <input type="date" class="form-control" id="indicator-date-input">
+                        <button class="btn btn-outline-secondary" type="button" onclick="setIndicatorDateToYesterday()">使用昨天</button>
+                    </div>
+                </div>
+                
+                <!-- 指标结果展示区域 -->
+                <div id="indicators-results" class="row g-4" style="display: none;">
+                    <!-- 指标卡片将在这里动态生成 -->
+                </div>
+
+                <!-- 图表展示区域 -->
+                <div id="charts-container" class="mt-4" style="display: none;">
+                    <h6 class="mb-4">📈 数据图表</h6>
+                    <div class="d-flex flex-column gap-4">
+                        <div class="w-100">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="card-title">近30天GMV图</h6>
+                                    <div id="chart-30day" class="text-center">
+                                        <img id="chart-30day-img" src="" alt="近30天GMV图" class="img-fluid" style="max-height: 600px; width: auto;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-100">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="card-title">日均GMV图（近7日）</h6>
+                                    <div id="chart-7day" class="text-center">
+                                        <img id="chart-7day-img" src="" alt="日均GMV图" class="img-fluid" style="max-height: 600px; width: auto;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 加载提示 -->
+                <div id="indicators-loading" class="text-center py-5" style="display: none;">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">加载中...</span>
+                    </div>
+                    <p class="mt-3 text-muted">正在计算指标，请稍候...</p>
+                </div>
+
+                <!-- 空状态提示 -->
+                <div id="indicators-empty" class="text-center py-5">
+                    <span style="font-size: 3rem; opacity: 0.3;">📊</span>
+                    <h5 class="text-muted mt-3">指标计算</h5>
+                    <p class="text-muted">请先配置数据目录，然后点击"计算指标"按钮开始分析</p>
+                    <button class="btn btn-primary" onclick="showIndicatorConfigModal()">
+                        <span class="me-1">⚙️</span>
+                        配置数据目录
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 通知容器 -->
+    <div id="notification-container" class="position-fixed top-0 start-50 translate-middle-x p-3" style="z-index: 1050;"></div>
+
+    <!-- 配置模态框 -->
+    <div class="modal fade" id="configModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">数据库配置</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="config-form">
+                        <h6>Traffic数据库配置</h6>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Host</label>
+                                <input type="text" class="form-control" id="traffic-host" name="traffic-host">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Port</label>
+                                <input type="number" class="form-control" id="traffic-port" name="traffic-port">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Database</label>
+                                <input type="text" class="form-control" id="traffic-database" name="traffic-database">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">User</label>
+                                <input type="text" class="form-control" id="traffic-user" name="traffic-user">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Password</label>
+                                <input type="password" class="form-control" id="traffic-password" name="traffic-password">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">当前表名</label>
+                            <input type="text" class="form-control" id="traffic-table" name="traffic-table" readonly>
+                        </div>
+
+                        <hr>
+
+                        <h6>Sales数据库配置</h6>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Host</label>
+                                <input type="text" class="form-control" id="sales-host" name="sales-host">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Port</label>
+                                <input type="number" class="form-control" id="sales-port" name="sales-port">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Database</label>
+                                <input type="text" class="form-control" id="sales-database" name="sales-database">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">User</label>
+                                <input type="text" class="form-control" id="sales-user" name="sales-user">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Password</label>
+                                <input type="password" class="form-control" id="sales-password" name="sales-password">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">当前表名</label>
+                            <input type="text" class="form-control" id="sales-table" name="sales-table" readonly>
+                        </div>
+
+                        <hr>
+
+                        <h6>货盘数据库配置</h6>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Host</label>
+                                <input type="text" class="form-control" id="pallet-host" name="pallet-host">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Port</label>
+                                <input type="number" class="form-control" id="pallet-port" name="pallet-port">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Database</label>
+                                <input type="text" class="form-control" id="pallet-database" name="pallet-database">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">User</label>
+                                <input type="text" class="form-control" id="pallet-user" name="pallet-user">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Password</label>
+                                <input type="password" class="form-control" id="pallet-password" name="pallet-password">
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <h6>平台商品表数据库配置</h6>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Host</label>
+                                <input type="text" class="form-control" id="product-host" name="product-host">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Port</label>
+                                <input type="number" class="form-control" id="product-port" name="product-port">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Database</label>
+                                <input type="text" class="form-control" id="product-database" name="product-database">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">User</label>
+                                <input type="text" class="form-control" id="product-user" name="product-user">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Password</label>
+                                <input type="password" class="form-control" id="product-password" name="product-password">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" onclick="saveConfig()">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 指标配置模态框 -->
+    <div class="modal fade" id="indicatorConfigModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">指标计算数据目录配置</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="indicator-config-form">
+                        <div class="alert alert-info">
+                            <small>配置本地xlsx文件目录路径，用于指标计算。目录结构应包含各个站点名称的子目录（如ROA1_FR），每个站点目录下包含未核价数据和限流数据的xlsx文件。</small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="unpriced-data-dir" class="form-label">
+                                未核价数据目录路径 <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" class="form-control" id="unpriced-data-dir" name="unpriced-data-dir"
+                                   placeholder="例如: C:\Users\PC\Desktop\code\核价\低流量">
+                            <div class="form-text">包含各个站点目录的未核价数据xlsx文件的根目录</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="traffic-restricted-data-dir" class="form-label">
+                                限流数据目录路径 <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" class="form-control" id="traffic-restricted-data-dir" name="traffic-restricted-data-dir"
+                                   placeholder="例如: C:\Users\PC\Desktop\code\核价\二次限流">
+                            <div class="form-text">包含各个站点目录的限流数据xlsx文件的根目录</div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" onclick="saveIndicatorConfig()">保存配置</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
+

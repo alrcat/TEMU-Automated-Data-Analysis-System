@@ -1,0 +1,2057 @@
+{
+  "statistics": {
+    "date": "2026-01-08",
+    "rising_count": 12,
+    "declined_count": 385,
+    "new_rising": 1,
+    "new_declined": 0,
+    "updated_to_rising": 0,
+    "back_to_rising": 7,
+    "declined_from_rising": 1,
+    "special_notes": [
+      "goods id 603347255981378查询日期的前一日(2026-01-07)单独没有status数据，可能缺货下架了",
+      "goods id 603397721825365查询日期的前一日(2026-01-07)单独没有status数据，可能缺货下架了",
+      "goods id 603422954755689查询日期的前一日(2026-01-07)单独没有status数据，可能缺货下架了",
+      "goods id 603456777635454查询日期的前一日(2026-01-07)单独没有status数据，可能缺货下架了",
+      "goods id 603460535719022查询日期的前一日(2026-01-07)单独没有status数据，可能缺货下架了",
+      "goods id 603461072568961查询日期的前一日(2026-01-07)单独没有status数据，可能缺货下架了",
+      "goods id 603462683166194查询日期的前一日(2026-01-07)单独没有status数据，可能缺货下架了",
+      "goods id 603488989848067查询日期的前一日(2026-01-07)单独没有status数据，可能缺货下架了",
+      "goods id 603497579788318查询日期的前一日(2026-01-07)单独没有status数据，可能缺货下架了",
+      "goods id 603517980908144查询日期的前一日(2026-01-07)单独没有status数据，可能缺货下架了",
+      "goods id 603599585305781查询日期的前一日(2026-01-07)单独没有status数据，可能缺货下架了",
+      "goods id 603629113167233查询日期的前一日(2026-01-07)单独没有status数据，可能缺货下架了",
+      "goods id 603715549393446查询日期的前一日(2026-01-07)单独没有status数据，可能缺货下架了",
+      "goods id 603798227523550查询日期的前一日(2026-01-07)单独没有status数据，可能缺货下架了",
+      "goods id 603814333649735查询日期的前一日(2026-01-07)单独没有status数据，可能缺货下架了",
+      "goods id 603826144815871查询日期的前一日(2026-01-07)单独没有status数据，可能缺货下架了",
+      "goods id 603866410126687查询日期的前一日(2026-01-07)单独没有status数据，可能缺货下架了",
+      "goods id 603907212299642查询日期的前一日(2026-01-07)单独没有status数据，可能缺货下架了",
+      "goods id 603908822947976查询日期的前一日(2026-01-07)单独没有status数据，可能缺货下架了",
+      "goods id 603993111644331查询日期的前一日(2026-01-07)单独没有status数据，可能缺货下架了",
+      "goods id 604106391451468查询日期的前一日(2026-01-07)单独没有status数据，可能缺货下架了",
+      "goods id 604126792532086查询日期的前一日(2026-01-07)单独没有status数据，可能缺货下架了",
+      "goods id 604171352796506查询日期的前一日(2026-01-07)单独没有status数据，可能缺货下架了",
+      "goods id 604177795239014查询日期的前一日(2026-01-07)单独没有status数据，可能缺货下架了",
+      "goods id 604211081252575查询日期的前一日(2026-01-07)单独没有status数据，可能缺货下架了",
+      "goods id 604279263843657查询日期的前一日(2026-01-07)单独没有status数据，可能缺货下架了",
+      "goods id 604285169419257查询日期的前一日(2026-01-07)单独没有status数据，可能缺货下架了",
+      "goods id 604297517440722查询日期的前一日(2026-01-07)单独没有status数据，可能缺货下架了",
+      "goods id 604299664916995查询日期的前一日(2026-01-07)单独没有status数据，可能缺货下架了",
+      "goods id 604330803489759查询日期的前一日(2026-01-07)单独没有status数据，可能缺货下架了",
+      "goods id 604356036397419查询日期的前一日(2026-01-07)单独没有status数据，可能缺货下架了"
+    ],
+    "elapsed_time": 4.623193740844727
+  },
+  "rising": {
+    "goods_info": [
+      {
+        "goods_id": "603448925898970",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2026-01-04"
+      },
+      {
+        "goods_id": "603452482629945",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2026-01-08"
+      },
+      {
+        "goods_id": "603606564630599",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2026-01-05"
+      },
+      {
+        "goods_id": "603639850620540",
+        "reason": "None",
+        "join_date": "2026-01-07"
+      },
+      {
+        "goods_id": "603855672696910",
+        "reason": "Out_of_stock",
+        "join_date": "2025-11-23"
+      },
+      {
+        "goods_id": "603876073778575",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-28"
+      },
+      {
+        "goods_id": "603916607536937",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2026-01-04"
+      },
+      {
+        "goods_id": "603993648542732",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2026-01-06"
+      },
+      {
+        "goods_id": "604043577549363",
+        "reason": "None",
+        "join_date": "2026-01-05"
+      },
+      {
+        "goods_id": "604109075764855",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-28"
+      },
+      {
+        "goods_id": "604198196362102",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2026-01-05"
+      },
+      {
+        "goods_id": "604376437457728",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2026-01-04"
+      }
+    ],
+    "summary": {
+      "total_records": 682,
+      "unique_goods": 12,
+      "min_date": "2025-10-13",
+      "max_date": "2026-01-14",
+      "date_range": 94
+    }
+  },
+  "declined": {
+    "goods_info": [
+      {
+        "goods_id": "603302695664017",
+        "reason": "None",
+        "join_date": "2025-12-22"
+      },
+      {
+        "goods_id": "603304306268230",
+        "reason": "None",
+        "join_date": "2025-12-21"
+      },
+      {
+        "goods_id": "603304843140287",
+        "reason": "None",
+        "join_date": "2025-11-07"
+      },
+      {
+        "goods_id": "603306990610108",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-17"
+      },
+      {
+        "goods_id": "603308064353362",
+        "reason": "None",
+        "join_date": "2025-12-19"
+      },
+      {
+        "goods_id": "603314506815826",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-14"
+      },
+      {
+        "goods_id": "603323633629387",
+        "reason": "None",
+        "join_date": "2025-12-19"
+      },
+      {
+        "goods_id": "603323633637769",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-24"
+      },
+      {
+        "goods_id": "603324707343911",
+        "reason": "None",
+        "join_date": "2025-12-07"
+      },
+      {
+        "goods_id": "603326318000762",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-03"
+      },
+      {
+        "goods_id": "603329539223084",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2026-01-02"
+      },
+      {
+        "goods_id": "603330076096248",
+        "reason": "Out_of_stock",
+        "join_date": "2025-12-04"
+      },
+      {
+        "goods_id": "603335981648014",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-09"
+      },
+      {
+        "goods_id": "603340276600578",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-01"
+      },
+      {
+        "goods_id": "603340276652961",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-08"
+      },
+      {
+        "goods_id": "603345108451752",
+        "reason": "Out_of_stock",
+        "join_date": "2025-12-11"
+      },
+      {
+        "goods_id": "603347255981378",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-10-05"
+      },
+      {
+        "goods_id": "603350141648352",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-31"
+      },
+      {
+        "goods_id": "603355309013931",
+        "reason": "None",
+        "join_date": "2025-12-21"
+      },
+      {
+        "goods_id": "603355845854827",
+        "reason": "Out_of_stock",
+        "join_date": "2025-12-02"
+      },
+      {
+        "goods_id": "603356382780120",
+        "reason": "None",
+        "join_date": "2025-12-06"
+      },
+      {
+        "goods_id": "603356919635450",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-29"
+      },
+      {
+        "goods_id": "603359067084983",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-19"
+      },
+      {
+        "goods_id": "603363898925255",
+        "reason": "None",
+        "join_date": "2025-12-11"
+      },
+      {
+        "goods_id": "603367321481738",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-02"
+      },
+      {
+        "goods_id": "603368193938133",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-13"
+      },
+      {
+        "goods_id": "603370341417187",
+        "reason": "None",
+        "join_date": "2025-12-21"
+      },
+      {
+        "goods_id": "603372488874806",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-06"
+      },
+      {
+        "goods_id": "603373025725624",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-08"
+      },
+      {
+        "goods_id": "603374099484524",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-10-10"
+      },
+      {
+        "goods_id": "603374636362302",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-07"
+      },
+      {
+        "goods_id": "603375173266662",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-02"
+      },
+      {
+        "goods_id": "603378931336593",
+        "reason": "Blocked",
+        "join_date": "2025-11-30"
+      },
+      {
+        "goods_id": "603379468218204",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-04"
+      },
+      {
+        "goods_id": "603382689420791",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-02"
+      },
+      {
+        "goods_id": "603384501370733",
+        "reason": "Out_of_stock",
+        "join_date": "2025-11-11"
+      },
+      {
+        "goods_id": "603389131911086",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-10-13"
+      },
+      {
+        "goods_id": "603390205641872",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-28"
+      },
+      {
+        "goods_id": "603390742477987",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-29"
+      },
+      {
+        "goods_id": "603392353095619",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-05"
+      },
+      {
+        "goods_id": "603397721825365",
+        "reason": "None",
+        "join_date": "2025-12-14"
+      },
+      {
+        "goods_id": "603397721831584",
+        "reason": "None",
+        "join_date": "2025-12-15"
+      },
+      {
+        "goods_id": "603402553687581",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-27"
+      },
+      {
+        "goods_id": "603405774880824",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-28"
+      },
+      {
+        "goods_id": "603413827926377",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-08"
+      },
+      {
+        "goods_id": "603415438528852",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-01"
+      },
+      {
+        "goods_id": "603415438550195",
+        "reason": "None",
+        "join_date": "2025-12-14"
+      },
+      {
+        "goods_id": "603417049161701",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-27"
+      },
+      {
+        "goods_id": "603418391343943",
+        "reason": "None",
+        "join_date": "2025-11-01"
+      },
+      {
+        "goods_id": "603418861112625",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-29"
+      },
+      {
+        "goods_id": "603420807238222",
+        "reason": "Blocked",
+        "join_date": "2025-11-15"
+      },
+      {
+        "goods_id": "603422954755689",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-29"
+      },
+      {
+        "goods_id": "603427249749889",
+        "reason": "Out_of_stock",
+        "join_date": "2025-12-06"
+      },
+      {
+        "goods_id": "603428323454015",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-30"
+      },
+      {
+        "goods_id": "603428323486093",
+        "reason": "Out_of_stock",
+        "join_date": "2025-11-29"
+      },
+      {
+        "goods_id": "603433155280918",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-22"
+      },
+      {
+        "goods_id": "603437987109575",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-18"
+      },
+      {
+        "goods_id": "603439597744212",
+        "reason": "Out_of_stock",
+        "join_date": "2025-11-18"
+      },
+      {
+        "goods_id": "603440134631294",
+        "reason": "None",
+        "join_date": "2025-11-28"
+      },
+      {
+        "goods_id": "603443355871234",
+        "reason": "None",
+        "join_date": "2026-01-06"
+      },
+      {
+        "goods_id": "603443892741227",
+        "reason": "Out_of_stock",
+        "join_date": "2025-11-26"
+      },
+      {
+        "goods_id": "603446577070603",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-06"
+      },
+      {
+        "goods_id": "603447650810700",
+        "reason": "None",
+        "join_date": "2025-12-23"
+      },
+      {
+        "goods_id": "603449261449474",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-16"
+      },
+      {
+        "goods_id": "603455167002117",
+        "reason": "None",
+        "join_date": "2025-11-16"
+      },
+      {
+        "goods_id": "603456777635454",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-01"
+      },
+      {
+        "goods_id": "603459461950163",
+        "reason": "None",
+        "join_date": "2025-11-07"
+      },
+      {
+        "goods_id": "603459461991420",
+        "reason": "Out_of_stock",
+        "join_date": "2025-11-27"
+      },
+      {
+        "goods_id": "603460535719022",
+        "reason": "None",
+        "join_date": "2025-12-24"
+      },
+      {
+        "goods_id": "603460535720673",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-10-31"
+      },
+      {
+        "goods_id": "603461072568961",
+        "reason": "None",
+        "join_date": "2025-12-13"
+      },
+      {
+        "goods_id": "603461072573322",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2026-01-03"
+      },
+      {
+        "goods_id": "603462683166194",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-14"
+      },
+      {
+        "goods_id": "603462683197121",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-20"
+      },
+      {
+        "goods_id": "603466978154121",
+        "reason": "Blocked",
+        "join_date": "2025-11-29"
+      },
+      {
+        "goods_id": "603470400737286",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-28"
+      },
+      {
+        "goods_id": "603474494331923",
+        "reason": "Out_of_stock",
+        "join_date": "2026-01-04"
+      },
+      {
+        "goods_id": "603488989848067",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-03"
+      },
+      {
+        "goods_id": "603490600471738",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-07"
+      },
+      {
+        "goods_id": "603491674209893",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-10"
+      },
+      {
+        "goods_id": "603494895439051",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-07"
+      },
+      {
+        "goods_id": "603497579788318",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-10"
+      },
+      {
+        "goods_id": "603504559124986",
+        "reason": "None",
+        "join_date": "2025-12-01"
+      },
+      {
+        "goods_id": "603508317235721",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-12"
+      },
+      {
+        "goods_id": "603514222811762",
+        "reason": "None",
+        "join_date": "2025-11-03"
+      },
+      {
+        "goods_id": "603517444021618",
+        "reason": "None",
+        "join_date": "2025-12-20"
+      },
+      {
+        "goods_id": "603517444039581",
+        "reason": "None",
+        "join_date": "2026-01-03"
+      },
+      {
+        "goods_id": "603517980908144",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-22"
+      },
+      {
+        "goods_id": "603523886455184",
+        "reason": "None",
+        "join_date": "2025-11-10"
+      },
+      {
+        "goods_id": "603528718302167",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-09"
+      },
+      {
+        "goods_id": "603538650443087",
+        "reason": "Blocked",
+        "join_date": "2025-12-07"
+      },
+      {
+        "goods_id": "603539992606934",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-23"
+      },
+      {
+        "goods_id": "603539992639480",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-19"
+      },
+      {
+        "goods_id": "603547710100622",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-02"
+      },
+      {
+        "goods_id": "603549119404490",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-07"
+      },
+      {
+        "goods_id": "603559856814089",
+        "reason": "Out_of_stock",
+        "join_date": "2025-11-29"
+      },
+      {
+        "goods_id": "603559856854534",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-12"
+      },
+      {
+        "goods_id": "603560930566571",
+        "reason": "Blocked",
+        "join_date": "2026-01-04"
+      },
+      {
+        "goods_id": "603561467462356",
+        "reason": "Out_of_stock",
+        "join_date": "2025-12-06"
+      },
+      {
+        "goods_id": "603566299303772",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-29"
+      },
+      {
+        "goods_id": "603568983650530",
+        "reason": "None",
+        "join_date": "2025-11-28"
+      },
+      {
+        "goods_id": "603571131100345",
+        "reason": "None",
+        "join_date": "2025-12-24"
+      },
+      {
+        "goods_id": "603573278600559",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-20"
+      },
+      {
+        "goods_id": "603577573559272",
+        "reason": "None",
+        "join_date": "2026-01-05"
+      },
+      {
+        "goods_id": "603578110472736",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-26"
+      },
+      {
+        "goods_id": "603578647329891",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-05"
+      },
+      {
+        "goods_id": "603581331696782",
+        "reason": "Out_of_stock",
+        "join_date": "2026-01-04"
+      },
+      {
+        "goods_id": "603585089756787",
+        "reason": "None",
+        "join_date": "2025-11-18"
+      },
+      {
+        "goods_id": "603585089761580",
+        "reason": "None",
+        "join_date": "2025-11-30"
+      },
+      {
+        "goods_id": "603585626610202",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-14"
+      },
+      {
+        "goods_id": "603587237261455",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-08"
+      },
+      {
+        "goods_id": "603588311003574",
+        "reason": "None",
+        "join_date": "2025-11-07"
+      },
+      {
+        "goods_id": "603593679695418",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-04"
+      },
+      {
+        "goods_id": "603599585305781",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-15"
+      },
+      {
+        "goods_id": "603604954007030",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-09"
+      },
+      {
+        "goods_id": "603605490860706",
+        "reason": "Out_of_stock",
+        "join_date": "2025-11-25"
+      },
+      {
+        "goods_id": "603607369903574",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-12"
+      },
+      {
+        "goods_id": "603607369934273",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-10-21"
+      },
+      {
+        "goods_id": "603613007061098",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-30"
+      },
+      {
+        "goods_id": "603614617687123",
+        "reason": "Blocked",
+        "join_date": "2025-12-29"
+      },
+      {
+        "goods_id": "603621596958913",
+        "reason": "None",
+        "join_date": "2025-12-03"
+      },
+      {
+        "goods_id": "603621597002191",
+        "reason": "Blocked",
+        "join_date": "2025-12-12"
+      },
+      {
+        "goods_id": "603625019557210",
+        "reason": "None",
+        "join_date": "2025-11-30"
+      },
+      {
+        "goods_id": "603628039436553",
+        "reason": "None",
+        "join_date": "2025-12-28"
+      },
+      {
+        "goods_id": "603629113167233",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-15"
+      },
+      {
+        "goods_id": "603635018785356",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-01"
+      },
+      {
+        "goods_id": "603635555641004",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-03"
+      },
+      {
+        "goods_id": "603636092482087",
+        "reason": "Secondary_traffic_restricted (Blocked)",
+        "join_date": "2025-11-03"
+      },
+      {
+        "goods_id": "603637166236785",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-05"
+      },
+      {
+        "goods_id": "603641461207901",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-23"
+      },
+      {
+        "goods_id": "603641998051661",
+        "reason": "None",
+        "join_date": "2025-12-04"
+      },
+      {
+        "goods_id": "603645219321780",
+        "reason": "None",
+        "join_date": "2025-12-18"
+      },
+      {
+        "goods_id": "603646494401375",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2026-01-04"
+      },
+      {
+        "goods_id": "603649514279178",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-06"
+      },
+      {
+        "goods_id": "603653272362294",
+        "reason": "None",
+        "join_date": "2026-01-08"
+      },
+      {
+        "goods_id": "603655956718955",
+        "reason": "None",
+        "join_date": "2025-12-05"
+      },
+      {
+        "goods_id": "603662936035097",
+        "reason": "None",
+        "join_date": "2025-11-30"
+      },
+      {
+        "goods_id": "603664546651681",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-10-27"
+      },
+      {
+        "goods_id": "603666694163632",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-05"
+      },
+      {
+        "goods_id": "603667969206469",
+        "reason": "None",
+        "join_date": "2025-11-15"
+      },
+      {
+        "goods_id": "603667969208939",
+        "reason": "None",
+        "join_date": "2025-11-20"
+      },
+      {
+        "goods_id": "603669378501858",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2026-01-03"
+      },
+      {
+        "goods_id": "603669378515544",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-10-16"
+      },
+      {
+        "goods_id": "603675820949278",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-28"
+      },
+      {
+        "goods_id": "603675820957205",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-28"
+      },
+      {
+        "goods_id": "603677431530137",
+        "reason": "Secondary_traffic_restricted (Blocked)",
+        "join_date": "2025-10-19"
+      },
+      {
+        "goods_id": "603679579072654",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-18"
+      },
+      {
+        "goods_id": "603682800258594",
+        "reason": "None",
+        "join_date": "2025-12-12"
+      },
+      {
+        "goods_id": "603683874007320",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-03"
+      },
+      {
+        "goods_id": "603685484647721",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-22"
+      },
+      {
+        "goods_id": "603688705867107",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-25"
+      },
+      {
+        "goods_id": "603693269278525",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-10-22"
+      },
+      {
+        "goods_id": "603694611440288",
+        "reason": "None",
+        "join_date": "2025-12-21"
+      },
+      {
+        "goods_id": "603697295763211",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-23"
+      },
+      {
+        "goods_id": "603703738228572",
+        "reason": "None",
+        "join_date": "2025-12-18"
+      },
+      {
+        "goods_id": "603703738265433",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-27"
+      },
+      {
+        "goods_id": "603710918875079",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-23"
+      },
+      {
+        "goods_id": "603713938761175",
+        "reason": "None",
+        "join_date": "2025-12-27"
+      },
+      {
+        "goods_id": "603715549393446",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-10-01"
+      },
+      {
+        "goods_id": "603718770615507",
+        "reason": "Out_of_stock",
+        "join_date": "2025-11-05"
+      },
+      {
+        "goods_id": "603720381250504",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-10-26"
+      },
+      {
+        "goods_id": "603721991872556",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-21"
+      },
+      {
+        "goods_id": "603724676178475",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-04"
+      },
+      {
+        "goods_id": "603724676210333",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-09"
+      },
+      {
+        "goods_id": "603725213087312",
+        "reason": "Out_of_stock",
+        "join_date": "2025-11-06"
+      },
+      {
+        "goods_id": "603726286796911",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-10-29"
+      },
+      {
+        "goods_id": "603728098744336",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-16"
+      },
+      {
+        "goods_id": "603732192426303",
+        "reason": "None",
+        "join_date": "2025-12-18"
+      },
+      {
+        "goods_id": "603737561118299",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-09"
+      },
+      {
+        "goods_id": "603741856069157",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-05"
+      },
+      {
+        "goods_id": "603744540424544",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-16"
+      },
+      {
+        "goods_id": "603753130341076",
+        "reason": "None",
+        "join_date": "2025-12-17"
+      },
+      {
+        "goods_id": "603754740945428",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-23"
+      },
+      {
+        "goods_id": "603759572788612",
+        "reason": "None",
+        "join_date": "2025-12-27"
+      },
+      {
+        "goods_id": "603761183451960",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-06"
+      },
+      {
+        "goods_id": "603764941521519",
+        "reason": "None",
+        "join_date": "2025-12-14"
+      },
+      {
+        "goods_id": "603766015289520",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-05"
+      },
+      {
+        "goods_id": "603769236470667",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-10-05"
+      },
+      {
+        "goods_id": "603772457724971",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-28"
+      },
+      {
+        "goods_id": "603775678955772",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-10"
+      },
+      {
+        "goods_id": "603780292666097",
+        "reason": "None",
+        "join_date": "2025-12-06"
+      },
+      {
+        "goods_id": "603788563854650",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-01"
+      },
+      {
+        "goods_id": "603791785064203",
+        "reason": "None",
+        "join_date": "2025-12-21"
+      },
+      {
+        "goods_id": "603796080060064",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-10-17"
+      },
+      {
+        "goods_id": "603797690616473",
+        "reason": "Out_of_stock",
+        "join_date": "2025-11-29"
+      },
+      {
+        "goods_id": "603798227523550",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-02"
+      },
+      {
+        "goods_id": "603802522504043",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-28"
+      },
+      {
+        "goods_id": "603804669942505",
+        "reason": "None",
+        "join_date": "2025-12-03"
+      },
+      {
+        "goods_id": "603804669944160",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-06"
+      },
+      {
+        "goods_id": "603810038655291",
+        "reason": "None",
+        "join_date": "2025-10-08"
+      },
+      {
+        "goods_id": "603814333647328",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-16"
+      },
+      {
+        "goods_id": "603814333649735",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-09"
+      },
+      {
+        "goods_id": "603819165514994",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-09"
+      },
+      {
+        "goods_id": "603826144811342",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-09"
+      },
+      {
+        "goods_id": "603826144815871",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-20"
+      },
+      {
+        "goods_id": "603829902874128",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-30"
+      },
+      {
+        "goods_id": "603830708197698",
+        "reason": "Out_of_stock",
+        "join_date": "2025-10-14"
+      },
+      {
+        "goods_id": "603832050387405",
+        "reason": "Out_of_stock",
+        "join_date": "2025-10-30"
+      },
+      {
+        "goods_id": "603832587277145",
+        "reason": "None",
+        "join_date": "2025-12-07"
+      },
+      {
+        "goods_id": "603839566603049",
+        "reason": "Out_of_stock",
+        "join_date": "2025-10-30"
+      },
+      {
+        "goods_id": "603843324676669",
+        "reason": "None",
+        "join_date": "2025-10-18"
+      },
+      {
+        "goods_id": "603843324684159",
+        "reason": "None",
+        "join_date": "2025-12-23"
+      },
+      {
+        "goods_id": "603852451502298",
+        "reason": "Blocked",
+        "join_date": "2025-11-24"
+      },
+      {
+        "goods_id": "603852988344315",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-08"
+      },
+      {
+        "goods_id": "603855135832468",
+        "reason": "None",
+        "join_date": "2025-12-21"
+      },
+      {
+        "goods_id": "603856209563238",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-06"
+      },
+      {
+        "goods_id": "603856209591024",
+        "reason": "Secondary_traffic_restricted (Blocked)",
+        "join_date": "2025-12-07"
+      },
+      {
+        "goods_id": "603861242736334",
+        "reason": "None",
+        "join_date": "2025-12-30"
+      },
+      {
+        "goods_id": "603862115170954",
+        "reason": "None",
+        "join_date": "2026-01-08"
+      },
+      {
+        "goods_id": "603863188873441",
+        "reason": "Secondary_traffic_restricted (Blocking)",
+        "join_date": "2025-11-17"
+      },
+      {
+        "goods_id": "603863725750664",
+        "reason": "Out_of_stock",
+        "join_date": "2025-12-04"
+      },
+      {
+        "goods_id": "603866410126687",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-06"
+      },
+      {
+        "goods_id": "603868020731510",
+        "reason": "None",
+        "join_date": "2026-01-08"
+      },
+      {
+        "goods_id": "603869094498716",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-29"
+      },
+      {
+        "goods_id": "603870168243092",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-29"
+      },
+      {
+        "goods_id": "603871778824182",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-09"
+      },
+      {
+        "goods_id": "603881979390112",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-08"
+      },
+      {
+        "goods_id": "603881979403687",
+        "reason": "None",
+        "join_date": "2025-12-10"
+      },
+      {
+        "goods_id": "603886274359715",
+        "reason": "None",
+        "join_date": "2025-12-19"
+      },
+      {
+        "goods_id": "603890032430793",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-22"
+      },
+      {
+        "goods_id": "603907212299642",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-29"
+      },
+      {
+        "goods_id": "603907749172779",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-20"
+      },
+      {
+        "goods_id": "603908822947976",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-28"
+      },
+      {
+        "goods_id": "603919560361540",
+        "reason": "Out_of_stock",
+        "join_date": "2025-12-03"
+      },
+      {
+        "goods_id": "603920097184255",
+        "reason": "None",
+        "join_date": "2025-12-22"
+      },
+      {
+        "goods_id": "603921707807135",
+        "reason": "Out_of_stock",
+        "join_date": "2025-10-02"
+      },
+      {
+        "goods_id": "603924929028446",
+        "reason": "None",
+        "join_date": "2025-10-19"
+      },
+      {
+        "goods_id": "603925667229462",
+        "reason": "None",
+        "join_date": "2025-11-25"
+      },
+      {
+        "goods_id": "603926539638802",
+        "reason": "Out_of_stock",
+        "join_date": "2025-12-05"
+      },
+      {
+        "goods_id": "603928150248642",
+        "reason": "None",
+        "join_date": "2025-12-16"
+      },
+      {
+        "goods_id": "603930834644952",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-02"
+      },
+      {
+        "goods_id": "603930834665228",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-08"
+      },
+      {
+        "goods_id": "603942847110632",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-18"
+      },
+      {
+        "goods_id": "603946403858914",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-08"
+      },
+      {
+        "goods_id": "603948551362845",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-06"
+      },
+      {
+        "goods_id": "603951235698172",
+        "reason": "None",
+        "join_date": "2025-12-11"
+      },
+      {
+        "goods_id": "603952309499990",
+        "reason": "Out_of_stock",
+        "join_date": "2025-12-11"
+      },
+      {
+        "goods_id": "603955530687776",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2026-01-01"
+      },
+      {
+        "goods_id": "603958215022335",
+        "reason": "Out_of_stock",
+        "join_date": "2025-11-02"
+      },
+      {
+        "goods_id": "603960899398102",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-10-30"
+      },
+      {
+        "goods_id": "603961436300788",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-08"
+      },
+      {
+        "goods_id": "603967878718093",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-04"
+      },
+      {
+        "goods_id": "603967878735526",
+        "reason": "None",
+        "join_date": "2025-12-01"
+      },
+      {
+        "goods_id": "603968147146093",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-10-10"
+      },
+      {
+        "goods_id": "603968147152623",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-10"
+      },
+      {
+        "goods_id": "603968616919417",
+        "reason": "None",
+        "join_date": "2025-11-20"
+      },
+      {
+        "goods_id": "603971099954365",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-21"
+      },
+      {
+        "goods_id": "603972710538783",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-19"
+      },
+      {
+        "goods_id": "603973247460591",
+        "reason": "None",
+        "join_date": "2026-01-06"
+      },
+      {
+        "goods_id": "603973784304925",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-03"
+      },
+      {
+        "goods_id": "603974321163920",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-09"
+      },
+      {
+        "goods_id": "603993111644331",
+        "reason": "None",
+        "join_date": "2025-12-01"
+      },
+      {
+        "goods_id": "603994185370989",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-30"
+      },
+      {
+        "goods_id": "603999554094772",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-11"
+      },
+      {
+        "goods_id": "604003849051640",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-28"
+      },
+      {
+        "goods_id": "604004385960142",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-13"
+      },
+      {
+        "goods_id": "604006533442420",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-13"
+      },
+      {
+        "goods_id": "604009754648866",
+        "reason": "Out_of_stock",
+        "join_date": "2025-12-11"
+      },
+      {
+        "goods_id": "604012439032178",
+        "reason": "Out_of_stock",
+        "join_date": "2025-10-21"
+      },
+      {
+        "goods_id": "604015123340628",
+        "reason": "None",
+        "join_date": "2025-12-13"
+      },
+      {
+        "goods_id": "604020492049401",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-10-15"
+      },
+      {
+        "goods_id": "604023176450583",
+        "reason": "Out_of_stock",
+        "join_date": "2025-11-14"
+      },
+      {
+        "goods_id": "604028008243528",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-13"
+      },
+      {
+        "goods_id": "604030692602861",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-28"
+      },
+      {
+        "goods_id": "604032840090439",
+        "reason": "None",
+        "join_date": "2025-11-25"
+      },
+      {
+        "goods_id": "604033913861925",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-05"
+      },
+      {
+        "goods_id": "604039819425299",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-06"
+      },
+      {
+        "goods_id": "604053241168853",
+        "reason": "None",
+        "join_date": "2025-10-31"
+      },
+      {
+        "goods_id": "604059683652116",
+        "reason": "None",
+        "join_date": "2025-12-17"
+      },
+      {
+        "goods_id": "604061294259729",
+        "reason": "Out_of_stock",
+        "join_date": "2025-11-26"
+      },
+      {
+        "goods_id": "604066662992813",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-07"
+      },
+      {
+        "goods_id": "604068273606904",
+        "reason": "Out_of_stock",
+        "join_date": "2025-12-06"
+      },
+      {
+        "goods_id": "604081695352042",
+        "reason": "None",
+        "join_date": "2025-12-01"
+      },
+      {
+        "goods_id": "604085453462669",
+        "reason": "None",
+        "join_date": "2025-11-28"
+      },
+      {
+        "goods_id": "604085453485918",
+        "reason": "Secondary_traffic_restricted (Blocked)",
+        "join_date": "2025-12-23"
+      },
+      {
+        "goods_id": "604085990307586",
+        "reason": "Blocked",
+        "join_date": "2025-12-04"
+      },
+      {
+        "goods_id": "604090822176179",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-09"
+      },
+      {
+        "goods_id": "604091895926869",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-04"
+      },
+      {
+        "goods_id": "604093170962658",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-15"
+      },
+      {
+        "goods_id": "604095117154721",
+        "reason": "Out_of_stock",
+        "join_date": "2025-12-05"
+      },
+      {
+        "goods_id": "604096190844596",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-10-23"
+      },
+      {
+        "goods_id": "604098875251847",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-01"
+      },
+      {
+        "goods_id": "604100485863043",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-16"
+      },
+      {
+        "goods_id": "604106391451468",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-16"
+      },
+      {
+        "goods_id": "604107465146953",
+        "reason": "Blocked",
+        "join_date": "2025-11-08"
+      },
+      {
+        "goods_id": "604114645831965",
+        "reason": "None",
+        "join_date": "2025-12-22"
+      },
+      {
+        "goods_id": "604114981376666",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-19"
+      },
+      {
+        "goods_id": "604117665731390",
+        "reason": "Out_of_stock",
+        "join_date": "2025-11-24"
+      },
+      {
+        "goods_id": "604126792532086",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-09"
+      },
+      {
+        "goods_id": "604131825671535",
+        "reason": "None",
+        "join_date": "2025-11-20"
+      },
+      {
+        "goods_id": "604131825683790",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-29"
+      },
+      {
+        "goods_id": "604132161226149",
+        "reason": "None",
+        "join_date": "2025-12-22"
+      },
+      {
+        "goods_id": "604132698101606",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2026-01-01"
+      },
+      {
+        "goods_id": "604133234952950",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-01"
+      },
+      {
+        "goods_id": "604143972371655",
+        "reason": "None",
+        "join_date": "2025-11-22"
+      },
+      {
+        "goods_id": "604150414814940",
+        "reason": "None",
+        "join_date": "2026-01-06"
+      },
+      {
+        "goods_id": "604150951697812",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-06"
+      },
+      {
+        "goods_id": "604160615414220",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-10-29"
+      },
+      {
+        "goods_id": "604161689134798",
+        "reason": "Blocked",
+        "join_date": "2025-12-01"
+      },
+      {
+        "goods_id": "604168131599498",
+        "reason": "None",
+        "join_date": "2025-11-08"
+      },
+      {
+        "goods_id": "604169205286264",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-10-23"
+      },
+      {
+        "goods_id": "604171352796506",
+        "reason": "None",
+        "join_date": "2026-01-06"
+      },
+      {
+        "goods_id": "604172963391957",
+        "reason": "Out_of_stock",
+        "join_date": "2025-11-27"
+      },
+      {
+        "goods_id": "604177795239014",
+        "reason": "None",
+        "join_date": "2025-12-21"
+      },
+      {
+        "goods_id": "604180479593417",
+        "reason": "None",
+        "join_date": "2026-01-05"
+      },
+      {
+        "goods_id": "604181553361271",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-10-26"
+      },
+      {
+        "goods_id": "604183700836738",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-07"
+      },
+      {
+        "goods_id": "604185311464262",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-03"
+      },
+      {
+        "goods_id": "604185311468963",
+        "reason": "None",
+        "join_date": "2025-12-26"
+      },
+      {
+        "goods_id": "604185848284932",
+        "reason": "None",
+        "join_date": "2025-12-02"
+      },
+      {
+        "goods_id": "604185848308297",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-10-20"
+      },
+      {
+        "goods_id": "604186922049056",
+        "reason": "None",
+        "join_date": "2025-10-18"
+      },
+      {
+        "goods_id": "604191217000773",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2026-01-03"
+      },
+      {
+        "goods_id": "604191753914304",
+        "reason": "None",
+        "join_date": "2025-12-17"
+      },
+      {
+        "goods_id": "604192827609043",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-21"
+      },
+      {
+        "goods_id": "604192827620400",
+        "reason": "None",
+        "join_date": "2025-12-25"
+      },
+      {
+        "goods_id": "604193901362390",
+        "reason": "604371068750407",
+        "join_date": "2025-12-05"
+      },
+      {
+        "goods_id": "604194438219378",
+        "reason": "Out_of_stock",
+        "join_date": "2025-10-12"
+      },
+      {
+        "goods_id": "604196585701718",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-10-25"
+      },
+      {
+        "goods_id": "604197122585547",
+        "reason": "Out_of_stock",
+        "join_date": "2025-12-07"
+      },
+      {
+        "goods_id": "604198733216324",
+        "reason": "Blocked",
+        "join_date": "2025-11-19"
+      },
+      {
+        "goods_id": "604204101916828",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-07"
+      },
+      {
+        "goods_id": "604211081252575",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-29"
+      },
+      {
+        "goods_id": "604221281827925",
+        "reason": "Out_of_stock",
+        "join_date": "2025-11-11"
+      },
+      {
+        "goods_id": "604223429255389",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-29"
+      },
+      {
+        "goods_id": "604223966130764",
+        "reason": "None",
+        "join_date": "2025-12-10"
+      },
+      {
+        "goods_id": "604232556053216",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-20"
+      },
+      {
+        "goods_id": "604233629835847",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-16"
+      },
+      {
+        "goods_id": "604243494817146",
+        "reason": "None",
+        "join_date": "2025-12-24"
+      },
+      {
+        "goods_id": "604244367222542",
+        "reason": "Out_of_stock",
+        "join_date": "2025-11-02"
+      },
+      {
+        "goods_id": "604248662223803",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-04"
+      },
+      {
+        "goods_id": "604252084791138",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-09"
+      },
+      {
+        "goods_id": "604252420329023",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-13"
+      },
+      {
+        "goods_id": "604257788988741",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-02"
+      },
+      {
+        "goods_id": "604258862771553",
+        "reason": "Blocked",
+        "join_date": "2025-12-28"
+      },
+      {
+        "goods_id": "604265623991341",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-30"
+      },
+      {
+        "goods_id": "604267989554757",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-04"
+      },
+      {
+        "goods_id": "604268526448968",
+        "reason": "Out_of_stock",
+        "join_date": "2025-12-29"
+      },
+      {
+        "goods_id": "604269264604677",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-29"
+      },
+      {
+        "goods_id": "604272284556593",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-10-29"
+      },
+      {
+        "goods_id": "604274432009885",
+        "reason": "None",
+        "join_date": "2025-12-10"
+      },
+      {
+        "goods_id": "604275505767136",
+        "reason": "None",
+        "join_date": "2025-11-08"
+      },
+      {
+        "goods_id": "604279263843657",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-12"
+      },
+      {
+        "goods_id": "604282485100234",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-25"
+      },
+      {
+        "goods_id": "604285169419257",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-08"
+      },
+      {
+        "goods_id": "604285169422244",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-04"
+      },
+      {
+        "goods_id": "604286444531879",
+        "reason": "Out_of_stock",
+        "join_date": "2025-11-27"
+      },
+      {
+        "goods_id": "604287853808360",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-09"
+      },
+      {
+        "goods_id": "604291611863278",
+        "reason": "None",
+        "join_date": "2025-12-19"
+      },
+      {
+        "goods_id": "604294564667794",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-11"
+      },
+      {
+        "goods_id": "604295906869250",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-28"
+      },
+      {
+        "goods_id": "604296980585716",
+        "reason": "None",
+        "join_date": "2025-12-27"
+      },
+      {
+        "goods_id": "604297517440722",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-15"
+      },
+      {
+        "goods_id": "604299664916995",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-10-06"
+      },
+      {
+        "goods_id": "604306644269235",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-26"
+      },
+      {
+        "goods_id": "604311476076547",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-21"
+      },
+      {
+        "goods_id": "604320066012484",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-28"
+      },
+      {
+        "goods_id": "604320066042838",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-07"
+      },
+      {
+        "goods_id": "604322213542022",
+        "reason": "None",
+        "join_date": "2025-12-24"
+      },
+      {
+        "goods_id": "604329394166711",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-03"
+      },
+      {
+        "goods_id": "604330803489759",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-30"
+      },
+      {
+        "goods_id": "604332414096915",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2026-01-03"
+      },
+      {
+        "goods_id": "604342614646731",
+        "reason": "Out_of_stock",
+        "join_date": "2025-11-04"
+      },
+      {
+        "goods_id": "604349593941184",
+        "reason": "Out_of_stock",
+        "join_date": "2025-10-27"
+      },
+      {
+        "goods_id": "604355499531666",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-05"
+      },
+      {
+        "goods_id": "604355499538478",
+        "reason": "Blocked",
+        "join_date": "2025-11-26"
+      },
+      {
+        "goods_id": "604356036397419",
+        "reason": "None",
+        "join_date": "2025-12-26"
+      },
+      {
+        "goods_id": "604360868229680",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-10-30"
+      },
+      {
+        "goods_id": "604363015726706",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-20"
+      },
+      {
+        "goods_id": "604365700067354",
+        "reason": "Out_of_stock",
+        "join_date": "2025-11-26"
+      },
+      {
+        "goods_id": "604366773842877",
+        "reason": "None",
+        "join_date": "2026-01-07"
+      },
+      {
+        "goods_id": "604369458154449",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-07"
+      },
+      {
+        "goods_id": "604371068750407",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-30"
+      },
+      {
+        "goods_id": "604375363747650",
+        "reason": "None",
+        "join_date": "2026-01-08"
+      },
+      {
+        "goods_id": "604375900621847",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-11-14"
+      },
+      {
+        "goods_id": "604376974334612",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-10-28"
+      },
+      {
+        "goods_id": "604377511237485",
+        "reason": "None",
+        "join_date": "2025-12-24"
+      },
+      {
+        "goods_id": "604378048090207",
+        "reason": "None",
+        "join_date": "2025-12-13"
+      },
+      {
+        "goods_id": "604380933810334",
+        "reason": "Out_of_stock",
+        "join_date": "2025-12-30"
+      },
+      {
+        "goods_id": "604384490581908",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-04"
+      },
+      {
+        "goods_id": "604386101159419",
+        "reason": "Secondary_traffic_restricted",
+        "join_date": "2025-12-14"
+      },
+      {
+        "goods_id": "604392543601589",
+        "reason": "None",
+        "join_date": "2025-12-25"
+      },
+      {
+        "goods_id": "604394691091705",
+        "reason": "None",
+        "join_date": "2025-12-24"
+      }
+    ],
+    "summary": {
+      "total_records": 22418,
+      "unique_goods": 383,
+      "min_date": "2025-10-01",
+      "max_date": "2026-01-08",
+      "date_range": 100
+    }
+  },
+  "total_summary": {
+    "total_records": 23100,
+    "unique_goods": 395,
+    "min_date": "2025-10-01",
+    "max_date": "2026-01-14",
+    "date_range": 106,
+    "out_of_stock_count": 45,
+    "secondary_traffic_restricted_count": 227,
+    "blocked_count": 14,
+    "normal_count": 0,
+    "none_count": 109,
+    "on_sale_ratio": 27.59493670886076,
+    "reason_pie_chart": "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2dlZHjZsWIPj9erVS3Z3d5f/7//+T16yZIk8duxYGYC8bds20z6lpaVyQECA3KpVK/lf//qXvHjxYrl3796yq6urfPr0adN+q1atkhUKhdylSxf5/fffl5944glZqVTKXbt2lWtraxvkHzNmjOzl5SW/8MIL8nvvvSe3atVKdnd3l/Py8hrkO3/+vDx//ny5VatWclhYmPzZZ5/JsizLx44dkwHIK1euNO27efNmOT4+XnZxcZGfeeYZWaVSXfHXMTExUU5NTW1y24cffigDkNVqtSzLstyvXz95+PDhTe47evRoOTk5WdZqtbIsy/LGjRvlVq1ayV27dpULCwvlc+fOyfv27ZPXr18vP/nkkzIAuVu3bqb9/wqA/Nprr8l6vV7WaDSywWBosD0wMFB+4YUXGjxmMBhknU53xddKRGSPODSIiBzW8uXLsXz5ctP3AQEB+PjjjzF06FCcP38eb7/9Np566ik888wzpn1UKhUWLlyIM2fOICkpCUVFRQgODsaHH36I+++/HwBw3333wd/fHxs3bjQNYTl+/DjKysrw/vvv4/HHHwcADB06FG+88YZpcava2lo89thjSEpKwp49e0xDZLp06YJp06bhgw8+wNy5c01Zvv76a2zZsgUDBgwAAMTGxiItLQ179uzBuHHjAABnz55F165d4efnh6eeegoPP/yw6V6BsLAwRERENFjMa+DAgTh69CjmzJmDEydONPiEPyMjA+fOnYO7uzskSYJOp4MkSfjtt98a/Lr26dOn2b8HP/30E7755hts3boVLi4uAIxXWAoKClBQUIDw8PAG+yckJKBXr17YvXs35s+fj5deeqnJ47q4uEChUDQ5ZWlTJElqMHyKiMgRsAgQkcMaMWIEnnjiCZw8eRJPPvkkHnnkEcycORMAsHnzZhgMBrz99tt4++23Gz33xIkTSEpKQlhYGL799lvU19dj//79OHjwIH788UdUV1c3mIu/ffv28Pb2xqJFixASEoIePXogPj6+wU3Ju3fvRllZGf7xj380eAM7ZcoUPPHEE9i4cWODIpCWlmYqAQDQoUMHAGgwv35YWBh27dqF5ORk0xvty9zc3JCfn48TJ040eNzLywsLFy6EVquFWq02Zfnqq6/wj3/8o8G+OTk52Lp1a4PH6urqmvrlbuTs2bOYOnUqRo4cCTc3N3z++edIT0/H3/72Nzz//PNISkrCtGnT8MYbb2DcuHFISkrCm2++ibFjx2LevHmYNWvWFY/N6UGJiK6N9wgQkcOKiIjAoEGD8MQTT6Bz585YsGABqqurAQAlJSUAgEWLFuGXX35p9NWrVy/TcV5++WX4+/ujZ8+eeO+99xAaGgp/f/8G5woMDMSGDRsQGhqKadOmoXXr1ggLC8M//vEP0yfyl1f9jYyMbPBcSZIQERHRYFVgAA0yAGhynv4RI0agY8eOcHV1bbB2giRJ8PHxAWCcy/+v25RKJTw9PRu8jkceeQTnz59HQUEBTp8+DQB48cUXUVhYiMLCQvzrX/+CQqGAUqk0vSb5f4uV/ZXBYEBKSgqKi4vx3XffoWfPnpg4cSKWL1+O9u3b4/XXX8eECRMAAEFBQQ0+rZckCS+//DICAwObPDYRETUPrwgQEQF44YUXMH78eCxcuBDPPPOMaarK6OhoDBo0yLRfZWUlTp06ZfrEedWqVZg3bx7mzp2L5557Dr6+vgCMVxT+KjU1Fampqaivr0d6ejo++OADvPbaawgPD8cjjzyC4OBgAGgwm81lBQUFaNeuXYPHLu9/NZ999hkMBgOcnJwazbs/evRoHD9+HBqNBl988QVuv/120zaDwQCdTtfg0/2AgAAEBAQAgGmxrl69eplWBFYqlaarB5enFtXpdA1m87lMoVDg3nvvhVqtRrdu3dC+fXskJSU1eE2Xi8/l41+v8vJypKWl4fPPP0erVq1u6BhERPaMVwSIiACMGTMGbdq0wbvvvgutVotBgwZBoVBg5cqVDfb74IMP0LNnT5w5cwYAsGfPHgDAk08+aSoBP//8s2mxrstWrlyJyMhIFBcXQ6lUomPHjvjXv/4FADh48CAAoHfv3vD398fSpUuh0+lMz/3ss89QUVGB4cOHX/frioyMRHR0NCIiIhAWFmb6+vrrr7F371589dVXmDJlCh588EHk5OSYtrdq1co0m05TlixZAnd3d/Ts2dP0WG1tLTw9PQEYVyAODQ1FfX39FbO9//77WLJkCR566CH07t3bVALUajUAYOfOnQD+GPJ0PbRaLcaOHYt9+/YhIyPjup9PROQIWASIiGD8hPq5555DUVER/vvf/yIhIQF///vf8fnnn2P48OFYuHAhnn32Wbz++usYMmQIevfuDeCP+fRnzpyJTz75BA888ABGjBgBhUJhekMLAD179jS9mf/ggw+wdOlSjB8/HoBx/QIA8PT0xPvvv49Tp06hZ8+e+PDDDzF79mzcd9996NSpk+km45uhUqnw9NNP49FHH8WLL76IYcOGYcmSJUhLS0Pv3r3x1FNPoby8/KrH+Pnnn7F69WpMmTIFfn5+psf/XARmz56NoqKiZg3f0el02Lp1K5544gnExsaapl597733TNN//lVZWVmDsnTZ5eLx1ltvYdeuXVi3bh369+9/zQxERA5J9LRFREQt7fL0mw899FCDx+vq6uS4uDg5Li5Orqurk2VZlhctWiS3a9dOdnV1lWNjY+W5c+fK1dXVpufo9Xr5+eefl1u1aiW7urrK3bt3l7/55hu5T58+cmhoaIN9d+3aJQ8bNkwODQ2V3dzc5LZt28oLFixolO+HH36Qb7vtNtnFxUUOCQmRH330UbmioqJR/k8//bTJ1/XXx6urq+Vff/1VnjFjhuzt7S37+PjIS5cubXTexYsXy97e3rK7u7s8depU+bvvvmtwXlmW5W+//VZ2d3eXY2Ji5JKSkgbbxo0bJ3fo0KHRcQ0Gg3zLLbfIo0aNMj32+++/yzNnzpS7d+8uu7i4yADkkJAQ+d5775WPHz8u//vf/5YByCtWrGjw2r766itZlmX5008/lePj4+WTJ082ONeJEydkALJSqZS//fbbRllkuenpQ4mIHBGLABGRHXvkkUdkhUIhA5DDwsLkF154QS4uLr7i/sXFxfLjjz8ue3p6ygDkYcOGyQaDQTYYDPLUqVNlAHJcXJycmZlpes6gQYNkX19fGYA8Z84c0+MFBQXywIED5cTERBmA/Nhjj5m2FRUVye7u7nLnzp3lV155RT548KBpvv9PP/1UVigU8pgxYxocC4B8//33y+np6fKAAQNkX1/fRuscHD58WPbw8DCtldAUPz8/+dlnn23+LyIRkZ2SZPkKUzoQEZHNO3fuHP7zn/9gyJAh6NOnT5MzCzWlpqYGX3/9NXr16oWEhAQAwJo1a7Bo0SJ88cUXDVZf/vjjj7Ft2zaMGDEC9957b4Nz9O3bF1qtFv3798dTTz3V4GbgwsLCRusEfPHFF7jnnnswaNAgfPfdd3BzczNtS0tLw8aNG6HX6+Hh4YGFCxdiypQpjbLn5OQgJibmiq/NxcUFM2fOxPvvv9+sXwsiInvFIkBERM0my7LF5+j/5ZdfkJqaygW+iIgsjEWAiIiIiMgBcdYgIiIiIiIHxCJAREREROSAWASIiIiIiBwQiwARERERkQNiESAiIiIickAsAkREREREDohFgIiIiIjIAbEIEBERERE5IBYBIiIiIiIHxCJAREREROSAWASIiIiIiBwQiwARERERkQNiESAiIiIickAsAkREREREDohFgIiIiIjIAbEIEBERERE5IBYBIiIiIiIHxCJAREREROSAWASIiIiIiBwQiwARERERkQNiESAiIiIickAsAkREREREDohFgIiIiIjIAbEIEBERERE5IBYBIiIiIiIHxCJAREREROSAWASIiIiIiBwQiwARERERkQNiESAyk507d6JDhw5wc3ND//79kZOTIyxLXl4e+vbtC1dXV0RFRSE3N1dYlqbMmzcP06ZNEx2DiIjIobEIEJlBRUUFRo0ahdGjRyM9PR0BAQG49957m/Xc2NhY/Pbbb2bN8+6778LX1xcXLlzAxo0b4efnd9PHlCQJ2dnZN30cIiIisg5K0QGI7MF3330HHx8fvPzyy5AkCe+++y5iYmKQk5ODmJiYFs9TWlqKbt26ITQ0FKGhoS1+fiIiIrJ+vCJAZAbHjx9Hx44dIUkSACA6Ohre3t744YcfkJqaatovOzvbtM/QoUMhSRJycnLQv39/SJKEN998s1nn2759Ozp37gx/f39MnDgRFRUVAIA333wTkiRh+fLlplIydOjQZh3z888/R1xcHDw9PTFkyBBcunQJAHDLLbeYMsfFxUGSJHzxxRem561duxbJyckICgrCrFmzoNFoGhwzMTERvr6+mDBhAiorKxud9/Tp0wgLC8PmzZublZOIiIjMg0WAyAzKy8vh6+vb4DFfX1+Ul5df8Tnr1q1DeXk5oqKi8N1336G8vByzZ8++5rlyc3Nx55134tFHH8WhQ4egUqlM4+1nz56N8vJy3HPPPZg7dy7Ky8uxbt26ax6zuroaU6dOxfz583Hy5EkolUq88847AIADBw6YXsfRo0dRXl6OsWPHmrZNnToVb731Fnbu3ImDBw/i2WefBQDs3r0bM2bMwDvvvIMjR46gsLAQL730UoPzXrx4EXfeeSf+9a9/YdCgQdfMSURERObDoUFEFiLL8lW3e3p6AgAUCgW8vLyaPY7/s88+Q69evfDAAw8AABYuXIjIyEgUFRUhLCwMrq6ucHFxgZub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"
+  }
+}

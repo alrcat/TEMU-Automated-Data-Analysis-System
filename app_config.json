@@ -1,0 +1,39 @@
+{
+  "traffic_db": {
+    "host": "127.0.0.1",
+    "port": 3306,
+    "database": "Vida_Traffic",
+    "user": "root",
+    "password": "txw@123",
+    "charset": "utf8mb4"
+  },
+  "sales_db": {
+    "host": "127.0.0.1",
+    "port": 3306,
+    "database": "Vida_Sales",
+    "user": "root",
+    "password": "txw@123",
+    "charset": "utf8mb4"
+  },
+  "current_table": "ROA1_PL",
+  "pallet_db": {
+    "host": "192.168.31.101",
+    "port": 3306,
+    "database": "vidaxl",
+    "user": "abc",
+    "password": "abc",
+    "charset": "utf8mb4"
+  },
+  "product_db": {
+    "host": "192.168.31.101",
+    "port": 3306,
+    "database": "slkw",
+    "user": "abc",
+    "password": "abc",
+    "charset": "utf8mb4"
+  },
+  "indicator_config": {
+    "unpriced_data_dir": "C:\\Users\\PC\\Desktop\\code\\核价\\低流量",
+    "traffic_restricted_data_dir": "C:\\Users\\PC\\Desktop\\code\\核价\\二次限流"
+  }
+}
