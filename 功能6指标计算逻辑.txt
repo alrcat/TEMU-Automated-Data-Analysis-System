@@ -1,0 +1,78 @@
+cursor提示词：
+@function6_indicator_calculation.py 
+新添加一个功能模块，能根据数据库的数据计算当前时间的对应指标和画图。具体的表用数据分析系统当前选择的表，如ROA1_FR。在这里还会用2个本地目录的xlsx文件作为数据，再这个功能模块内，会有一个配置按钮，配置这两个数据目录的地址，里面包含各个国家站点名称目录（如目录ROA1_FR），这些站点目录中的所有xlsx文件，按顺序分别为“未核价数据”和“限流数据”（路径例子："C:\Users\PC\Desktop\code\核价\低流量\ROA1_FR\priceTemplate_for_newProductBoostOpportunities1_2026-1-14.xlsx"（未核价数据之一）和"C:\Users\PC\Desktop\code\核价\二次限流\ROA1_FR\priceTemplate_for_trafficBoostOpportunities1_2026-1-14.xlsx"（限流数据之一）），配置成功会类似于切换表成功一样弹出提示"配置成功"，这些文件是至少存在一个的，如果没有xlsx文件，就报错。每个指标用一个函数写，并进行注释。如需多次调用一个功能/数据，也写成函数。
+具体指标说明：
+
+货盘表DEFAULT_PALLET_DB_CONFIG，商品表DEFAULT_PRODUCT_DB_CONFIG，销售表DEFAULT_SALES_DB_CONFIG，流量表DEFAULT_DB_CONFIG
+
+·1.非限流在售商品数量：ok不影响
+商品表DEFAULT_PRODUCT_DB_CONFIG中对应站点，如ROA1_FR表中字段“detail_status”为'Active'，goods_id去重的所有数据，主键为goods_id，SQL为：
+“SELECT COUNT(DISTINCT goods_id) AS sku_cnt
+FROM `ROA1_FR`
+WHERE detail_status = 'Active';”这部分数据为"无风险active数据"，数量为"无风险active数量"ok
+
+商品表DEFAULT_PRODUCT_DB_CONFIG中对应站点，如ROA1_FR表中字段“detail_status”为"At Risk"，goods_id去重的所有数据，主键为goods_id，SQL为：
+“SELECT COUNT(DISTINCT goods_id) AS sku_cnt
+FROM `ROA1_FR`
+WHERE detail_status = 'At Risk';”这部分数据为"有风险active数据"，数量为"有风险active数量"ok
+
+"无风险active数据"与"有风险active数据"的数量和（并集），减去"未核价数据"和"限流数据"中从第3列（列名Goods ID）第3行（第3列第二行核价数据为是The ID information corresponding to each product on the Pricing opportunities page. If there are multiple products, they will be separated by spaces.，限流数据为The ID information corresponding to each product on the Pricing opportunities page. If there are multiple products, they will be separated by spaces.）开始的存在的goods_id数据，剩下的goods id的数量被记录为这个站点ROA1_FR的"非限流在售商品数量"，具体的数据为"非限流在售商品数据"
+
+·2.二次限流占比：ok不影响
+统计“限流数据“中所有goods id的数量，这个数量为“限流数据数量”，
+计算公式为："限流数据数量"/（"非限流在售商品数量"+"限流数据数量"），用百分率表示
+
+·3.历史动销品数量 ok影响
+在销售表DEFAULT_SALES_DB_CONFIG中，如ROA1_FR_Sales表，取按goods_id字段去重后count的数据，为"历史动销品数量"，具体的数据为"历史动销品数据"
+
+·4.在售动销品数量 ok影响
+"历史动销品数据"和第一步计算的"非限流在售商品数据"的goods id交集，这部分的数目就是“在售动销品数量”，具体数据为"在售动销品数据"
+
+·5.二次限流动销品占比 影响
+找到"历史动销品数据"和"限流数据"的交际数据，称"历史动销被限流数据"，其数量为"历史动销被限流数量"，"历史动销被限流数量"/"历史动销品数量"，为二次限流动销品占比，用百分率表示
+
+·6.日均单量（近7日）影响
+销售表DEFAULT_SALES_DB_CONFIG中，如ROA1_FR_Sales表，找到日期属于查询日期前7天的数据（不含今天），对所有这些数据的Units ordered字段求和，这个和除以7，就是"日均单量（近7日）"，保留2为小数
+
+·7.过程数据展示
+展示"无风险active数量"，"有风险active数量"，"限流数据数量"，"历史动销被限流数量"影响，放在一起
+
+·8.近30天GMV图 影响
+销售表DEFAULT_SALES_DB_CONFIG中，如ROA1_FR_Sales表，找到日期属于查询日期前30天的数据（不含今天），按照从30天的第一天到最后一天，30个时间段，柱状图为日期当日的这个ROA1_FR所有商品销售额之和（字段为Base price sales），然后再柱状图上画折线图，数据为当日ROA1_FR所有商品销售量（字段为Units ordered），最后组成双轴图，左边销售额，右边销售量。如果当日没找到数据就默认为0
+
+·9.日均GMV图 影响
+销售表DEFAULT_SALES_DB_CONFIG中，如ROA1_FR_Sales表，找到日期属于查询日期前7天的数据（不含今天），按照从7天的第一天到最后一天，7个时间段，柱状图为日期当日的这个ROA1_FR所有商品销售额之和（字段为Base price sales），然后再柱状图上画折线图，数据为当日ROA1_FR所有商品销售量（字段为Units ordered），最后组成双轴图，左边销售额，右边销售量。如果当日没找到数据就默认为0
+
+·tips当前处于risk的也被视为非限流在售商品
+
+
+
+
+
+功能6增加一个保存按钮，点击后会在当前目录的数据指标xlsx文件（没有就创建，sheet名称为当前表名），每个sheet表
+字段说明:
+
+记录日期：当天查询的日期（欧洲-7h）减1天
+上周非限流在售：上一行的"本周非限流在售"数据，没有就为0
+本周非限流在售：即系统的"非限流在售商品数量"
+增长率：("本周非限流在售"-"上周非限流在售")/"上周非限流在售" x 100%（如上周非限流在售为0，就设为0%）
+二次限流占比：即系统的"二次限流占比"
+上周动销品数：上一行的"本周动销品数"数据，没有就为0
+本周动销品数：即系统的"历史动销品数量"
+上周畅销品数：空着不写
+本周畅销品数：空着不写
+上周在售动销品数：上一行的"本周在售动销品数"数据，没有就为0
+本周在售动销品数：即系统的"在售动销品数量"
+增长率：("本周在售动销品数"-"上周在售动销品数")/"上周在售动销品数" x 100%（如上周在售动销品数为0，就设为0%）
+二次限流动销品占比：即系统的"二次限流动销品占比"
+日均单量（近7日）：即系统的"日均单量（近7日）"
+无风险active数量：即系统过程数据之一
+有风险active数量：即系统过程数据之一
+限流数据数量：即系统过程数据之一
+未核价数据数量：即系统过程数据之一
+历史动销被限流数量：即系统过程数据之一
+
+如果记录日期为同一天，就覆盖原有行数据。
+点击保存按钮，会在对应站点国家的sheet表更新最新数据行，再之前时间的数据行下面一行
+最后弹出保存成功，类似于切换配置时的提醒
+
