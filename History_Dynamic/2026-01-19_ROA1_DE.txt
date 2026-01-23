@@ -1,7 +1,7 @@
 ================================================================================
 动销品管理记录 - 2026-01-19
 表名: ROA1_DE
-记录时间: 2026-01-20 15:16:13
+记录时间: 2026-01-21 17:51:14
 ================================================================================
 
 【统计信息】
@@ -31,30 +31,30 @@ goods_id: 603302158779968, 603528181443734, 603560393673551, 603738634815307, 60
 【非上升期商品】
 商品数量: 442个
 
-603302158779968 - 加入时间: 2026-01-17, Reason: None
+603302158779968 - 加入时间: 2026-01-17, Reason: Out_of_stock (0119)
 603302158793277 - 加入时间: 2025-11-03, Reason: Out_of_stock
 603303769413257 - 加入时间: 2026-01-03, Reason: Secondary_traffic_restricted
 603305916891116 - 加入时间: 2025-11-09, Reason: Secondary_traffic_restricted
 603306453776259 - 加入时间: 2025-11-19, Reason: Secondary_traffic_restricted
 603306990658734 - 加入时间: 2025-12-29, Reason: Secondary_traffic_restricted
-603313433088427 - 加入时间: 2025-12-24, Reason: None
+603313433088427 - 加入时间: 2025-12-24, Reason: Out_of_stock
 603314506828325 - 加入时间: 2025-11-25, Reason: Secondary_traffic_restricted
 603316117421237 - 加入时间: 2025-12-02, Reason: Secondary_traffic_restricted
 603317728066711 - 加入时间: 2025-11-20, Reason: Secondary_traffic_restricted
 603324371798280 - 加入时间: 2025-12-08, Reason: Secondary_traffic_restricted
-603325244266176 - 加入时间: 2025-12-23, Reason: None
+603325244266176 - 加入时间: 2025-12-23, Reason: Secondary_traffic_restricted
 603327391735530 - 加入时间: 2025-11-05, Reason: Secondary_traffic_restricted
 603327391744111 - 加入时间: 2025-10-20, Reason: Blocked
-603327928625265 - 加入时间: 2025-12-24, Reason: None
+603327928625265 - 加入时间: 2025-12-24, Reason: Secondary_traffic_restricted
 603337256715159 - 加入时间: 2025-12-04, Reason: Blocked
-603337256756311 - 加入时间: 2026-01-14, Reason: None
+603337256756311 - 加入时间: 2026-01-14, Reason: Out_of_stock
 603338129140528 - 加入时间: 2025-11-08, Reason: Secondary_traffic_restricted
 603342424105089 - 加入时间: 2025-11-07, Reason: None
-603346719070211 - 加入时间: 2026-01-16, Reason: None
+603346719070211 - 加入时间: 2026-01-16, Reason: Out_of_stock
 603346719093770 - 加入时间: 2025-12-01, Reason: Blocked (Children)
 603353161555620 - 加入时间: 2025-11-21, Reason: Out_of_stock
 603354436629911 - 加入时间: 2025-11-14, Reason: Secondary_traffic_restricted
-603355309029135 - 加入时间: 2026-01-08, Reason: None
+603355309029135 - 加入时间: 2026-01-08, Reason: Secondary_traffic_restricted
 603357456471625 - 加入时间: 2025-11-05, Reason: Secondary_traffic_restricted
 603358530211323 - 加入时间: 2025-12-15, Reason: Secondary_traffic_restricted
 603360140885335 - 加入时间: 2025-11-25, Reason: Secondary_traffic_restricted
@@ -77,7 +77,7 @@ goods_id: 603302158779968, 603528181443734, 603560393673551, 603738634815307, 60
 603405976222031 - 加入时间: 2025-11-26, Reason: Secondary_traffic_restricted
 603409533008324 - 加入时间: 2025-11-25, Reason: Secondary_traffic_restricted
 603417049156436 - 加入时间: 2025-11-28, Reason: Secondary_traffic_restricted
-603426175999012 - 加入时间: 2026-01-07, Reason: None
+603426175999012 - 加入时间: 2026-01-07, Reason: Out_of_stock
 603428323444097 - 加入时间: 2025-10-22, Reason: Secondary_traffic_restricted
 603430470920939 - 加入时间: 2025-10-26, Reason: Out_of_stock
 603435302780523 - 加入时间: 2026-01-08, Reason: Secondary_traffic_restricted
@@ -92,12 +92,12 @@ goods_id: 603302158779968, 603528181443734, 603560393673551, 603738634815307, 60
 603457515809121 - 加入时间: 2025-12-08, Reason: Secondary_traffic_restricted
 603461609486006 - 加入时间: 2025-11-13, Reason: Out_of_stock
 603465367529930 - 加入时间: 2025-11-24, Reason: None
-603466978135470 - 加入时间: 2025-10-29, Reason: None
+603466978135470 - 加入时间: 2025-10-29, Reason: Secondary_traffic_restricted
 603471273106281 - 加入时间: 2025-10-19, Reason: Secondary_traffic_restricted
 603477715562289 - 加入时间: 2026-01-01, Reason: Secondary_traffic_restricted
 603482547445019 - 加入时间: 2025-12-02, Reason: Secondary_traffic_restricted
 603484694904179 - 加入时间: 2026-01-11, Reason: None
-603484694911883 - 加入时间: 2026-01-01, Reason: None
+603484694911883 - 加入时间: 2026-01-01, Reason: Out_of_stock
 603486842383239 - 加入时间: 2025-11-03, Reason: Secondary_traffic_restricted
 603486842412284 - 加入时间: 2025-12-13, Reason: Secondary_traffic_restricted
 603488453032937 - 加入时间: 2025-11-07, Reason: Secondary_traffic_restricted
@@ -111,11 +111,11 @@ goods_id: 603302158779968, 603528181443734, 603560393673551, 603738634815307, 60
 603507780380512 - 加入时间: 2025-10-25, Reason: Secondary_traffic_restricted
 603508317212144 - 加入时间: 2025-12-26, Reason: Secondary_traffic_restricted
 603509927814085 - 加入时间: 2025-10-21, Reason: Secondary_traffic_restricted
-603509927854622 - 加入时间: 2025-11-21, Reason: None
+603509927854622 - 加入时间: 2025-11-21, Reason: Secondary_traffic_restricted
 603514222786467 - 加入时间: 2025-12-02, Reason: Secondary_traffic_restricted
 603515833409662 - 加入时间: 2025-11-08, Reason: Secondary_traffic_restricted
 603516370280399 - 加入时间: 2025-10-23, Reason: Secondary_traffic_restricted
-603518517742031 - 加入时间: 2025-12-19, Reason: None
+603518517742031 - 加入时间: 2025-12-19, Reason: Secondary_traffic_restricted
 603521202133710 - 加入时间: 2026-01-19, Reason: None
 603524960213993 - 加入时间: 2025-11-23, Reason: Secondary_traffic_restricted
 603524960252619 - 加入时间: 2025-12-08, Reason: Secondary_traffic_restricted
@@ -130,7 +130,7 @@ goods_id: 603302158779968, 603528181443734, 603560393673551, 603738634815307, 60
 603544287601573 - 加入时间: 2026-01-03, Reason: Secondary_traffic_restricted
 603546435088910 - 加入时间: 2025-11-28, Reason: Out_of_stock
 603553414361934 - 加入时间: 2025-11-11, Reason: Secondary_traffic_restricted
-603560393673551 - 加入时间: 2026-01-14, Reason: None
+603560393673551 - 加入时间: 2026-01-14, Reason: Secondary_traffic_restricted (Disagree_0119)
 603560393682204 - 加入时间: 2025-11-30, Reason: Secondary_traffic_restricted
 603563078054311 - 加入时间: 2025-10-20, Reason: None
 603564688682671 - 加入时间: 2025-12-08, Reason: None
@@ -204,7 +204,7 @@ goods_id: 603302158779968, 603528181443734, 603560393673551, 603738634815307, 60
 603727897428501 - 加入时间: 2025-12-15, Reason: Secondary_traffic_restricted
 603728971169311 - 加入时间: 2025-12-06, Reason: Secondary_traffic_restricted
 603729508042084 - 加入时间: 2025-11-08, Reason: Secondary_traffic_restricted
-603738634815307 - 加入时间: 2026-01-12, Reason: None
+603738634815307 - 加入时间: 2026-01-12, Reason: Secondary_traffic_restricted (Disagree_0118)
 603740245436184 - 加入时间: 2025-10-26, Reason: Secondary_traffic_restricted
 603740245454312 - 加入时间: 2025-11-26, Reason: None
 603740245487555 - 加入时间: 2026-01-04, Reason: Secondary_traffic_restricted
@@ -413,8 +413,8 @@ goods_id: 603302158779968, 603528181443734, 603560393673551, 603738634815307, 60
 604242756662811 - 加入时间: 2025-11-29, Reason: Out_of_stock
 604248662198873 - 加入时间: 2025-11-11, Reason: Normal
 604251346543974 - 加入时间: 2026-01-16, Reason: None
-604251883428774 - 加入时间: 2026-01-14, Reason: None
-604254030905565 - 加入时间: 2026-01-18, Reason: None
+604251883428774 - 加入时间: 2026-01-14, Reason: Secondary_traffic_restricted (Disagree_0118)
+604254030905565 - 加入时间: 2026-01-18, Reason: Secondary_traffic_restricted (Disagree_0118)
 604258325896967 - 加入时间: 2025-12-04, Reason: Secondary_traffic_restricted
 604261547134714 - 加入时间: 2025-11-04, Reason: Secondary_traffic_restricted
 604271210762561 - 加入时间: 2026-01-03, Reason: Secondary_traffic_restricted
@@ -426,7 +426,7 @@ goods_id: 603302158779968, 603528181443734, 603560393673551, 603738634815307, 60
 604283021974638 - 加入时间: 2025-11-24, Reason: Secondary_traffic_restricted
 604285169426646 - 加入时间: 2025-12-27, Reason: None
 604287316943456 - 加入时间: 2025-12-07, Reason: None
-604292148770559 - 加入时间: 2026-01-18, Reason: None
+604292148770559 - 加入时间: 2026-01-18, Reason: Secondary_traffic_restricted (Disagree_0118)
 604298591179422 - 加入时间: 2025-11-26, Reason: Secondary_traffic_restricted
 604300201794166 - 加入时间: 2025-12-29, Reason: Secondary_traffic_restricted
 604303423055919 - 加入时间: 2025-12-07, Reason: None

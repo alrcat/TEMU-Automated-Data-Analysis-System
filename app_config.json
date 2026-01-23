@@ -15,7 +15,7 @@
     "password": "txw@123",
     "charset": "utf8mb4"
   },
-  "current_table": "ROA1_PL",
+  "current_table": "ROA1_DE",
   "pallet_db": {
     "host": "192.168.31.101",
     "port": 3306,
