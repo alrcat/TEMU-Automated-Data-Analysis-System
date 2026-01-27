@@ -15,12 +15,22 @@ from function2_dynamic_management import dynamic_management
 from function3_optimization import optimization_effect
 from function4_manual_update import (
     manual_update_reason, manual_update_video, manual_update_price,
-    get_available_dates
+    get_available_dates, auto_update_reason, configure_auto_reason_directory,
+    get_auto_reason_config, auto_update_reason_for_table
 )
 from function5_data_filter import data_filter
 from function6_indicator_calculation import (
     indicator_calculation, configure_directories, get_indicator_config,
-    save_indicator_data_to_excel
+    save_indicator_data_to_excel, save_indicator_data_to_excel_for_table,
+    indicator_calculation_for_table
+)
+from function7_batch_operations import (
+    load_batch_countries_config, save_batch_countries_config,
+    add_country_table, remove_country_table, update_selected_tables,
+    validate_country_tables, validate_all_selected_tables,
+    batch_refresh_status, batch_quick_refresh_status,
+    batch_auto_update_reason, batch_save_indicator_data,
+    get_batch_config
 )
 from datetime import datetime
 
@@ -394,6 +404,42 @@ def api_function4_dates():
     return jsonify(result)
 
 
+@app.route('/api/function4/auto_update_reason', methods=['POST'])
+def api_function4_auto_update_reason():
+    """功能4：自动更新Reason（只能更新昨天的数据）"""
+    try:
+        result = auto_update_reason()
+        if result.get('success'):
+            return jsonify(result)
+        else:
+            return jsonify(result), 400
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({
+            'success': False,
+            'error': f'自动更新Reason失败: {str(e)}'
+        }), 500
+
+
+@app.route('/api/function4/auto_reason_config', methods=['GET', 'POST'])
+def api_function4_auto_reason_config():
+    """功能4：自动更新Reason配置管理"""
+    if request.method == 'GET':
+        result = get_auto_reason_config()
+        return jsonify(result)
+    else:
+        # POST: 配置限流数据目录
+        data = request.json
+        restricted_dir = data.get('traffic_restricted_data_dir', '').strip()
+        
+        result = configure_auto_reason_directory(restricted_dir)
+        if result.get('success'):
+            return jsonify(result)
+        else:
+            return jsonify(result), 400
+
+
 @app.route('/api/function5/filter', methods=['POST'])
 def api_function5():
     """功能5：数据筛选"""
@@ -463,10 +509,12 @@ def api_function6_indicators():
     """获取所有指标计算结果"""
     from flask import request
     target_date = None
+    use_cache = True  # 默认使用缓存
     if request.method == 'POST':
         data = request.get_json() or {}
         target_date = data.get('target_date')
-    return indicator_calculation(target_date=target_date)
+        use_cache = data.get('use_cache', True)  # 获取use_cache参数
+    return indicator_calculation(target_date=target_date, use_cache=use_cache)
 
 
 @app.route('/api/function6/config', methods=['GET', 'POST'])
@@ -485,6 +533,239 @@ def api_function6_save():
     data = request.get_json() or {}
     target_date = data.get('target_date')
     return save_indicator_data_to_excel(target_date=target_date)
+
+
+# ===== 功能7：批量国家站点运行 =====
+
+@app.route('/api/function7/config', methods=['GET', 'POST'])
+def api_function7_config():
+    """功能7：批量国家配置管理"""
+    if request.method == 'GET':
+        result = get_batch_config()
+        return jsonify(result)
+    else:
+        # POST: 更新已选中的表
+        data = request.json
+        selected_tables = data.get('selected_tables', [])
+        success, message = update_selected_tables(selected_tables)
+        return jsonify({
+            'success': success,
+            'message': message
+        })
+
+
+@app.route('/api/function7/add_table', methods=['POST'])
+def api_function7_add_table():
+    """功能7：添加国家数据表"""
+    data = request.json
+    table_name = data.get('table_name', '').strip()
+    
+    if not table_name:
+        return jsonify({
+            'success': False,
+            'error': '表名不能为空'
+        }), 400
+    
+    success, message = add_country_table(table_name)
+    return jsonify({
+        'success': success,
+        'message': message
+    })
+
+
+@app.route('/api/function7/remove_table', methods=['POST'])
+def api_function7_remove_table():
+    """功能7：移除国家数据表"""
+    data = request.json
+    table_name = data.get('table_name', '').strip()
+    
+    if not table_name:
+        return jsonify({
+            'success': False,
+            'error': '表名不能为空'
+        }), 400
+    
+    success, message = remove_country_table(table_name)
+    return jsonify({
+        'success': success,
+        'message': message
+    })
+
+
+@app.route('/api/function7/validate_table', methods=['POST'])
+def api_function7_validate_table():
+    """功能7：验证单个国家数据表"""
+    data = request.json
+    table_name = data.get('table_name', '').strip()
+    
+    if not table_name:
+        return jsonify({
+            'success': False,
+            'error': '表名不能为空'
+        }), 400
+    
+    result = validate_country_tables(table_name)
+    return jsonify(result)
+
+
+@app.route('/api/function7/validate_all', methods=['POST'])
+def api_function7_validate_all():
+    """功能7：验证所有已选中的国家数据表"""
+    result = validate_all_selected_tables()
+    return jsonify(result)
+
+
+@app.route('/api/function7/single_refresh', methods=['POST'])
+def api_function7_single_refresh():
+    """功能7：单表刷新Status（供前端进度条逐表调用）"""
+    try:
+        from function2_dynamic_management import refresh_status_data
+        data = request.json or {}
+        table_name = (data.get('table_name') or '').strip()
+        if not table_name:
+            return jsonify({'success': False, 'error': 'table_name不能为空'}), 400
+        sales_table_name = f"{table_name}_Sales"
+        success, message, updated_count, missing_dates_info = refresh_status_data(table_name, sales_table_name)
+        return jsonify({
+            'success': success,
+            'message': message,
+            'table_name': table_name,
+            'updated_count': updated_count,
+            'missing_dates_info': missing_dates_info or []
+        })
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        tn = (request.json or {}).get('table_name', '') if request.is_json else ''
+        return jsonify({'success': False, 'error': str(e), 'table_name': tn}), 500
+
+
+@app.route('/api/function7/single_quick_refresh', methods=['POST'])
+def api_function7_single_quick_refresh():
+    """功能7：单表快速刷新Status（供前端进度条逐表调用）"""
+    try:
+        from function2_dynamic_management import quick_refresh_status_data
+        data = request.json or {}
+        table_name = (data.get('table_name') or '').strip()
+        if not table_name:
+            return jsonify({'success': False, 'error': 'table_name不能为空'}), 400
+        sales_table_name = f"{table_name}_Sales"
+        success, message, updated_count, missing_dates_info = quick_refresh_status_data(table_name, sales_table_name)
+        return jsonify({
+            'success': success,
+            'message': message,
+            'table_name': table_name,
+            'updated_count': updated_count,
+            'missing_dates_info': missing_dates_info or []
+        })
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        tn = (request.json or {}).get('table_name', '') if request.is_json else ''
+        return jsonify({'success': False, 'error': str(e), 'table_name': tn}), 500
+
+
+@app.route('/api/function7/single_auto_reason', methods=['POST'])
+def api_function7_single_auto_reason():
+    """功能7：单表自动更新Reason（供前端进度条逐表调用）"""
+    try:
+        data = request.json or {}
+        table_name = (data.get('table_name') or '').strip()
+        if not table_name:
+            return jsonify({'success': False, 'error': 'table_name不能为空'}), 400
+        result = auto_update_reason_for_table(table_name)
+        result['table_name'] = table_name
+        return jsonify(result)
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        tn = (request.json or {}).get('table_name', '') if request.is_json else ''
+        return jsonify({'success': False, 'error': str(e), 'table_name': tn}), 500
+
+
+@app.route('/api/function7/single_save_indicator', methods=['POST'])
+def api_function7_single_save_indicator():
+    """功能7：单表保存指标数据（供前端进度条逐表调用，先计算再保存）"""
+    try:
+        data = request.json or {}
+        table_name = (data.get('table_name') or '').strip()
+        target_date = data.get('target_date')
+        if not table_name:
+            return jsonify({'success': False, 'error': 'table_name不能为空'}), 400
+        calc = indicator_calculation_for_table(table_name, target_date=target_date, use_cache=False)
+        if not calc.get('success'):
+            return jsonify({'success': False, 'error': calc.get('error', '计算失败'), 'table_name': table_name}), 500
+        save_result = save_indicator_data_to_excel_for_table(table_name, target_date=target_date)
+        save_result['table_name'] = table_name
+        save_result['analysis_time'] = calc.get('analysis_time')
+        return jsonify(save_result)
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        tn = (request.json or {}).get('table_name', '') if request.is_json else ''
+        return jsonify({'success': False, 'error': str(e), 'table_name': tn}), 500
+
+
+@app.route('/api/function7/batch_refresh', methods=['POST'])
+def api_function7_batch_refresh():
+    """功能7：批量刷新Status数据"""
+    try:
+        result = batch_refresh_status()
+        return jsonify(result)
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({
+            'success': False,
+            'error': f'批量刷新失败: {str(e)}'
+        }), 500
+
+
+@app.route('/api/function7/batch_quick_refresh', methods=['POST'])
+def api_function7_batch_quick_refresh():
+    """功能7：批量快速刷新Status数据"""
+    try:
+        result = batch_quick_refresh_status()
+        return jsonify(result)
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({
+            'success': False,
+            'error': f'批量快速刷新失败: {str(e)}'
+        }), 500
+
+
+@app.route('/api/function7/batch_auto_reason', methods=['POST'])
+def api_function7_batch_auto_reason():
+    """功能7：批量自动更新Reason"""
+    try:
+        result = batch_auto_update_reason()
+        return jsonify(result)
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({
+            'success': False,
+            'error': f'批量自动更新Reason失败: {str(e)}'
+        }), 500
+
+
+@app.route('/api/function7/batch_save_indicator', methods=['POST'])
+def api_function7_batch_save_indicator():
+    """功能7：批量保存指标数据"""
+    try:
+        data = request.get_json() or {}
+        target_date = data.get('target_date')
+        result = batch_save_indicator_data(target_date=target_date)
+        return jsonify(result)
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({
+            'success': False,
+            'error': f'批量保存指标数据失败: {str(e)}'
+        }), 500
 
 
 if __name__ == '__main__':

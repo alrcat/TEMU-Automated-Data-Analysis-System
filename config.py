@@ -117,3 +117,26 @@ def update_db_config(traffic_db, sales_db, pallet_db=None, product_db=None):
         config['product_db'] = product_db
     return save_config(config)
 
+
+# ===== 功能4自动更新Reason配置 =====
+
+def load_auto_reason_config():
+    """加载自动更新Reason的配置（限流数据目录）"""
+    config = load_config()
+    return config.get('auto_reason_config', {
+        'traffic_restricted_data_dir': ''
+    })
+
+
+def save_auto_reason_config(config_data):
+    """保存自动更新Reason的配置"""
+    config = load_config()
+    config['auto_reason_config'] = config_data
+    return save_config(config)
+
+
+def get_auto_reason_restricted_dir():
+    """获取限流数据目录路径"""
+    auto_reason_config = load_auto_reason_config()
+    return auto_reason_config.get('traffic_restricted_data_dir', '')
+

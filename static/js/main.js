@@ -206,10 +206,14 @@ async function saveConfig() {
 
 // 功能1：快速查找
 function showFunction1() {
-    // 隐藏功能6面板，显示功能内容区域
+    // 隐藏功能6和功能7面板，显示功能内容区域
     const function6Content = document.getElementById('function6-content');
     if (function6Content) {
         function6Content.style.display = 'none';
+    }
+    const function7Content = document.getElementById('function7-content');
+    if (function7Content) {
+        function7Content.style.display = 'none';
     }
     const functionContent = document.getElementById('function-content');
     if (functionContent) {
@@ -301,10 +305,14 @@ async function doQuickSearch() {
 
 // 功能2：动销品管理
 function showFunction2() {
-    // 隐藏功能6面板，显示功能内容区域
+    // 隐藏功能6和功能7面板，显示功能内容区域
     const function6Content = document.getElementById('function6-content');
     if (function6Content) {
         function6Content.style.display = 'none';
+    }
+    const function7Content = document.getElementById('function7-content');
+    if (function7Content) {
+        function7Content.style.display = 'none';
     }
     const functionContent = document.getElementById('function-content');
     if (functionContent) {
@@ -1489,10 +1497,14 @@ async function exportFunction2Data() {
 
 // 功能3：优化效果数据
 function showFunction3() {
-    // 隐藏功能6面板，显示功能内容区域
+    // 隐藏功能6和功能7面板，显示功能内容区域
     const function6Content = document.getElementById('function6-content');
     if (function6Content) {
         function6Content.style.display = 'none';
+    }
+    const function7Content = document.getElementById('function7-content');
+    if (function7Content) {
+        function7Content.style.display = 'none';
     }
     const functionContent = document.getElementById('function-content');
     if (functionContent) {
@@ -1583,10 +1595,14 @@ async function doOptimization(fieldName) {
 
 // 功能4：手动更新记录
 function showFunction4() {
-    // 隐藏功能6面板，显示功能内容区域
+    // 隐藏功能6和功能7面板，显示功能内容区域
     const function6Content = document.getElementById('function6-content');
     if (function6Content) {
         function6Content.style.display = 'none';
+    }
+    const function7Content = document.getElementById('function7-content');
+    if (function7Content) {
+        function7Content.style.display = 'none';
     }
     const functionContent = document.getElementById('function-content');
     if (functionContent) {
@@ -1600,10 +1616,38 @@ function showFunction4() {
     
     const content = `
         <h4>手动更新记录</h4>
+        
+        <!-- 自动更新Reason区域 -->
+        <div class="card mb-3">
+            <div class="card-header bg-success text-dark">
+                <strong>自动更新Reason</strong>
+                <button class="btn btn-sm btn-light float-end" onclick="showAutoReasonConfigModal()">配置</button>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <p class="mb-2"><strong>功能说明：</strong>批量更新<strong>昨日</strong>所有动销品的Reason状态</p>
+                        <p class="mb-2 text-muted small">
+                            自动识别：缺货(Out_of_stock)、封禁(Blocked)、二次限流(Secondary_traffic_restricted)、正常(Normal)等状态
+                        </p>
+                        <p class="mb-2 text-muted small">
+                            <strong>注意：</strong>只能更新昨日数据，如果昨日没有数据会报错。已有异常状态记录的商品不会被重复标记。
+                        </p>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <button class="btn btn-success btn-lg" onclick="doAutoUpdateReason()">自动更新Reason</button>
+                    </div>
+                </div>
+                <div id="auto-reason-config-display" class="mt-2">
+                    <small class="text-muted">限流数据目录: <span id="auto-reason-dir-display">未配置</span></small>
+                </div>
+            </div>
+        </div>
+        
         <div class="row">
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header">更新Reason</div>
+                    <div class="card-header">更新Reason（手动）</div>
                     <div class="card-body">
                         <div class="mb-3">
                             <label class="form-label">Goods ID:</label>
@@ -1654,8 +1698,44 @@ function showFunction4() {
             </div>
         </div>
         <div id="function4-result" class="mt-3"></div>
+        
+        <!-- 自动更新Reason功能说明 -->
+        <div class="card mt-3">
+            <div class="card-header">
+                <button class="btn btn-link text-decoration-none p-0" type="button" data-bs-toggle="collapse" data-bs-target="#autoReasonHelp">
+                    ▼ 自动更新Reason功能说明
+                </button>
+            </div>
+            <div id="autoReasonHelp" class="collapse">
+                <div class="card-body">
+                    <h6>Reason标记规则：</h6>
+                    <ol>
+                        <li><strong>Out_of_stock (MMDD)</strong> - 缺货：商品表中detail_status为'Out of stock'</li>
+                        <li><strong>Blocked (MMDD)</strong> - 封禁：商品表中detail_status为'Blocked'</li>
+                        <li><strong>Secondary_traffic_restricted (MMDD)</strong> - 二次限流：在限流数据xlsx文件中存在</li>
+                        <li><strong>Blocked (Secondary_traffic_restricted_MMDD)</strong> - 二次限流+封禁：同时满足封禁和限流条件（优先于单纯封禁）</li>
+                        <li><strong>Normal (MMDD)</strong> - 正常：不属于上述任何异常状态</li>
+                        <li><strong>Normal (Xxx_MMDD)</strong> - 恢复正常：之前有异常状态记录，现在恢复正常</li>
+                        <li><strong>Normal (Blocking_MMDD)</strong> - 有风险的正常品：商品表中detail_status为'At Risk'（优先级最高）</li>
+                    </ol>
+                    <h6>重要规则：</h6>
+                    <ul>
+                        <li>对于异常状态（Out_of_stock/Blocked/Secondary_traffic_restricted），如果之前已有相同类型的记录，则跳过不更新</li>
+                        <li>对于Normal状态，无论之前有没有记录都会更新</li>
+                        <li>Normal优先级：Normal (Blocking_MMDD) &gt; Normal (Xxx_MMDD) &gt; Normal (MMDD)</li>
+                        <li>MMDD为日期后缀，如0125表示1月25日</li>
+                    </ul>
+                    <h6>配置说明：</h6>
+                    <p>需要配置"限流数据目录"，该目录下应包含各国家站点子目录（如ROA1_CZ），子目录中的xlsx文件为限流数据。</p>
+                    <p>例如：<code>C:\\Users\\PC\\Desktop\\code\\核价\\二次限流\\ROA1_FR\\priceTemplate_xxx.xlsx</code></p>
+                </div>
+            </div>
+        </div>
     `;
     document.getElementById('function-content').innerHTML = content;
+    
+    // 加载自动更新Reason配置
+    loadAutoReasonConfig();
 }
 
 // 设置昨天日期
@@ -1832,12 +1912,216 @@ async function updatePrice() {
     }
 }
 
+// ===== 自动更新Reason相关函数 =====
+
+// 加载自动更新Reason配置
+async function loadAutoReasonConfig() {
+    try {
+        const response = await fetch('/api/function4/auto_reason_config');
+        const result = await response.json();
+        
+        if (result.success) {
+            const dirDisplay = document.getElementById('auto-reason-dir-display');
+            if (dirDisplay) {
+                const dir = result.data.traffic_restricted_data_dir;
+                dirDisplay.textContent = dir ? dir : '未配置';
+                dirDisplay.className = dir ? 'text-success' : 'text-danger';
+            }
+        }
+    } catch (error) {
+        console.error('加载自动更新Reason配置失败:', error);
+    }
+}
+
+// 显示自动更新Reason配置模态框
+function showAutoReasonConfigModal() {
+    // 创建模态框HTML
+    let modal = document.getElementById('autoReasonConfigModal');
+    if (!modal) {
+        const modalHtml = `
+            <div class="modal fade" id="autoReasonConfigModal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">配置自动更新Reason</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label class="form-label">限流数据目录:</label>
+                                <input type="text" class="form-control" id="auto-reason-restricted-dir" 
+                                    placeholder="例如: C:\\Users\\PC\\Desktop\\code\\核价\\二次限流">
+                                <small class="text-muted">
+                                    该目录下应包含各国家站点子目录（如ROA1_CZ），子目录中的xlsx文件为限流数据
+                                </small>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                            <button type="button" class="btn btn-primary" onclick="saveAutoReasonConfig()">保存配置</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.insertAdjacentHTML('beforeend', modalHtml);
+        modal = document.getElementById('autoReasonConfigModal');
+    }
+    
+    // 加载当前配置到输入框
+    loadAutoReasonConfigToModal();
+    
+    // 显示模态框
+    const bsModal = new bootstrap.Modal(modal);
+    bsModal.show();
+}
+
+// 加载配置到模态框
+async function loadAutoReasonConfigToModal() {
+    try {
+        const response = await fetch('/api/function4/auto_reason_config');
+        const result = await response.json();
+        
+        if (result.success) {
+            document.getElementById('auto-reason-restricted-dir').value = result.data.traffic_restricted_data_dir || '';
+        }
+    } catch (error) {
+        console.error('加载配置到模态框失败:', error);
+    }
+}
+
+// 保存自动更新Reason配置
+async function saveAutoReasonConfig() {
+    const restrictedDir = document.getElementById('auto-reason-restricted-dir').value.trim();
+    
+    if (!restrictedDir) {
+        alert('请填写限流数据目录');
+        return;
+    }
+    
+    try {
+        const response = await fetch('/api/function4/auto_reason_config', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                traffic_restricted_data_dir: restrictedDir
+            })
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            showNotification('配置成功', 'success');
+            bootstrap.Modal.getInstance(document.getElementById('autoReasonConfigModal')).hide();
+            
+            // 刷新配置显示
+            loadAutoReasonConfig();
+        } else {
+            alert('配置失败: ' + result.error);
+        }
+    } catch (error) {
+        console.error('保存配置失败:', error);
+        alert('保存配置失败，请检查网络连接');
+    }
+}
+
+// 执行自动更新Reason
+async function doAutoUpdateReason() {
+    const resultDiv = document.getElementById('function4-result');
+    resultDiv.innerHTML = '<p><strong>正在自动更新Reason，请稍候...</strong></p>';
+    
+    try {
+        const response = await fetch('/api/function4/auto_update_reason', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            // 构建详细的结果显示
+            const stats = result.stats;
+            const dataSources = result.data_sources;
+            
+            let html = `
+                <div class="alert alert-success">
+                    <h5>✓ 自动更新Reason完成</h5>
+                    <p><strong>目标日期：</strong>${result.target_date} (后缀: ${result.date_suffix})</p>
+                    <p><strong>表名：</strong>${result.table_name}</p>
+                </div>
+                <div class="card">
+                    <div class="card-header">更新统计</div>
+                    <div class="card-body">
+                        <table class="table table-sm table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>类别</th>
+                                    <th>数量</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>基础动销品数量</td><td>${stats.base_goods_count}</td></tr>
+                                <tr class="table-danger"><td>缺货 (Out_of_stock)</td><td>${stats.out_of_stock}</td></tr>
+                                <tr class="table-danger"><td>封禁 (Blocked)</td><td>${stats.blocked}</td></tr>
+                                <tr class="table-warning"><td>二次限流 (Secondary_traffic_restricted)</td><td>${stats.secondary_traffic_restricted}</td></tr>
+                                <tr class="table-warning"><td>二次限流+封禁</td><td>${stats.blocked_secondary_traffic_restricted}</td></tr>
+                                <tr class="table-success"><td>正常 (Normal)</td><td>${stats.normal}</td></tr>
+                                <tr class="table-info"><td>恢复正常 (Normal Xxx)</td><td>${stats.normal_recovered}</td></tr>
+                                <tr class="table-info"><td>有风险的正常品 (Normal Blocking)</td><td>${stats.normal_blocking}</td></tr>
+                                <tr class="table-secondary"><td>跳过（已有异常记录）</td><td>${stats.skipped}</td></tr>
+                                <tr class="table-primary"><td><strong>成功更新</strong></td><td><strong>${stats.total_updated}</strong></td></tr>
+                                <tr><td>更新失败</td><td>${stats.total_failed}</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card mt-2">
+                    <div class="card-header">数据来源统计</div>
+                    <div class="card-body">
+                        <ul class="mb-0">
+                            <li>商品表缺货数量: ${dataSources.out_of_stock_goods_count}</li>
+                            <li>商品表封禁数量: ${dataSources.blocked_goods_count}</li>
+                            <li>商品表有风险数量: ${dataSources.at_risk_goods_count}</li>
+                            <li>限流数据xlsx数量: ${dataSources.restricted_goods_count}</li>
+                        </ul>
+                    </div>
+                </div>
+            `;
+            
+            if (result.errors && result.errors.length > 0) {
+                html += `
+                    <div class="alert alert-warning mt-2">
+                        <h6>部分错误（前10条）：</h6>
+                        <ul class="mb-0">
+                            ${result.errors.map(e => `<li>${e}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+            
+            resultDiv.innerHTML = html;
+        } else {
+            resultDiv.innerHTML = `<div class="alert alert-danger">错误: ${result.error}</div>`;
+        }
+    } catch (error) {
+        resultDiv.innerHTML = `<div class="alert alert-danger">请求失败: ${error.message}</div>`;
+    }
+}
+
 // 功能5：数据筛选
 function showFunction5() {
-    // 隐藏功能6面板，显示功能内容区域
+    // 隐藏功能6和功能7面板，显示功能内容区域
     const function6Content = document.getElementById('function6-content');
     if (function6Content) {
         function6Content.style.display = 'none';
+    }
+    const function7Content = document.getElementById('function7-content');
+    if (function7Content) {
+        function7Content.style.display = 'none';
     }
     const functionContent = document.getElementById('function-content');
     if (functionContent) {
@@ -2260,6 +2544,10 @@ async function calculateIndicators() {
         return;
     }
     
+    // 获取非缓存模式选项
+    const noCache = document.getElementById('indicator-no-cache-checkbox').checked;
+    const useCache = !noCache;  // 非缓存模式时，use_cache为false
+    
     // 显示加载状态
     document.getElementById('indicators-loading').style.display = 'block';
     document.getElementById('indicators-empty').style.display = 'none';
@@ -2272,12 +2560,15 @@ async function calculateIndicators() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ target_date: targetDate })
+            body: JSON.stringify({ 
+                target_date: targetDate,
+                use_cache: useCache
+            })
         });
         const result = await response.json();
 
         if (result.success) {
-            displayIndicators(result.data, result.analysis_time);
+            displayIndicators(result.data, result.analysis_time, result.from_cache);
         } else {
             let errorMsg = '计算指标失败: ' + result.error;
             if (result.analysis_time !== undefined && result.analysis_time !== null) {
@@ -2352,18 +2643,22 @@ async function saveIndicatorData() {
 }
 
 // 显示指标结果
-function displayIndicators(data, analysisTime) {
+function displayIndicators(data, analysisTime, fromCache) {
     const resultsContainer = document.getElementById('indicators-results');
     resultsContainer.innerHTML = '';
 
-    // 显示运行时间
+    // 显示运行时间和缓存提示
     if (analysisTime !== undefined && analysisTime !== null) {
         const timeInfoCol = document.createElement('div');
         timeInfoCol.className = 'col-12';
         const timeInfo = document.createElement('div');
         timeInfo.className = 'alert alert-info';
         timeInfo.style.marginBottom = '15px';
-        timeInfo.textContent = `计算耗时: ${analysisTime} 秒`;
+        let timeText = `计算耗时: ${analysisTime} 秒`;
+        if (fromCache) {
+            timeText += ' (来自缓存)';
+        }
+        timeInfo.textContent = timeText;
         timeInfoCol.appendChild(timeInfo);
         resultsContainer.appendChild(timeInfoCol);
     }
@@ -2448,19 +2743,49 @@ function displayIndicators(data, analysisTime) {
     // 处理图表
     const chart30Day = data.indicator_8?.value;
     const chart7Day = data.indicator_9?.value;
+    const chartsContainer = document.getElementById('charts-container');
 
     if (chart30Day) {
         document.getElementById('chart-30day-img').src = `data:image/png;base64,${chart30Day}`;
-        document.getElementById('chart-30day').style.display = 'block';
+        document.getElementById('chart-30day-img').style.display = 'block';
+        // 移除缓存提示（如果有）
+        const cacheHint30 = document.getElementById('chart-30day-cache-hint');
+        if (cacheHint30) cacheHint30.remove();
+    } else if (fromCache) {
+        // 缓存模式下图表为空，显示提示
+        document.getElementById('chart-30day-img').style.display = 'none';
+        const chart30DayContainer = document.getElementById('chart-30day');
+        if (!document.getElementById('chart-30day-cache-hint')) {
+            const hint = document.createElement('div');
+            hint.id = 'chart-30day-cache-hint';
+            hint.className = 'alert alert-warning text-center';
+            hint.innerHTML = '<span class="me-2">📊</span>图表未缓存，勾选"非缓存模式"重新计算可获取图表';
+            chart30DayContainer.appendChild(hint);
+        }
     }
 
     if (chart7Day) {
         document.getElementById('chart-7day-img').src = `data:image/png;base64,${chart7Day}`;
-        document.getElementById('chart-7day').style.display = 'block';
+        document.getElementById('chart-7day-img').style.display = 'block';
+        // 移除缓存提示（如果有）
+        const cacheHint7 = document.getElementById('chart-7day-cache-hint');
+        if (cacheHint7) cacheHint7.remove();
+    } else if (fromCache) {
+        // 缓存模式下图表为空，显示提示
+        document.getElementById('chart-7day-img').style.display = 'none';
+        const chart7DayContainer = document.getElementById('chart-7day');
+        if (!document.getElementById('chart-7day-cache-hint')) {
+            const hint = document.createElement('div');
+            hint.id = 'chart-7day-cache-hint';
+            hint.className = 'alert alert-warning text-center';
+            hint.innerHTML = '<span class="me-2">📊</span>图表未缓存，勾选"非缓存模式"重新计算可获取图表';
+            chart7DayContainer.appendChild(hint);
+        }
     }
 
-    if (chart30Day || chart7Day) {
-        document.getElementById('charts-container').style.display = 'block';
+    // 显示图表容器（有图表或缓存模式都显示）
+    if (chart30Day || chart7Day || fromCache) {
+        chartsContainer.style.display = 'block';
     }
 }
 
@@ -2477,3 +2802,525 @@ document.addEventListener('DOMContentLoaded', function() {
     // 如果需要滚动优化，可以取消注释
     // window.addEventListener('scroll', scrollHandler, { passive: true });
 });
+
+
+// ===== 功能7：批量国家站点运行 =====
+
+// 显示功能7界面
+function showFunction7() {
+    // 隐藏其他功能面板
+    const function6Content = document.getElementById('function6-content');
+    if (function6Content) {
+        function6Content.style.display = 'none';
+    }
+    const function7Content = document.getElementById('function7-content');
+    if (function7Content) {
+        function7Content.style.display = 'block';
+    }
+    const functionContent = document.getElementById('function-content');
+    if (functionContent) {
+        functionContent.style.display = 'none';
+    }
+    
+    // 设置默认日期为昨天
+    setBatchDateToYesterday();
+    
+    // 加载批量国家配置
+    loadBatchCountriesConfig();
+}
+
+// 设置批量操作日期为昨天
+function setBatchDateToYesterday() {
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    const dateInput = document.getElementById('batch-date-input');
+    if (dateInput) {
+        dateInput.value = yesterday.toISOString().split('T')[0];
+    }
+}
+
+// 加载批量国家配置
+async function loadBatchCountriesConfig() {
+    try {
+        const response = await fetch('/api/function7/config');
+        const result = await response.json();
+        
+        if (result.success) {
+            const config = result.data;
+            renderBatchTablesList(config.available_tables || [], config.selected_tables || []);
+        } else {
+            showNotification('加载配置失败: ' + (result.error || '未知错误'), 'error');
+        }
+    } catch (error) {
+        showNotification('加载配置失败: ' + error.message, 'error');
+    }
+}
+
+// 渲染批量国家表列表
+function renderBatchTablesList(availableTables, selectedTables) {
+    const listContainer = document.getElementById('batch-tables-list');
+    
+    if (!availableTables || availableTables.length === 0) {
+        listContainer.innerHTML = '<p class="text-muted text-center mb-0" style="grid-column: 1 / -1;">暂无配置的国家表，请先添加</p>';
+        return;
+    }
+    
+    let html = '';
+    availableTables.forEach(table => {
+        const isSelected = selectedTables.includes(table);
+        html += `
+            <div class="border rounded p-2 d-flex flex-column align-items-center justify-content-center position-relative" 
+                 style="min-height: 80px; background-color: ${isSelected ? '#e7f3ff' : '#fff'};">
+                <div class="form-check mb-2">
+                    <input class="form-check-input batch-table-checkbox" type="checkbox" 
+                           value="${table}" id="batch-table-${table}" 
+                           ${isSelected ? 'checked' : ''} 
+                           onchange="updateBatchSelectedTables()">
+                    <label class="form-check-label small" for="batch-table-${table}" style="cursor: pointer;">
+                        ${table}
+                    </label>
+                </div>
+                <button class="btn btn-sm btn-outline-danger position-absolute top-0 end-0" 
+                        style="padding: 2px 6px; font-size: 10px;"
+                        onclick="removeBatchCountryTable('${table}')" 
+                        title="删除">
+                    <span>🗑️</span>
+                </button>
+            </div>
+        `;
+    });
+    
+    listContainer.innerHTML = html;
+}
+
+// 添加国家数据表
+async function addBatchCountryTable() {
+    const input = document.getElementById('batch-new-table-input');
+    const tableName = input.value.trim();
+    
+    if (!tableName) {
+        showNotification('请输入表名', 'warning');
+        return;
+    }
+    
+    try {
+        const response = await fetch('/api/function7/add_table', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ table_name: tableName })
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            showNotification(result.message, 'success');
+            input.value = '';
+            loadBatchCountriesConfig();
+        } else {
+            showNotification(result.message || result.error, 'error');
+        }
+    } catch (error) {
+        showNotification('添加失败: ' + error.message, 'error');
+    }
+}
+
+// 移除国家数据表
+async function removeBatchCountryTable(tableName) {
+    if (!confirm(`确定要移除表 ${tableName} 吗？`)) {
+        return;
+    }
+    
+    try {
+        const response = await fetch('/api/function7/remove_table', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ table_name: tableName })
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            showNotification(result.message, 'success');
+            loadBatchCountriesConfig();
+        } else {
+            showNotification(result.message || result.error, 'error');
+        }
+    } catch (error) {
+        showNotification('移除失败: ' + error.message, 'error');
+    }
+}
+
+// 更新已选中的表
+async function updateBatchSelectedTables() {
+    const checkboxes = document.querySelectorAll('.batch-table-checkbox:checked');
+    const selectedTables = Array.from(checkboxes).map(cb => cb.value);
+    
+    try {
+        const response = await fetch('/api/function7/config', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ selected_tables: selectedTables })
+        });
+        
+        const result = await response.json();
+        
+        if (!result.success) {
+            showNotification('更新选择失败: ' + (result.message || result.error), 'error');
+        }
+    } catch (error) {
+        showNotification('更新选择失败: ' + error.message, 'error');
+    }
+}
+
+// 全选
+function selectAllBatchTables() {
+    const checkboxes = document.querySelectorAll('.batch-table-checkbox');
+    checkboxes.forEach(cb => cb.checked = true);
+    updateBatchSelectedTables();
+}
+
+// 取消全选
+function deselectAllBatchTables() {
+    const checkboxes = document.querySelectorAll('.batch-table-checkbox');
+    checkboxes.forEach(cb => cb.checked = false);
+    updateBatchSelectedTables();
+}
+
+// 验证所有已选中的表
+async function validateAllSelectedTables() {
+    showNotification('正在验证所选表...', 'info', 0);
+    
+    try {
+        const response = await fetch('/api/function7/validate_all', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' }
+        });
+        
+        const result = await response.json();
+        clearNotifications();
+        
+        if (result.error) {
+            showNotification(result.error, 'error');
+            return;
+        }
+        
+        // 显示验证结果
+        let html = `
+            <div class="alert ${result.success ? 'alert-success' : 'alert-warning'}">
+                <strong>验证完成：</strong>
+                共 ${result.total} 个表，${result.valid} 个有效，${result.invalid} 个无效
+            </div>
+        `;
+        
+        if (result.results) {
+            html += '<div class="table-responsive"><table class="table table-sm table-bordered">';
+            html += '<thead><tr><th>表名</th><th>Traffic</th><th>Sales</th><th>货盘</th><th>商品表</th><th>状态</th></tr></thead>';
+            html += '<tbody>';
+            
+            for (const [tableName, validation] of Object.entries(result.results)) {
+                const checks = validation.checks;
+                html += `<tr>
+                    <td><strong>${tableName}</strong></td>
+                    <td>${checks.traffic.exists ? '✅' : '❌'}</td>
+                    <td>${checks.sales.exists ? '✅' : '❌'}</td>
+                    <td>${checks.pallet.exists ? '✅' : '❌'}</td>
+                    <td>${checks.product.exists ? '✅' : '❌'}</td>
+                    <td>${validation.success ? '<span class="badge bg-success">通过</span>' : '<span class="badge bg-danger">失败</span>'}</td>
+                </tr>`;
+                
+                if (!validation.success && validation.errors) {
+                    html += `<tr><td colspan="6" class="text-danger small">${validation.errors.join('<br>')}</td></tr>`;
+                }
+            }
+            
+            html += '</tbody></table></div>';
+        }
+        
+        showBatchOperationResult(html);
+        
+    } catch (error) {
+        clearNotifications();
+        showNotification('验证失败: ' + error.message, 'error');
+    }
+}
+
+// 显示批量操作结果
+function showBatchOperationResult(html) {
+    const resultDiv = document.getElementById('batch-operation-result');
+    const contentDiv = document.getElementById('batch-result-content');
+    
+    contentDiv.innerHTML = html;
+    resultDiv.style.display = 'block';
+    
+    // 滚动到结果区域
+    resultDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ----- 功能7：批量进度条与取消 -----
+let batchCancelled = false;
+let batchProgressModalInstance = null;
+
+function getBatchSelectedTables() {
+    const checkboxes = document.querySelectorAll('.batch-table-checkbox:checked');
+    return Array.from(checkboxes).map(cb => cb.value);
+}
+
+function setBatchCancelled(value) {
+    batchCancelled = value;
+}
+
+function resetBatchCancelled() {
+    batchCancelled = false;
+}
+
+function showBatchProgressModal(title) {
+    document.getElementById('batchProgressTitle').textContent = title;
+    document.getElementById('batchProgressText').textContent = '准备中...';
+    document.getElementById('batchProgressPercent').textContent = '0%';
+    document.getElementById('batchProgressBar').style.width = '0%';
+    document.getElementById('batchProgressBar').textContent = '0%';
+    document.getElementById('batchProgressBar').setAttribute('aria-valuenow', 0);
+    document.getElementById('batchProgressCurrent').textContent = '—';
+    document.getElementById('batchCancelBtn').style.display = 'inline-block';
+    document.getElementById('batchProgressCloseBtn').style.display = 'none';
+    const el = document.getElementById('batchProgressModal');
+    if (!batchProgressModalInstance) {
+        batchProgressModalInstance = new bootstrap.Modal(el, { backdrop: 'static', keyboard: false });
+    }
+    batchProgressModalInstance.show();
+}
+
+function updateBatchProgress(current, total, tableName) {
+    const pct = total > 0 ? Math.round((current / total) * 100) : 0;
+    document.getElementById('batchProgressText').textContent = `已完成 ${current} / ${total}`;
+    document.getElementById('batchProgressPercent').textContent = pct + '%';
+    const bar = document.getElementById('batchProgressBar');
+    bar.style.width = pct + '%';
+    bar.textContent = pct + '%';
+    bar.setAttribute('aria-valuenow', pct);
+    document.getElementById('batchProgressCurrent').textContent = tableName ? '当前: ' + tableName : '—';
+}
+
+function hideBatchProgressModal(cancelled) {
+    if (batchProgressModalInstance) {
+        batchProgressModalInstance.hide();
+    }
+}
+
+function runBatchWithProgress(options) {
+    const { title, tables, apiUrl, getBody, mapResult } = options;
+    if (!tables || tables.length === 0) {
+        showNotification('没有选中的国家表', 'warning');
+        return Promise.resolve(null);
+    }
+    resetBatchCancelled();
+    const abortController = new AbortController();
+    showBatchProgressModal(title);
+    const cancelBtn = document.getElementById('batchCancelBtn');
+    const onceCancel = () => {
+        setBatchCancelled(true);
+        abortController.abort();
+        if (cancelBtn) {
+            cancelBtn.onclick = null;
+            cancelBtn.disabled = true;
+        }
+    };
+    if (cancelBtn) {
+        cancelBtn.disabled = false;
+        cancelBtn.onclick = onceCancel;
+    }
+    const results = {};
+    let processed = 0;
+    let failed = 0;
+    const total = tables.length;
+    let promise = Promise.resolve();
+    tables.forEach((tableName, index) => {
+        promise = promise.then(async () => {
+            if (batchCancelled) return;
+            updateBatchProgress(index, total, tableName);
+            const body = getBody ? getBody(tableName) : { table_name: tableName };
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body),
+                    signal: abortController.signal
+                });
+                const data = await response.json();
+                const r = mapResult ? mapResult(data) : { success: data.success, message: data.message || data.error };
+                results[tableName] = r;
+                if (r.success) processed++; else failed++;
+            } catch (e) {
+                if (e.name === 'AbortError' || batchCancelled) {
+                    setBatchCancelled(true);
+                    return;
+                }
+                results[tableName] = { success: false, message: e.message || '请求失败' };
+                failed++;
+            }
+        });
+    });
+    return promise.then(() => {
+        if (cancelBtn) cancelBtn.onclick = null;
+        hideBatchProgressModal(batchCancelled);
+        return { success: failed === 0 && !batchCancelled, total, processed, failed, results, cancelled: batchCancelled };
+    });
+}
+
+// 批量刷新Status（串行 + 进度条 + 取消）
+async function batchRefreshStatus() {
+    if (!confirmBatchOperation('批量刷新')) return;
+    clearNotifications();
+    const tables = getBatchSelectedTables();
+    const result = await runBatchWithProgress({
+        title: '批量刷新Status',
+        tables,
+        apiUrl: '/api/function7/single_refresh',
+        getBody: t => ({ table_name: t }),
+        mapResult: d => ({ success: d.success, message: d.message || d.error, updated_count: d.updated_count, missing_dates_info: d.missing_dates_info || [] })
+    });
+    if (result) displayBatchOperationResult('批量刷新Status', result);
+    if (batchCancelled) showNotification('已取消批量刷新', 'warning');
+}
+
+// 批量快速刷新Status
+async function batchQuickRefreshStatus() {
+    if (!confirmBatchOperation('批量快速刷新')) return;
+    clearNotifications();
+    const tables = getBatchSelectedTables();
+    const result = await runBatchWithProgress({
+        title: '批量快速刷新Status',
+        tables,
+        apiUrl: '/api/function7/single_quick_refresh',
+        getBody: t => ({ table_name: t }),
+        mapResult: d => ({ success: d.success, message: d.message || d.error, updated_count: d.updated_count, missing_dates_info: d.missing_dates_info || [] })
+    });
+    if (result) displayBatchOperationResult('批量快速刷新Status', result);
+    if (batchCancelled) showNotification('已取消批量快速刷新', 'warning');
+}
+
+// 批量自动更新Reason
+async function batchAutoUpdateReason() {
+    if (!confirmBatchOperation('批量更新Reason')) return;
+    clearNotifications();
+    const tables = getBatchSelectedTables();
+    const result = await runBatchWithProgress({
+        title: '批量更新Reason',
+        tables,
+        apiUrl: '/api/function7/single_auto_reason',
+        getBody: t => ({ table_name: t }),
+        mapResult: d => ({ success: d.success, message: d.message || d.error, stats: d.stats, skipped: d.skipped })
+    });
+    if (result) displayBatchOperationResult('批量自动更新Reason', result);
+    if (batchCancelled) showNotification('已取消批量更新Reason', 'warning');
+}
+
+// 批量保存指标数据
+async function batchSaveIndicatorData() {
+    if (!confirmBatchOperation('批量保存指标数据')) return;
+    clearNotifications();
+    const dateInput = document.getElementById('batch-date-input');
+    const targetDate = dateInput ? dateInput.value : null;
+    const tables = getBatchSelectedTables();
+    const result = await runBatchWithProgress({
+        title: '批量保存指标数据',
+        tables,
+        apiUrl: '/api/function7/single_save_indicator',
+        getBody: t => ({ table_name: t, target_date: targetDate }),
+        mapResult: d => ({ success: d.success, message: d.message || d.error, calc_time: d.analysis_time })
+    });
+    if (result) displayBatchOperationResult('批量保存指标数据', result);
+    if (batchCancelled) showNotification('已取消批量保存指标', 'warning');
+}
+
+// 确认批量操作
+function confirmBatchOperation(operationName) {
+    const checkboxes = document.querySelectorAll('.batch-table-checkbox:checked');
+    if (checkboxes.length === 0) {
+        showNotification('请先选择要处理的国家表', 'warning');
+        return false;
+    }
+    
+    const selectedTables = Array.from(checkboxes).map(cb => cb.value);
+    return confirm(`确定要对以下 ${selectedTables.length} 个国家表执行"${operationName}"操作吗？\n\n${selectedTables.join('\n')}`);
+}
+
+// 显示批量操作结果
+function displayBatchOperationResult(operationName, result) {
+    const cancelled = result.cancelled === true;
+    let summary = `共 ${result.total} 个表，成功 ${result.processed} 个，失败 ${result.failed} 个`;
+    if (result.skipped !== undefined) summary += `，跳过 ${result.skipped} 个`;
+    if (cancelled) summary += '（已取消）';
+    let html = `
+        <div class="alert ${result.success && !cancelled ? 'alert-success' : 'alert-warning'}">
+            <strong>${operationName}${cancelled ? '已取消' : '完成'}：</strong>
+            ${summary}
+        </div>
+    `;
+    
+    if (result.results) {
+        html += '<div class="accordion" id="batchResultAccordion">';
+        
+        let index = 0;
+        for (const [tableName, tableResult] of Object.entries(result.results)) {
+            const isSuccess = tableResult.success;
+            const isSkipped = tableResult.skipped;
+            
+            let statusBadge = '';
+            if (isSuccess) {
+                statusBadge = '<span class="badge bg-success">成功</span>';
+            } else if (isSkipped) {
+                statusBadge = '<span class="badge bg-warning">跳过</span>';
+            } else {
+                statusBadge = '<span class="badge bg-danger">失败</span>';
+            }
+            
+            html += `
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading${index}">
+                        <button class="accordion-button ${index > 0 ? 'collapsed' : ''}" type="button" 
+                                data-bs-toggle="collapse" data-bs-target="#collapse${index}">
+                            <span class="me-2">${tableName}</span>
+                            ${statusBadge}
+                        </button>
+                    </h2>
+                    <div id="collapse${index}" class="accordion-collapse collapse ${index === 0 ? 'show' : ''}" 
+                         data-bs-parent="#batchResultAccordion">
+                        <div class="accordion-body">
+                            <p><strong>消息：</strong>${tableResult.message || '无'}</p>
+                            ${tableResult.updated_count !== undefined ? `<p><strong>更新数量：</strong>${tableResult.updated_count}</p>` : ''}
+                            ${tableResult.stats ? formatBatchStats(tableResult.stats) : ''}
+                            ${tableResult.calc_time !== undefined ? `<p><strong>计算耗时：</strong>${tableResult.calc_time}秒</p>` : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
+            index++;
+        }
+        
+        html += '</div>';
+    }
+    
+    showBatchOperationResult(html);
+    
+    if (result.success) {
+        showNotification(`${operationName}完成！成功处理 ${result.processed} 个表`, 'success');
+    } else {
+        showNotification(`${operationName}完成，但有 ${result.failed} 个表失败`, 'warning');
+    }
+}
+
+// 格式化批量操作统计数据
+function formatBatchStats(stats) {
+    if (!stats) return '';
+    
+    let html = '<div class="small"><strong>详细统计：</strong><ul class="mb-0">';
+    
+    for (const [key, value] of Object.entries(stats)) {
+        const label = key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+        html += `<li>${label}: ${value}</li>`;
+    }
+    
+    html += '</ul></div>';
+    return html;
+}

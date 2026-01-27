@@ -64,6 +64,104 @@ def load_indicator_config():
     })
 
 
+# ===== 缓存功能 =====
+
+def get_indicator_cache_file_path(table_name, target_date):
+    """
+    获取缓存文件路径
+    返回: 缓存文件路径
+    """
+    cache_dir = 'Cache_Indicator'
+    if not os.path.exists(cache_dir):
+        os.makedirs(cache_dir)
+    
+    # 文件名格式：表名_日期.json，例如：FR_2025-12-16.json
+    # 去掉表名中的ROA1_前缀（如果存在）
+    table_suffix = table_name.replace('ROA1_', '')
+    filename = f"{table_suffix}_{target_date}.json"
+    return os.path.join(cache_dir, filename)
+
+
+def load_indicator_cache(table_name, target_date):
+    """
+    加载指标计算缓存
+    返回: 缓存数据字典，如果不存在则返回None
+    """
+    try:
+        cache_file = get_indicator_cache_file_path(table_name, target_date)
+        if os.path.exists(cache_file):
+            with open(cache_file, 'r', encoding='utf-8') as f:
+                cache_data = json.load(f)
+                return cache_data
+        return None
+    except Exception as e:
+        print(f"加载指标缓存失败: {e}")
+        return None
+
+
+def convert_to_json_serializable(obj):
+    """
+    递归转换对象为JSON可序列化的类型
+    处理 Decimal, set, 等类型
+    """
+    from decimal import Decimal
+    
+    if isinstance(obj, Decimal):
+        return float(obj)
+    elif isinstance(obj, dict):
+        return {k: convert_to_json_serializable(v) for k, v in obj.items()}
+    elif isinstance(obj, (list, tuple, set)):
+        return [convert_to_json_serializable(item) for item in obj]
+    elif isinstance(obj, (int, float, str, bool, type(None))):
+        return obj
+    else:
+        # 其他类型转换为字符串
+        return str(obj)
+
+
+def save_indicator_cache(table_name, target_date, results, analysis_time):
+    """
+    保存指标计算缓存
+    参数:
+        table_name: 表名
+        target_date: 目标日期
+        results: 计算结果字典
+        analysis_time: 分析耗时
+    """
+    try:
+        cache_file = get_indicator_cache_file_path(table_name, target_date)
+        
+        # 构建缓存数据（不包含图表，因为base64图片太大）
+        cache_data = {
+            'table_name': table_name,
+            'target_date': target_date,
+            'analysis_time': analysis_time,
+            'results': {}
+        }
+        
+        # 复制结果，但排除图表数据
+        for key, value in results.items():
+            if key in ['indicator_8', 'indicator_9']:
+                # 图表数据不缓存
+                cache_data['results'][key] = {
+                    'name': value.get('name', ''),
+                    'value': None,  # 图表不缓存
+                    'unit': value.get('unit', '')
+                }
+            else:
+                # 转换所有数据为JSON可序列化格式
+                cache_data['results'][key] = convert_to_json_serializable(value)
+        
+        with open(cache_file, 'w', encoding='utf-8') as f:
+            json.dump(cache_data, f, ensure_ascii=False, indent=2)
+        
+        print(f"指标缓存已保存到: {cache_file}")
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        print(f"保存指标缓存失败: {e}")
+
+
 def save_indicator_config(config_data):
     """保存指标计算配置文件"""
     config = load_config()
@@ -788,11 +886,12 @@ def calculate_7day_gmv_chart():
 
 # ===== Flask路由函数 =====
 
-def indicator_calculation(target_date=None):
+def indicator_calculation(target_date=None, use_cache=True):
     """
     主指标计算函数
     参数:
         target_date: 目标日期（字符串格式 'YYYY-MM-DD'），如果为None则使用昨天（东欧时间-1天）
+        use_cache: 是否使用缓存，默认True。如果为False，重新计算并覆盖缓存
     返回所有指标的计算结果
     """
     import time
@@ -810,8 +909,48 @@ def indicator_calculation(target_date=None):
             else:
                 end_date = target_date
         
+        target_date_str = end_date.strftime('%Y-%m-%d')
         current_table = get_current_table()
         sales_table_name = f"{current_table}_Sales"
+        
+        # 如果使用缓存，先检查缓存
+        if use_cache:
+            cache_file_path = get_indicator_cache_file_path(current_table, target_date_str)
+            print(f"[缓存检查] 表名: {current_table}, 日期: {target_date_str}")
+            print(f"[缓存检查] 缓存文件路径: {cache_file_path}")
+            print(f"[缓存检查] 缓存文件是否存在: {os.path.exists(cache_file_path)}")
+            
+            cache_data = load_indicator_cache(current_table, target_date_str)
+            if cache_data:
+                # 从缓存加载数据，不生成图表（加快速度）
+                print(f"[缓存命中] 直接从缓存返回数据，不生成图表")
+                end_time = time.time()
+                cache_analysis_time = round(end_time - start_time, 2)
+                
+                results = cache_data.get('results', {})
+                
+                # 缓存模式下不生成图表，直接返回None（加快速度）
+                results['indicator_8'] = {
+                    'name': '近30天GMV图',
+                    'value': None,  # 缓存模式不生成图表
+                    'unit': ''
+                }
+                
+                results['indicator_9'] = {
+                    'name': '日均GMV图',
+                    'value': None,  # 缓存模式不生成图表
+                    'unit': ''
+                }
+                
+                return jsonify({
+                    'success': True,
+                    'data': results,
+                    'analysis_time': cache_analysis_time,
+                    'from_cache': True
+                })
+            else:
+                print(f"[缓存未命中] 缓存文件不存在或加载失败，将重新计算")
+        
         results = {}
 
         # 只读取一次Excel数据
@@ -914,34 +1053,54 @@ def indicator_calculation(target_date=None):
             'unit': ''
         }
 
-        # 指标8和9：GMV图表（一次性获取30天数据，7天数据是其子集）
-        df_30day = get_gmv_data(sales_table_name, days=30, end_date=end_date)
-        
-        # 指标8：近30天GMV图
-        chart_8 = generate_gmv_chart(df_30day, '近30天GMV图', 'skyblue', 'red')
-        results['indicator_8'] = {
-            'name': '近30天GMV图',
-            'value': chart_8,
-            'unit': ''
-        }
+        # 指标8和9：GMV图表
+        # 只有在非缓存模式（use_cache=False）时才生成图表
+        if not use_cache:
+            print("[图表生成] 非缓存模式，生成GMV图表")
+            df_30day = get_gmv_data(sales_table_name, days=30, end_date=end_date)
+            
+            # 指标8：近30天GMV图
+            chart_8 = generate_gmv_chart(df_30day, '近30天GMV图', 'skyblue', 'red')
+            results['indicator_8'] = {
+                'name': '近30天GMV图',
+                'value': chart_8,
+                'unit': ''
+            }
 
-        # 指标9：日均GMV图（使用30天数据的后7天）
-        df_7day = df_30day.tail(7).reset_index(drop=True) if len(df_30day) >= 7 else df_30day
-        chart_9 = generate_gmv_chart(df_7day, '日均GMV图（近7日）', 'lightgreen', 'orange')
-        results['indicator_9'] = {
-            'name': '日均GMV图',
-            'value': chart_9,
-            'unit': ''
-        }
+            # 指标9：日均GMV图（使用30天数据的后7天）
+            df_7day = df_30day.tail(7).reset_index(drop=True) if len(df_30day) >= 7 else df_30day
+            chart_9 = generate_gmv_chart(df_7day, '日均GMV图（近7日）', 'lightgreen', 'orange')
+            results['indicator_9'] = {
+                'name': '日均GMV图',
+                'value': chart_9,
+                'unit': ''
+            }
+        else:
+            # 缓存模式下不生成图表
+            print("[图表跳过] 缓存模式，跳过GMV图表生成")
+            results['indicator_8'] = {
+                'name': '近30天GMV图',
+                'value': None,
+                'unit': ''
+            }
+            results['indicator_9'] = {
+                'name': '日均GMV图',
+                'value': None,
+                'unit': ''
+            }
 
         # 计算运行时间
         end_time = time.time()
         analysis_time = round(end_time - start_time, 2)
+        
+        # 保存缓存（无论use_cache是True还是False都保存，以便下次使用）
+        save_indicator_cache(current_table, target_date_str, results, analysis_time)
 
         return jsonify({
             'success': True,
             'data': results,
-            'analysis_time': analysis_time
+            'analysis_time': analysis_time,
+            'from_cache': False
         })
 
     except Exception as e:
@@ -1247,3 +1406,499 @@ def save_indicator_data_to_excel(target_date=None):
             'success': False,
             'error': f'保存指标数据时出错: {str(e)}'
         }), 500
+
+
+# ===== 批量操作支持函数 =====
+
+def get_excel_data_for_table(unpriced_dir, restricted_dir, table_name):
+    """
+    获取指定表的Excel文件中的goods_id数据
+    参数:
+        unpriced_dir: 未核价数据目录
+        restricted_dir: 限流数据目录
+        table_name: 表名（站点名称）
+    返回: (unpriced_goods_ids, restricted_goods_ids)
+    """
+    try:
+        unpriced_goods_ids, restricted_goods_ids = read_excel_files_to_goods_ids(unpriced_dir, restricted_dir, table_name)
+        return unpriced_goods_ids, restricted_goods_ids
+    except Exception as e:
+        print(f"获取Excel数据出错: {e}")
+        import traceback
+        traceback.print_exc()
+        return set(), set()
+
+
+def get_active_products_data_for_table(table_name):
+    """
+    获取指定表的商品表中在售商品数据
+    参数:
+        table_name: 表名
+    返回: (active_goods_ids, at_risk_goods_ids)
+    """
+    _, _, _, product_config = get_db_config()
+
+    try:
+        conn = get_db_connection(product_config)
+        cursor = conn.cursor()
+
+        # 获取Active状态的商品
+        active_query = f"""
+        SELECT DISTINCT goods_id
+        FROM `{table_name}`
+        WHERE detail_status = 'Active'
+        """
+        cursor.execute(active_query)
+        active_results = cursor.fetchall()
+        active_goods_ids = set()
+        for row in active_results:
+            normalized_id = normalize_goods_id(row[0])
+            if normalized_id:
+                active_goods_ids.add(normalized_id)
+
+        # 获取At Risk状态的商品
+        at_risk_query = f"""
+        SELECT DISTINCT goods_id
+        FROM `{table_name}`
+        WHERE detail_status = 'At Risk'
+        """
+        cursor.execute(at_risk_query)
+        at_risk_results = cursor.fetchall()
+        at_risk_goods_ids = set()
+        for row in at_risk_results:
+            normalized_id = normalize_goods_id(row[0])
+            if normalized_id:
+                at_risk_goods_ids.add(normalized_id)
+
+        cursor.close()
+        conn.close()
+
+        return active_goods_ids, at_risk_goods_ids
+
+    except Exception as e:
+        print(f"获取商品数据出错: {e}")
+        return set(), set()
+
+
+def get_sales_data_for_table(table_name, sales_table_name, end_date=None):
+    """
+    获取指定表的销售表中动销商品数据
+    参数:
+        table_name: 表名
+        sales_table_name: 销售表名
+        end_date: 结束日期
+    返回: sales_goods_ids (set)
+    """
+    _, sales_config, _, _ = get_db_config()
+
+    try:
+        conn = get_db_connection(sales_config)
+        cursor = conn.cursor()
+
+        if end_date is None:
+            sales_query = f"""
+            SELECT DISTINCT goods_id
+            FROM `{sales_table_name}`
+            """
+            cursor.execute(sales_query)
+        else:
+            if isinstance(end_date, datetime):
+                end_date = end_date.date()
+            elif isinstance(end_date, str):
+                end_date = datetime.strptime(end_date, '%Y-%m-%d').date()
+            
+            end_date_str = end_date.strftime('%Y-%m-%d')
+            sales_query = f"""
+            SELECT DISTINCT goods_id
+            FROM `{sales_table_name}`
+            WHERE date_label <= %s
+            """
+            cursor.execute(sales_query, (end_date_str,))
+        
+        sales_results = cursor.fetchall()
+        sales_goods_ids = set()
+        for row in sales_results:
+            normalized_id = normalize_goods_id(row[0])
+            if normalized_id:
+                sales_goods_ids.add(normalized_id)
+
+        cursor.close()
+        conn.close()
+
+        return sales_goods_ids
+
+    except Exception as e:
+        print(f"获取销售数据出错: {e}")
+        return set()
+
+
+def get_recent_sales_volume_for_table(sales_table_name, days=7, end_date=None):
+    """
+    获取指定表的近N天日均单量
+    """
+    _, sales_config, _, _ = get_db_config()
+
+    try:
+        conn = get_db_connection(sales_config)
+        cursor = conn.cursor()
+
+        if end_date is None:
+            end_date = (get_eastern_europe_time() - timedelta(days=1)).date()
+        elif isinstance(end_date, datetime):
+            end_date = end_date.date()
+        elif isinstance(end_date, str):
+            end_date = datetime.strptime(end_date, '%Y-%m-%d').date()
+        
+        start_date = end_date - timedelta(days=days-1)
+
+        start_date_str = start_date.strftime('%Y-%m-%d')
+        end_date_str = end_date.strftime('%Y-%m-%d')
+
+        volume_query = f"""
+        SELECT SUM(`Units ordered`) as total_volume
+        FROM `{sales_table_name}`
+        WHERE date_label >= %s AND date_label <= %s
+        """
+        cursor.execute(volume_query, (start_date_str, end_date_str))
+        result = cursor.fetchone()
+        total_volume = result[0] if result[0] else 0
+
+        avg_daily_volume = round(total_volume / days, 2)
+
+        cursor.close()
+        conn.close()
+
+        return avg_daily_volume
+
+    except Exception as e:
+        print(f"获取销售量数据出错: {e}")
+        return 0.0
+
+
+def indicator_calculation_for_table(table_name, target_date=None, use_cache=True):
+    """
+    针对指定表名计算指标（用于批量操作）
+    参数:
+        table_name: 要计算的表名
+        target_date: 目标日期
+        use_cache: 是否使用缓存
+    返回: 计算结果字典（不是jsonify对象）
+    """
+    import time
+    start_time = time.time()
+    
+    try:
+        # 处理日期参数
+        if target_date is None:
+            end_date = (get_eastern_europe_time() - timedelta(days=1)).date()
+        else:
+            if isinstance(target_date, str):
+                end_date = datetime.strptime(target_date, '%Y-%m-%d').date()
+            elif isinstance(target_date, datetime):
+                end_date = target_date.date()
+            else:
+                end_date = target_date
+        
+        target_date_str = end_date.strftime('%Y-%m-%d')
+        sales_table_name = f"{table_name}_Sales"
+        
+        # 如果使用缓存，先检查缓存
+        if use_cache:
+            cache_data = load_indicator_cache(table_name, target_date_str)
+            if cache_data:
+                end_time = time.time()
+                return {
+                    'success': True,
+                    'data': cache_data.get('results', {}),
+                    'analysis_time': round(end_time - start_time, 2),
+                    'from_cache': True
+                }
+        
+        results = {}
+
+        # 获取配置
+        config = load_indicator_config()
+        unpriced_dir = config.get('unpriced_data_dir', '')
+        restricted_dir = config.get('traffic_restricted_data_dir', '')
+        
+        unpriced_goods_ids = set()
+        restricted_goods_ids = set()
+        
+        if unpriced_dir and restricted_dir:
+            unpriced_goods_ids, restricted_goods_ids = get_excel_data_for_table(unpriced_dir, restricted_dir, table_name)
+
+        # 获取商品表数据
+        active_goods_ids, at_risk_goods_ids = get_active_products_data_for_table(table_name)
+        all_active_goods = active_goods_ids.union(at_risk_goods_ids)
+        
+        # 获取销售表数据
+        sales_goods_ids = get_sales_data_for_table(table_name, sales_table_name, end_date=end_date)
+        
+        # 计算公共数据
+        excluded_goods = unpriced_goods_ids.union(restricted_goods_ids)
+        non_restricted_active_goods = all_active_goods - excluded_goods
+        restricted_sales_goods = sales_goods_ids.intersection(restricted_goods_ids)
+
+        # 指标1：非限流在售商品数量
+        count_1 = len(non_restricted_active_goods)
+        results['indicator_1'] = {
+            'name': '非限流在售商品数量',
+            'value': count_1,
+            'unit': '个'
+        }
+
+        # 指标2：二次限流占比
+        restricted_count = len(restricted_goods_ids)
+        denominator = count_1 + restricted_count
+        if denominator > 0:
+            ratio_2 = round((restricted_count / denominator) * 100, 2)
+        else:
+            ratio_2 = 0.0
+        results['indicator_2'] = {
+            'name': '二次限流占比',
+            'value': ratio_2,
+            'unit': '%'
+        }
+
+        # 指标3：历史动销品数量
+        count_3 = len(sales_goods_ids)
+        results['indicator_3'] = {
+            'name': '历史动销品数量',
+            'value': count_3,
+            'unit': '个'
+        }
+
+        # 指标4：在售动销品数量
+        active_sales_goods = non_restricted_active_goods.intersection(sales_goods_ids)
+        count_4 = len(active_sales_goods)
+        results['indicator_4'] = {
+            'name': '在售动销品数量',
+            'value': count_4,
+            'unit': '个',
+            'goods_ids': sorted(list(active_sales_goods))
+        }
+
+        # 指标5：二次限流动销品占比
+        historical_sales_count = len(sales_goods_ids)
+        if historical_sales_count > 0:
+            ratio_5 = round((len(restricted_sales_goods) / historical_sales_count) * 100, 2)
+        else:
+            ratio_5 = 0.0
+        results['indicator_5'] = {
+            'name': '二次限流动销品占比',
+            'value': ratio_5,
+            'unit': '%'
+        }
+
+        # 指标6：日均单量（近7日）
+        volume_6 = get_recent_sales_volume_for_table(sales_table_name, days=7, end_date=end_date)
+        results['indicator_6'] = {
+            'name': '日均单量（近7日）',
+            'value': volume_6,
+            'unit': '个'
+        }
+
+        # 指标7：过程数据展示
+        process_data = {
+            'low_risk_active_count': len(active_goods_ids),
+            'high_risk_active_count': len(at_risk_goods_ids),
+            'restricted_data_count': len(restricted_goods_ids),
+            'unpriced_data_count': len(unpriced_goods_ids),
+            'restricted_sales_count': len(restricted_sales_goods)
+        }
+        results['indicator_7'] = {
+            'name': '过程数据展示',
+            'value': process_data,
+            'unit': ''
+        }
+
+        # 计算运行时间
+        end_time = time.time()
+        analysis_time = round(end_time - start_time, 2)
+        
+        # 保存缓存
+        save_indicator_cache(table_name, target_date_str, results, analysis_time)
+
+        return {
+            'success': True,
+            'data': results,
+            'analysis_time': analysis_time,
+            'from_cache': False
+        }
+
+    except Exception as e:
+        end_time = time.time()
+        analysis_time = round(end_time - start_time, 2)
+        
+        return {
+            'success': False,
+            'error': f'计算指标时出错: {str(e)}',
+            'analysis_time': analysis_time
+        }
+
+
+def save_indicator_data_to_excel_for_table(table_name, target_date=None):
+    """
+    针对指定表名保存指标数据到Excel（用于批量操作）
+    参数:
+        table_name: 要保存的表名
+        target_date: 目标日期
+    返回: 结果字典（不是jsonify对象）
+    """
+    try:
+        # 处理日期参数
+        if target_date is None:
+            record_date = (get_eastern_europe_time() - timedelta(days=1)).date()
+        else:
+            if isinstance(target_date, str):
+                record_date = datetime.strptime(target_date, '%Y-%m-%d').date()
+            elif isinstance(target_date, datetime):
+                record_date = target_date.date()
+            else:
+                record_date = target_date
+        
+        sales_table_name = f"{table_name}_Sales"
+        
+        # 获取配置
+        config = load_indicator_config()
+        unpriced_dir = config.get('unpriced_data_dir', '')
+        restricted_dir = config.get('traffic_restricted_data_dir', '')
+        
+        unpriced_goods_ids = set()
+        restricted_goods_ids = set()
+        
+        if unpriced_dir and restricted_dir:
+            unpriced_goods_ids, restricted_goods_ids = get_excel_data_for_table(unpriced_dir, restricted_dir, table_name)
+        
+        # 获取基础数据
+        active_goods_ids, at_risk_goods_ids = get_active_products_data_for_table(table_name)
+        all_active_goods = active_goods_ids.union(at_risk_goods_ids)
+        sales_goods_ids = get_sales_data_for_table(table_name, sales_table_name, end_date=record_date)
+        
+        excluded_goods = unpriced_goods_ids.union(restricted_goods_ids)
+        non_restricted_active_goods = all_active_goods - excluded_goods
+        restricted_sales_goods = sales_goods_ids.intersection(restricted_goods_ids)
+        
+        # 计算指标数据
+        count_1 = len(non_restricted_active_goods)
+        restricted_count = len(restricted_goods_ids)
+        denominator = count_1 + restricted_count
+        ratio_2 = round((restricted_count / denominator) * 100, 2) if denominator > 0 else 0.0
+        count_3 = len(sales_goods_ids)
+        active_sales_goods = non_restricted_active_goods.intersection(sales_goods_ids)
+        count_4 = len(active_sales_goods)
+        historical_sales_count = len(sales_goods_ids)
+        ratio_5 = round((len(restricted_sales_goods) / historical_sales_count) * 100, 2) if historical_sales_count > 0 else 0.0
+        volume_6 = get_recent_sales_volume_for_table(sales_table_name, days=7, end_date=record_date)
+        
+        process_data = {
+            'low_risk_active_count': len(active_goods_ids),
+            'high_risk_active_count': len(at_risk_goods_ids),
+            'restricted_data_count': len(restricted_goods_ids),
+            'unpriced_data_count': len(unpriced_goods_ids),
+            'restricted_sales_count': len(restricted_sales_goods)
+        }
+        
+        record_date_str = record_date.strftime('%Y-%m-%d')
+        excel_file = '指标体系数据.xlsx'
+        
+        columns = [
+            '记录日期', '上周非限流在售', '本周非限流在售', '增长率（非限流在售）',
+            '二次限流占比', '上周动销品数', '本周动销品数', '上周畅销品数',
+            '本周畅销品数', '上周在售动销品数', '本周在售动销品数', '增长率（在售动销品）',
+            '二次限流动销品占比', '日均单量（近7日）', '无风险active数量',
+            '有风险active数量', '限流数据数量', '未核价数据数量', '历史动销被限流数量'
+        ]
+        
+        # 读取或创建Excel文件
+        if os.path.exists(excel_file):
+            excel_data = pd.read_excel(excel_file, sheet_name=None, engine='openpyxl')
+        else:
+            excel_data = {}
+        
+        if table_name in excel_data:
+            df = excel_data[table_name]
+        else:
+            df = pd.DataFrame(columns=columns)
+            excel_data[table_name] = df
+        
+        for col in columns:
+            if col not in df.columns:
+                df[col] = None
+        
+        row_idx = len(df)
+        if len(df) > 0:
+            last_week_non_restricted = df.iloc[-1]['本周非限流在售'] if pd.notna(df.iloc[-1]['本周非限流在售']) else 0
+            last_week_sales = df.iloc[-1]['本周动销品数'] if pd.notna(df.iloc[-1]['本周动销品数']) else 0
+            last_week_active_sales = df.iloc[-1]['本周在售动销品数'] if pd.notna(df.iloc[-1]['本周在售动销品数']) else 0
+        else:
+            last_week_non_restricted = 0
+            last_week_sales = 0
+            last_week_active_sales = 0
+        
+        if last_week_non_restricted > 0:
+            growth_rate_1 = round(((count_1 - last_week_non_restricted) / last_week_non_restricted) * 100, 2)
+        else:
+            growth_rate_1 = 0.0
+        
+        if last_week_active_sales > 0:
+            growth_rate_2 = round(((count_4 - last_week_active_sales) / last_week_active_sales) * 100, 2)
+        else:
+            growth_rate_2 = 0.0
+        
+        new_row_data = [
+            record_date_str, last_week_non_restricted, count_1, growth_rate_1 / 100.0,
+            ratio_2 / 100.0, last_week_sales, count_3, None, None,
+            last_week_active_sales, count_4, growth_rate_2 / 100.0, ratio_5 / 100.0,
+            volume_6, process_data['low_risk_active_count'], process_data['high_risk_active_count'],
+            process_data['restricted_data_count'], process_data['unpriced_data_count'],
+            process_data['restricted_sales_count']
+        ]
+        
+        if row_idx < len(df):
+            for i, col in enumerate(columns):
+                df.at[row_idx, col] = new_row_data[i]
+        else:
+            new_df = pd.DataFrame([new_row_data], columns=columns)
+            df = pd.concat([df, new_df], ignore_index=True)
+        
+        excel_data[table_name] = df
+        
+        with pd.ExcelWriter(excel_file, engine='openpyxl') as writer:
+            for sheet_name, sheet_df in excel_data.items():
+                sheet_df.to_excel(writer, sheet_name=sheet_name, index=False)
+        
+        # 设置百分比格式
+        try:
+            from openpyxl import load_workbook
+            import openpyxl.utils
+            
+            wb = load_workbook(excel_file)
+            if table_name in wb.sheetnames:
+                ws = wb[table_name]
+                percentage_cols = [3, 4, 11, 12]
+                
+                for col_idx in percentage_cols:
+                    col_letter = openpyxl.utils.get_column_letter(col_idx + 1)
+                    for row_idx in range(2, ws.max_row + 1):
+                        cell = ws[f'{col_letter}{row_idx}']
+                        if cell.value is not None:
+                            cell.number_format = '0.00%'
+                
+                wb.save(excel_file)
+                wb.close()
+        except Exception as format_error:
+            print(f"设置百分比格式时出错: {format_error}")
+        
+        return {
+            'success': True,
+            'message': '保存成功'
+        }
+        
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return {
+            'success': False,
+            'error': f'保存指标数据时出错: {str(e)}'
+        }

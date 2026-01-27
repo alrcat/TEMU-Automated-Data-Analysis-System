@@ -15,7 +15,7 @@
     "password": "txw@123",
     "charset": "utf8mb4"
   },
-  "current_table": "ROA1_AT",
+  "current_table": "ROA1_FR",
   "pallet_db": {
     "host": "192.168.31.101",
     "port": 3306,
@@ -35,5 +35,30 @@
   "indicator_config": {
     "unpriced_data_dir": "C:\\Users\\PC\\Desktop\\code\\核价\\低流量",
     "traffic_restricted_data_dir": "C:\\Users\\PC\\Desktop\\code\\核价\\二次限流"
+  },
+  "auto_reason_config": {
+    "traffic_restricted_data_dir": "C:\\Users\\PC\\Desktop\\code\\核价\\二次限流"
+  },
+  "batch_countries_config": {
+    "available_tables": [
+      "ROA1_NL",
+      "ROA1_PL",
+      "ROA1_DE",
+      "ROA1_FR",
+      "ROA1_BE",
+      "ROA1_RO",
+      "ROA1_CZ",
+      "ROA1_AT"
+    ],
+    "selected_tables": [
+      "ROA1_NL",
+      "ROA1_PL",
+      "ROA1_DE",
+      "ROA1_FR",
+      "ROA1_BE",
+      "ROA1_RO",
+      "ROA1_CZ",
+      "ROA1_AT"
+    ]
   }
 }
