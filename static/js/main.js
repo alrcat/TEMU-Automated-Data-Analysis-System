@@ -1727,6 +1727,8 @@ function showFunction4() {
                     <h6>配置说明：</h6>
                     <p>需要配置"限流数据目录"，该目录下应包含各国家站点子目录（如ROA1_CZ），子目录中的xlsx文件为限流数据。</p>
                     <p>例如：<code>C:\\Users\\PC\\Desktop\\code\\核价\\二次限流\\ROA1_FR\\priceTemplate_xxx.xlsx</code></p>
+                    <h6>补充说明：</h6>
+                    <p>部分 Reason 显示为 None 是因为 Traffic 表没有「昨天」的数据，并非缺货或封禁导致，而可能是二次限流或自然流量枯竭导致流量过低，未被 Temu 统计进下载的表中，这些品实际上仍在售。</p>
                 </div>
             </div>
         </div>
@@ -3328,7 +3330,8 @@ function formatBatchStats(stats) {
     let html = '<div class="small"><strong>详细统计：</strong><ul class="mb-0">';
     
     for (const [key, value] of Object.entries(stats)) {
-        const label = key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+        let label = key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+        if (key === 'total_failed') label = 'Total True Normal';
         html += `<li>${label}: ${value}</li>`;
     }
     

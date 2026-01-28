@@ -819,11 +819,11 @@ def auto_update_reason():
         stats['blocked_backfill'] = 0
         for goods_id in missing_yesterday:
             history = get_goods_reason_history(table_name, goods_id)
-            if not history:
-                continue
-            last_reason_type = parse_reason_type(history[0][1])
-            if last_reason_type in ('Out_of_stock', 'Blocked'):
-                continue
+            # 有历史且最近一条已是缺货/封禁则跳过；历史为空（从未标过Reason）仍回填
+            if history:
+                last_reason_type = parse_reason_type(history[0][1])
+                if last_reason_type in ('Out_of_stock', 'Blocked'):
+                    continue
             last_date = get_last_appearance_date(table_name, goods_id)
             if not last_date:
                 continue
@@ -1032,11 +1032,11 @@ def auto_update_reason_for_table(table_name):
         stats['blocked_backfill'] = 0
         for goods_id in missing_yesterday:
             history = get_goods_reason_history(table_name, goods_id)
-            if not history:
-                continue
-            last_reason_type = parse_reason_type(history[0][1])
-            if last_reason_type in ('Out_of_stock', 'Blocked'):
-                continue
+            # 有历史且最近一条已是缺货/封禁则跳过；历史为空（从未标过Reason）仍回填
+            if history:
+                last_reason_type = parse_reason_type(history[0][1])
+                if last_reason_type in ('Out_of_stock', 'Blocked'):
+                    continue
             last_date = get_last_appearance_date(table_name, goods_id)
             if not last_date:
                 continue
