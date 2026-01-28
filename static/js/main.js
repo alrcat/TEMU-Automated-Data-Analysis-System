@@ -1713,7 +1713,6 @@ function showFunction4() {
                         <li><strong>Out_of_stock (MMDD)</strong> - 缺货：商品表中detail_status为'Out of stock'</li>
                         <li><strong>Blocked (MMDD)</strong> - 封禁：商品表中detail_status为'Blocked'</li>
                         <li><strong>Secondary_traffic_restricted (MMDD)</strong> - 二次限流：在限流数据xlsx文件中存在</li>
-                        <li><strong>Blocked (Secondary_traffic_restricted_MMDD)</strong> - 二次限流+封禁：同时满足封禁和限流条件（优先于单纯封禁）</li>
                         <li><strong>Normal (MMDD)</strong> - 正常：不属于上述任何异常状态</li>
                         <li><strong>Normal (Xxx_MMDD)</strong> - 恢复正常：之前有异常状态记录，现在恢复正常</li>
                         <li><strong>Normal (Blocking_MMDD)</strong> - 有风险的正常品：商品表中detail_status为'At Risk'（优先级最高）</li>
@@ -2068,13 +2067,14 @@ async function doAutoUpdateReason() {
                                 <tr class="table-danger"><td>缺货 (Out_of_stock)</td><td>${stats.out_of_stock}</td></tr>
                                 <tr class="table-danger"><td>封禁 (Blocked)</td><td>${stats.blocked}</td></tr>
                                 <tr class="table-warning"><td>二次限流 (Secondary_traffic_restricted)</td><td>${stats.secondary_traffic_restricted}</td></tr>
-                                <tr class="table-warning"><td>二次限流+封禁</td><td>${stats.blocked_secondary_traffic_restricted}</td></tr>
                                 <tr class="table-success"><td>正常 (Normal)</td><td>${stats.normal}</td></tr>
                                 <tr class="table-info"><td>恢复正常 (Normal Xxx)</td><td>${stats.normal_recovered}</td></tr>
                                 <tr class="table-info"><td>有风险的正常品 (Normal Blocking)</td><td>${stats.normal_blocking}</td></tr>
                                 <tr class="table-secondary"><td>跳过（已有异常记录）</td><td>${stats.skipped}</td></tr>
+                                <tr class="table-danger"><td>缺货回填（昨日无数据）</td><td>${stats.out_of_stock_backfill ?? 0}</td></tr>
+                                <tr class="table-danger"><td>封禁回填（昨日无数据）</td><td>${stats.blocked_backfill ?? 0}</td></tr>
                                 <tr class="table-primary"><td><strong>成功更新</strong></td><td><strong>${stats.total_updated}</strong></td></tr>
-                                <tr><td>更新失败</td><td>${stats.total_failed}</td></tr>
+                                <tr class="table-success"><td>总Normal</td><td>${(stats.normal ?? 0) + (stats.normal_recovered ?? 0) + (stats.normal_blocking ?? 0)}</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -2091,17 +2091,6 @@ async function doAutoUpdateReason() {
                     </div>
                 </div>
             `;
-            
-            if (result.errors && result.errors.length > 0) {
-                html += `
-                    <div class="alert alert-warning mt-2">
-                        <h6>部分错误（前10条）：</h6>
-                        <ul class="mb-0">
-                            ${result.errors.map(e => `<li>${e}</li>`).join('')}
-                        </ul>
-                    </div>
-                `;
-            }
             
             resultDiv.innerHTML = html;
         } else {
@@ -2716,6 +2705,28 @@ function displayIndicators(data, analysisTime, fromCache) {
                 `;
             } else {
                 valueDisplay = `<div class="h4 mb-0">${indicatorData.value}</div>`;
+            }
+        } else if (indicator.key === 'indicator_5') {
+            // 指标5：二次限流动销品占比 - 显示二次限流动销品goods_id列表
+            if (indicatorData.goods_ids && Array.isArray(indicatorData.goods_ids) && indicatorData.goods_ids.length > 0) {
+                const goodsIds = indicatorData.goods_ids;
+                const goodsIdsStr = goodsIds.join(', ');
+                const uniqueId = 'goods-ids-5-' + Date.now();
+                valueDisplay = `
+                    <div class="h4 mb-0">${indicatorData.value}%</div>
+                    <div class="mt-2">
+                        <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#${uniqueId}" aria-expanded="false" aria-controls="${uniqueId}">
+                            查看二次限流动销品goods_id (${goodsIds.length}个)
+                        </button>
+                        <div class="collapse mt-2" id="${uniqueId}">
+                            <div class="card card-body small" style="max-height: 300px; overflow-y: auto; text-align: left; font-family: monospace;">
+                                ${goodsIdsStr}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                valueDisplay = `<div class="h4 mb-0">${indicatorData.value}%</div>`;
             }
         } else {
             valueDisplay = `<div class="h4 mb-0">${indicatorData.value}</div>`;

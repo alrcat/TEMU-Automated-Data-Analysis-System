@@ -354,7 +354,7 @@ def get_product_status_goods(table_name, status_value):
 
 def get_dynamic_goods_with_yesterday_data(table_name, sales_table_name, target_date):
     """
-    获取在流量表中target_date有数据，且在销售表中历史Buyers > 1的动销品goods_id
+    获取在流量表中target_date有数据，且在销售表中历史Buyers >= 1的动销品goods_id
     返回: set of goods_id
     """
     traffic_config, sales_config, _, _ = get_db_config()
@@ -378,12 +378,12 @@ def get_dynamic_goods_with_yesterday_data(table_name, sales_table_name, target_d
             if normalized_id:
                 traffic_goods.add(normalized_id)
         
-        # 获取销售表中历史Buyers > 1的动销品
+        # 获取销售表中历史Buyers >= 1的动销品
         query_sales = f"""
         SELECT goods_id, SUM(COALESCE(Buyers, 0)) as total_buyers
         FROM `{sales_table_name}`
         GROUP BY goods_id
-        HAVING total_buyers > 1
+        HAVING total_buyers >= 1
         """
         cursor_sales.execute(query_sales)
         sales_goods = set()
@@ -407,6 +407,85 @@ def get_dynamic_goods_with_yesterday_data(table_name, sales_table_name, target_d
         import traceback
         traceback.print_exc()
         return set()
+
+
+def get_dynamic_goods_only(table_name, sales_table_name):
+    """
+    获取销售表中历史Buyers >= 1的动销品goods_id（不限定某日是否在流量表）
+    返回: set of goods_id
+    """
+    _, sales_config, _, _ = get_db_config()
+    try:
+        conn = get_db_connection(sales_config)
+        cursor = conn.cursor()
+        query = f"""
+        SELECT goods_id
+        FROM `{sales_table_name}`
+        GROUP BY goods_id
+        HAVING SUM(COALESCE(Buyers, 0)) >= 1
+        """
+        cursor.execute(query)
+        goods_ids = set()
+        for row in cursor.fetchall():
+            normalized_id = normalize_goods_id(row[0])
+            if normalized_id:
+                goods_ids.add(normalized_id)
+        cursor.close()
+        conn.close()
+        return goods_ids
+    except Exception as e:
+        print(f"获取动销品列表出错: {e}")
+        return set()
+
+
+def get_traffic_goods_for_date(table_name, target_date):
+    """
+    获取流量表中target_date有数据的goods_id
+    返回: set of goods_id
+    """
+    traffic_config, _, _, _ = get_db_config()
+    try:
+        conn = get_db_connection(traffic_config)
+        cursor = conn.cursor()
+        query = f"""
+        SELECT DISTINCT goods_id
+        FROM `{table_name}`
+        WHERE date_label = %s
+        """
+        cursor.execute(query, (target_date,))
+        goods_ids = set()
+        for row in cursor.fetchall():
+            normalized_id = normalize_goods_id(row[0])
+            if normalized_id:
+                goods_ids.add(normalized_id)
+        cursor.close()
+        conn.close()
+        return goods_ids
+    except Exception as e:
+        print(f"获取流量表当日商品出错: {e}")
+        return set()
+
+
+def get_last_appearance_date(table_name, goods_id):
+    """
+    获取goods_id在流量表中最后出现的日期（MAX(date_label)）
+    返回: date_label 字符串，若无记录返回 None
+    """
+    traffic_config, _, _, _ = get_db_config()
+    try:
+        conn = get_db_connection(traffic_config)
+        cursor = conn.cursor()
+        query = f"""
+        SELECT MAX(date_label) FROM `{table_name}` WHERE goods_id = %s
+        """
+        cursor.execute(query, (goods_id,))
+        row = cursor.fetchone()
+        cursor.close()
+        conn.close()
+        return row[0] if row and row[0] else None
+    except Exception as e:
+        print(f"获取最后出现日期出错: {e}")
+        return None
 
 
 def check_has_yesterday_data(table_name, target_date):
@@ -545,7 +624,7 @@ def batch_update_reason(table_name, goods_reason_dict, target_date):
                     success_count += 1
                 else:
                     fail_count += 1
-                    errors.append(f"goods_id {goods_id}: 未找到记录")
+                    errors.append(f"[昨日更新] goods_id={goods_id} date={target_date}: 未找到记录（可能流量表与商品表/销售表 goods_id 格式不一致，如前导零）")
             except Exception as e:
                 fail_count += 1
                 errors.append(f"goods_id {goods_id}: {str(e)}")
@@ -559,6 +638,44 @@ def batch_update_reason(table_name, goods_reason_dict, target_date):
     except Exception as e:
         print(f"批量更新Reason出错: {e}")
         return 0, len(goods_reason_dict), [str(e)]
+
+
+def batch_update_reason_multi_date(table_name, goods_date_reason_list):
+    """
+    批量更新Reason字段，每条记录可对应不同 date_label
+    goods_date_reason_list: [(goods_id, date_label, reason_string), ...]
+    返回: (success_count, fail_count, errors)
+    """
+    traffic_config, _, _, _ = get_db_config()
+    success_count = 0
+    fail_count = 0
+    errors = []
+    try:
+        conn = get_db_connection(traffic_config)
+        cursor = conn.cursor()
+        for goods_id, date_label, reason in goods_date_reason_list:
+            try:
+                query = f"""
+                UPDATE `{table_name}`
+                SET Reason = %s
+                WHERE goods_id = %s AND date_label = %s
+                """
+                cursor.execute(query, (reason, goods_id, date_label))
+                if cursor.rowcount > 0:
+                    success_count += 1
+                else:
+                    fail_count += 1
+                    errors.append(f"[回填] goods_id={goods_id} date={date_label}: 未找到记录")
+            except Exception as e:
+                fail_count += 1
+                errors.append(f"[回填] goods_id={goods_id} date={date_label}: {str(e)}")
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return success_count, fail_count, errors
+    except Exception as e:
+        print(f"批量更新Reason(多日期)出错: {e}")
+        return 0, len(goods_date_reason_list), [str(e)]
 
 
 def auto_update_reason():
@@ -600,13 +717,8 @@ def auto_update_reason():
                 'error': f'昨日 ({yesterday}) 在流量表 {table_name} 中没有数据'
             }
         
-        # 获取基础数据：昨天有数据且为动销品的goods_id
+        # 获取基础数据：昨天有数据且为动销品的goods_id（可为空，后续回填仍会处理昨日无数据但为缺货/封禁的动销品）
         base_goods_ids = get_dynamic_goods_with_yesterday_data(table_name, sales_table_name, yesterday)
-        if len(base_goods_ids) == 0:
-            return {
-                'success': False,
-                'error': f'昨日 ({yesterday}) 没有找到符合条件的动销品'
-            }
         
         # 从商品表获取各状态的goods_id
         out_of_stock_goods = get_product_status_goods(table_name, 'Out of stock')
@@ -623,10 +735,6 @@ def auto_update_reason():
         blocked_set = base_goods_ids.intersection(blocked_goods)
         # 二次限流
         restricted_set = base_goods_ids.intersection(restricted_goods)
-        # 二次限流+封禁（优先于单纯封禁）
-        blocked_restricted_set = blocked_set.intersection(restricted_set)
-        # 纯封禁（去除同时限流的）
-        pure_blocked_set = blocked_set - blocked_restricted_set
         
         # 正常品 = 基础集合 - 缺货 - 二次限流 - 封禁
         abnormal_all = out_of_stock_set.union(restricted_set).union(blocked_set)
@@ -641,7 +749,6 @@ def auto_update_reason():
             'out_of_stock': 0,
             'blocked': 0,
             'secondary_traffic_restricted': 0,
-            'blocked_secondary_traffic_restricted': 0,
             'normal': 0,
             'normal_recovered': 0,
             'normal_blocking': 0,
@@ -660,17 +767,8 @@ def auto_update_reason():
             goods_reason_dict[goods_id] = f"Out_of_stock ({date_suffix})"
             stats['out_of_stock'] += 1
         
-        # 2. 处理二次限流+封禁（优先于单纯封禁）
-        for goods_id in blocked_restricted_set:
-            has_record, _ = has_previous_status_record(table_name, goods_id, abnormal_status_types)
-            if has_record:
-                stats['skipped'] += 1
-                continue
-            goods_reason_dict[goods_id] = f"Blocked (Secondary_traffic_restricted_{date_suffix})"
-            stats['blocked_secondary_traffic_restricted'] += 1
-        
-        # 3. 处理纯封禁
-        for goods_id in pure_blocked_set:
+        # 2. 处理封禁（统一为 Blocked (MMDD)）
+        for goods_id in blocked_set:
             has_record, _ = has_previous_status_record(table_name, goods_id, abnormal_status_types)
             if has_record:
                 stats['skipped'] += 1
@@ -678,7 +776,7 @@ def auto_update_reason():
             goods_reason_dict[goods_id] = f"Blocked ({date_suffix})"
             stats['blocked'] += 1
         
-        # 4. 处理纯二次限流（去除封禁的）
+        # 3. 处理二次限流（去除封禁的）
         pure_restricted_set = restricted_set - blocked_set
         for goods_id in pure_restricted_set:
             has_record, _ = has_previous_status_record(table_name, goods_id, abnormal_status_types)
@@ -688,7 +786,7 @@ def auto_update_reason():
             goods_reason_dict[goods_id] = f"Secondary_traffic_restricted ({date_suffix})"
             stats['secondary_traffic_restricted'] += 1
         
-        # 5. 处理正常品
+        # 4. 处理正常品
         for goods_id in normal_set:
             # 检查是否是有风险的正常品（优先级最高）
             if goods_id in normal_at_risk_set:
@@ -707,8 +805,40 @@ def auto_update_reason():
             goods_reason_dict[goods_id] = f"Normal ({date_suffix})"
             stats['normal'] += 1
         
-        # 执行批量更新
+        # 执行批量更新（昨日有数据的记录）
         success_count, fail_count, errors = batch_update_reason(table_name, goods_reason_dict, yesterday)
+        
+        # 回填：昨天流量表无数据、但商品表为缺货/封禁、且为动销品、且历史最近Reason未标缺货/封禁 -> 在最后出现日期上标缺货或封禁+昨日日期
+        dynamic_goods = get_dynamic_goods_only(table_name, sales_table_name)
+        traffic_goods_yesterday = get_traffic_goods_for_date(table_name, yesterday)
+        out_of_stock_dynamic = out_of_stock_goods.intersection(dynamic_goods)
+        blocked_dynamic = blocked_goods.intersection(dynamic_goods)
+        missing_yesterday = (out_of_stock_dynamic.union(blocked_dynamic)) - traffic_goods_yesterday
+        backfill_list = []
+        stats['out_of_stock_backfill'] = 0
+        stats['blocked_backfill'] = 0
+        for goods_id in missing_yesterday:
+            history = get_goods_reason_history(table_name, goods_id)
+            if not history:
+                continue
+            last_reason_type = parse_reason_type(history[0][1])
+            if last_reason_type in ('Out_of_stock', 'Blocked'):
+                continue
+            last_date = get_last_appearance_date(table_name, goods_id)
+            if not last_date:
+                continue
+            if goods_id in out_of_stock_goods:
+                reason_str = f"Out_of_stock ({date_suffix})"
+                stats['out_of_stock_backfill'] += 1
+            else:
+                reason_str = f"Blocked ({date_suffix})"
+                stats['blocked_backfill'] += 1
+            backfill_list.append((goods_id, last_date, reason_str))
+        if backfill_list:
+            backfill_success, backfill_fail, backfill_errors = batch_update_reason_multi_date(table_name, backfill_list)
+            success_count += backfill_success
+            fail_count += backfill_fail
+            errors.extend(backfill_errors)
         
         # 构建返回结果
         result = {
@@ -722,11 +852,12 @@ def auto_update_reason():
                 'out_of_stock': stats['out_of_stock'],
                 'blocked': stats['blocked'],
                 'secondary_traffic_restricted': stats['secondary_traffic_restricted'],
-                'blocked_secondary_traffic_restricted': stats['blocked_secondary_traffic_restricted'],
                 'normal': stats['normal'],
                 'normal_recovered': stats['normal_recovered'],
                 'normal_blocking': stats['normal_blocking'],
                 'skipped': stats['skipped'],
+                'out_of_stock_backfill': stats['out_of_stock_backfill'],
+                'blocked_backfill': stats['blocked_backfill'],
                 'total_updated': success_count,
                 'total_failed': fail_count
             },
@@ -799,13 +930,8 @@ def auto_update_reason_for_table(table_name):
                 'error': f'昨日 ({yesterday}) 在流量表 {table_name} 中没有数据'
             }
         
-        # 获取基础数据：昨天有数据且为动销品的goods_id
+        # 获取基础数据：昨天有数据且为动销品的goods_id（可为空，后续回填仍会处理昨日无数据但为缺货/封禁的动销品）
         base_goods_ids = get_dynamic_goods_with_yesterday_data(table_name, sales_table_name, yesterday)
-        if len(base_goods_ids) == 0:
-            return {
-                'success': False,
-                'error': f'昨日 ({yesterday}) 没有找到符合条件的动销品'
-            }
         
         # 从商品表获取各状态的goods_id
         out_of_stock_goods = get_product_status_goods(table_name, 'Out of stock')
@@ -822,10 +948,6 @@ def auto_update_reason_for_table(table_name):
         blocked_set = base_goods_ids.intersection(blocked_goods)
         # 二次限流
         restricted_set = base_goods_ids.intersection(restricted_goods)
-        # 二次限流+封禁（优先于单纯封禁）
-        blocked_restricted_set = blocked_set.intersection(restricted_set)
-        # 纯封禁（去除同时限流的）
-        pure_blocked_set = blocked_set - blocked_restricted_set
         
         # 正常品 = 基础集合 - 缺货 - 二次限流 - 封禁
         abnormal_all = out_of_stock_set.union(restricted_set).union(blocked_set)
@@ -840,7 +962,6 @@ def auto_update_reason_for_table(table_name):
             'out_of_stock': 0,
             'blocked': 0,
             'secondary_traffic_restricted': 0,
-            'blocked_secondary_traffic_restricted': 0,
             'normal': 0,
             'normal_recovered': 0,
             'normal_blocking': 0,
@@ -859,17 +980,8 @@ def auto_update_reason_for_table(table_name):
             goods_reason_dict[goods_id] = f"Out_of_stock ({date_suffix})"
             stats['out_of_stock'] += 1
         
-        # 2. 处理二次限流+封禁（优先于单纯封禁）
-        for goods_id in blocked_restricted_set:
-            has_record, _ = has_previous_status_record(table_name, goods_id, abnormal_status_types)
-            if has_record:
-                stats['skipped'] += 1
-                continue
-            goods_reason_dict[goods_id] = f"Blocked (Secondary_traffic_restricted_{date_suffix})"
-            stats['blocked_secondary_traffic_restricted'] += 1
-        
-        # 3. 处理纯封禁
-        for goods_id in pure_blocked_set:
+        # 2. 处理封禁（统一为 Blocked (MMDD)）
+        for goods_id in blocked_set:
             has_record, _ = has_previous_status_record(table_name, goods_id, abnormal_status_types)
             if has_record:
                 stats['skipped'] += 1
@@ -877,7 +989,7 @@ def auto_update_reason_for_table(table_name):
             goods_reason_dict[goods_id] = f"Blocked ({date_suffix})"
             stats['blocked'] += 1
         
-        # 4. 处理纯二次限流（去除封禁的）
+        # 3. 处理二次限流（去除封禁的）
         pure_restricted_set = restricted_set - blocked_set
         for goods_id in pure_restricted_set:
             has_record, _ = has_previous_status_record(table_name, goods_id, abnormal_status_types)
@@ -887,7 +999,7 @@ def auto_update_reason_for_table(table_name):
             goods_reason_dict[goods_id] = f"Secondary_traffic_restricted ({date_suffix})"
             stats['secondary_traffic_restricted'] += 1
         
-        # 5. 处理正常品
+        # 4. 处理正常品
         for goods_id in normal_set:
             # 检查是否是有风险的正常品（优先级最高）
             if goods_id in normal_at_risk_set:
@@ -906,8 +1018,40 @@ def auto_update_reason_for_table(table_name):
             goods_reason_dict[goods_id] = f"Normal ({date_suffix})"
             stats['normal'] += 1
         
-        # 执行批量更新
+        # 执行批量更新（昨日有数据的记录）
         success_count, fail_count, errors = batch_update_reason(table_name, goods_reason_dict, yesterday)
+        
+        # 回填：昨天流量表无数据、但商品表为缺货/封禁、且为动销品、且历史最近Reason未标缺货/封禁 -> 在最后出现日期上标缺货或封禁+昨日日期
+        dynamic_goods = get_dynamic_goods_only(table_name, sales_table_name)
+        traffic_goods_yesterday = get_traffic_goods_for_date(table_name, yesterday)
+        out_of_stock_dynamic = out_of_stock_goods.intersection(dynamic_goods)
+        blocked_dynamic = blocked_goods.intersection(dynamic_goods)
+        missing_yesterday = (out_of_stock_dynamic.union(blocked_dynamic)) - traffic_goods_yesterday
+        backfill_list = []
+        stats['out_of_stock_backfill'] = 0
+        stats['blocked_backfill'] = 0
+        for goods_id in missing_yesterday:
+            history = get_goods_reason_history(table_name, goods_id)
+            if not history:
+                continue
+            last_reason_type = parse_reason_type(history[0][1])
+            if last_reason_type in ('Out_of_stock', 'Blocked'):
+                continue
+            last_date = get_last_appearance_date(table_name, goods_id)
+            if not last_date:
+                continue
+            if goods_id in out_of_stock_goods:
+                reason_str = f"Out_of_stock ({date_suffix})"
+                stats['out_of_stock_backfill'] += 1
+            else:
+                reason_str = f"Blocked ({date_suffix})"
+                stats['blocked_backfill'] += 1
+            backfill_list.append((goods_id, last_date, reason_str))
+        if backfill_list:
+            backfill_success, backfill_fail, backfill_errors = batch_update_reason_multi_date(table_name, backfill_list)
+            success_count += backfill_success
+            fail_count += backfill_fail
+            errors.extend(backfill_errors)
         
         # 构建返回结果
         result = {
@@ -921,11 +1065,12 @@ def auto_update_reason_for_table(table_name):
                 'out_of_stock': stats['out_of_stock'],
                 'blocked': stats['blocked'],
                 'secondary_traffic_restricted': stats['secondary_traffic_restricted'],
-                'blocked_secondary_traffic_restricted': stats['blocked_secondary_traffic_restricted'],
                 'normal': stats['normal'],
                 'normal_recovered': stats['normal_recovered'],
                 'normal_blocking': stats['normal_blocking'],
                 'skipped': stats['skipped'],
+                'out_of_stock_backfill': stats['out_of_stock_backfill'],
+                'blocked_backfill': stats['blocked_backfill'],
                 'total_updated': success_count,
                 'total_failed': fail_count
             },

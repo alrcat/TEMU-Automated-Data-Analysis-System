@@ -695,6 +695,7 @@ def calculate_active_sales_products(unpriced_goods_ids=None, restricted_goods_id
 def calculate_secondary_restriction_sales_ratio(unpriced_goods_ids=None, restricted_goods_ids=None):
     """
     指标5：二次限流动销品占比
+    新公式：历史动销被限流数量 / (在售动销品数量 + 历史动销被限流数量) × 100%
     参数: unpriced_goods_ids, restricted_goods_ids - Excel数据（可选，如果为None则从配置读取）
     返回: 百分比值（保留2位小数）
     """
@@ -707,9 +708,13 @@ def calculate_secondary_restriction_sales_ratio(unpriced_goods_ids=None, restric
         if not unpriced_dir or not restricted_dir:
             return 0.0
 
-        _, restricted_goods_ids = get_excel_data(unpriced_dir, restricted_dir)
+        unpriced_goods_ids, restricted_goods_ids = get_excel_data(unpriced_dir, restricted_dir)
 
     try:
+        # 获取在售动销品数量（指标4）
+        _, active_sales_goods = calculate_active_sales_products(unpriced_goods_ids, restricted_goods_ids)
+        count_4 = len(active_sales_goods)
+        
         # 获取历史动销品数据
         _, historical_sales_goods = calculate_historical_sales_products()
 
@@ -717,10 +722,10 @@ def calculate_secondary_restriction_sales_ratio(unpriced_goods_ids=None, restric
         restricted_sales_goods = historical_sales_goods.intersection(restricted_goods_ids)
         restricted_sales_count = len(restricted_sales_goods)
 
-        # 计算占比
-        historical_sales_count = len(historical_sales_goods)
-        if historical_sales_count > 0:
-            ratio = (restricted_sales_count / historical_sales_count) * 100
+        # 计算占比：历史动销被限流数量 / (在售动销品数量 + 历史动销被限流数量) × 100%
+        denominator_5 = count_4 + restricted_sales_count
+        if denominator_5 > 0:
+            ratio = (restricted_sales_count / denominator_5) * 100
             return round(ratio, 2)
         else:
             return 0.0
@@ -1019,16 +1024,19 @@ def indicator_calculation(target_date=None, use_cache=True):
             'goods_ids': sorted(list(active_sales_goods))  # 返回goods_id列表（排序后的列表）
         }
 
-        # 指标5：二次限流动销品占比
-        historical_sales_count = len(sales_goods_ids)
-        if historical_sales_count > 0:
-            ratio_5 = round((len(restricted_sales_goods) / historical_sales_count) * 100, 2)
+        # 指标5：二次限流动销品占比（含二次限流动销品goods_id列表）
+        # 新公式：历史动销被限流数量 / (在售动销品数量 + 历史动销被限流数量) × 100%
+        restricted_sales_count = len(restricted_sales_goods)
+        denominator_5 = count_4 + restricted_sales_count
+        if denominator_5 > 0:
+            ratio_5 = round((restricted_sales_count / denominator_5) * 100, 2)
         else:
             ratio_5 = 0.0
         results['indicator_5'] = {
             'name': '二次限流动销品占比',
             'value': ratio_5,
-            'unit': '%'
+            'unit': '%',
+            'goods_ids': sorted(list(restricted_sales_goods))  # 二次限流的动销品goods_id列表
         }
 
         # 指标6：日均单量（近7日）
@@ -1232,9 +1240,12 @@ def save_indicator_data_to_excel(target_date=None):
         ratio_2 = round((restricted_count / denominator) * 100, 2) if denominator > 0 else 0.0  # 二次限流占比
         count_3 = len(sales_goods_ids)  # 本周动销品数
         active_sales_goods = non_restricted_active_goods.intersection(sales_goods_ids)
-        count_4 = len(active_sales_goods)  # 本周在售动销品数
-        historical_sales_count = len(sales_goods_ids)
-        ratio_5 = round((len(restricted_sales_goods) / historical_sales_count) * 100, 2) if historical_sales_count > 0 else 0.0  # 二次限流动销品占比
+        count_4 = len(active_sales_goods)  # 在售动销品数（不含二次限流）
+        restricted_sales_count = len(restricted_sales_goods)  # 正在二次限流的动销品数
+        count_4_K = count_4 + restricted_sales_count  # 本周在售动销品数（K列：含二次限流动销品）
+        # 二次限流动销品占比：历史动销被限流数量 / (在售动销品数量 + 历史动销被限流数量) × 100%
+        denominator_5 = count_4 + restricted_sales_count
+        ratio_5 = round((restricted_sales_count / denominator_5) * 100, 2) if denominator_5 > 0 else 0.0
         volume_6 = get_recent_sales_volume(sales_table_name, days=7, end_date=record_date)  # 日均单量（近7日）
         
         # 过程数据
@@ -1315,25 +1326,26 @@ def save_indicator_data_to_excel(target_date=None):
             growth_rate_1 = 0.0
         
         if last_week_active_sales > 0:
-            growth_rate_2 = round(((count_4 - last_week_active_sales) / last_week_active_sales) * 100, 2)
+            growth_rate_2 = round(((count_4_K - last_week_active_sales) / last_week_active_sales) * 100, 2)
         else:
             growth_rate_2 = 0.0
         
         # 准备新行数据（使用列表按顺序存储，因为有两个"增长率"列）
         # 注意：百分比值在写入DataFrame时转换为小数（除以100），以便Excel百分比格式正确显示
+        # K列（本周在售动销品数）= 在售动销品数 + 正在二次限流的动销品数
         new_row_data = [
             record_date_str,  # 记录日期
             last_week_non_restricted,  # 上周非限流在售
             count_1,  # 本周非限流在售
-            growth_rate_1 / 100.0,  # 增长率 - 转换为小数
+            growth_rate_1 / 100.0,  # 增长率（非限流在售）- 转换为小数
             ratio_2 / 100.0,  # 二次限流占比 - 转换为小数
             last_week_sales,  # 上周动销品数
             count_3,  # 本周动销品数
             None,  # 上周畅销品数
             None,  # 本周畅销品数
             last_week_active_sales,  # 上周在售动销品数
-            count_4,  # 本周在售动销品数
-            growth_rate_2 / 100.0,  # 增长率（第二个）- 转换为小数
+            count_4_K,  # 本周在售动销品数（K列：含二次限流动销品）
+            growth_rate_2 / 100.0,  # 增长率（在售动销品）- 转换为小数
             ratio_5 / 100.0,  # 二次限流动销品占比 - 转换为小数
             volume_6,  # 日均单量（近7日）
             process_data['low_risk_active_count'],  # 无风险active数量
@@ -1361,35 +1373,27 @@ def save_indicator_data_to_excel(target_date=None):
             for sheet_name, sheet_df in excel_data.items():
                 sheet_df.to_excel(writer, sheet_name=sheet_name, index=False)
         
-        # 使用openpyxl设置百分比格式
+        # 使用openpyxl为所有sheet的D、E、L、M列（除第一行表头）强制保留两位小数的百分位表示
         try:
             from openpyxl import load_workbook
-            from openpyxl.styles import NamedStyle
             import openpyxl.utils
             
             wb = load_workbook(excel_file)
-            if current_table in wb.sheetnames:
-                ws = wb[current_table]
-                
-                # 定义百分比列的索引（从0开始）
-                # 列索引：增长率（非限流在售）(3), 二次限流占比(4), 增长率（在售动销品）(11), 二次限流动销品占比(12)
-                percentage_cols = [3, 4, 11, 12]  # D列(增长率（非限流在售）), E列(二次限流占比), L列(增长率（在售动销品）), M列(二次限流动销品占比)
-                
-                # 设置百分比格式样式
-                percentage_style = NamedStyle(name="percentage_style", number_format='0.00%')
-                
-                # 为所有数据行设置百分比格式（值已经在DataFrame中转换为小数）
-                # 新行的值已经是小数格式，旧行的值也是小数格式（之前已经转换过）
+            # D列(4)、E列(5)、L列(12)、M列(13)，0-based列索引为3,4,11,12
+            percentage_cols = [3, 4, 11, 12]
+            
+            for sheet_name in wb.sheetnames:
+                ws = wb[sheet_name]
                 for col_idx in percentage_cols:
-                    col_letter = openpyxl.utils.get_column_letter(col_idx + 1)  # +1因为Excel列从1开始
-                    # 从第2行开始（第1行是表头）
+                    col_letter = openpyxl.utils.get_column_letter(col_idx + 1)
+                    # 从第2行开始（第1行是表头，不设置）
                     for row_idx in range(2, ws.max_row + 1):
                         cell = ws[f'{col_letter}{row_idx}']
                         if cell.value is not None:
                             cell.number_format = '0.00%'
-                
-                wb.save(excel_file)
-                wb.close()
+            
+            wb.save(excel_file)
+            wb.close()
         except Exception as format_error:
             print(f"设置百分比格式时出错（数据仍会保存）: {format_error}")
             # 即使格式化失败，数据仍然保存成功
@@ -1678,16 +1682,19 @@ def indicator_calculation_for_table(table_name, target_date=None, use_cache=True
             'goods_ids': sorted(list(active_sales_goods))
         }
 
-        # 指标5：二次限流动销品占比
-        historical_sales_count = len(sales_goods_ids)
-        if historical_sales_count > 0:
-            ratio_5 = round((len(restricted_sales_goods) / historical_sales_count) * 100, 2)
+        # 指标5：二次限流动销品占比（含二次限流动销品goods_id列表）
+        # 新公式：历史动销被限流数量 / (在售动销品数量 + 历史动销被限流数量) × 100%
+        restricted_sales_count = len(restricted_sales_goods)
+        denominator_5 = count_4 + restricted_sales_count
+        if denominator_5 > 0:
+            ratio_5 = round((restricted_sales_count / denominator_5) * 100, 2)
         else:
             ratio_5 = 0.0
         results['indicator_5'] = {
             'name': '二次限流动销品占比',
             'value': ratio_5,
-            'unit': '%'
+            'unit': '%',
+            'goods_ids': sorted(list(restricted_sales_goods))
         }
 
         # 指标6：日均单量（近7日）
@@ -1787,8 +1794,11 @@ def save_indicator_data_to_excel_for_table(table_name, target_date=None):
         count_3 = len(sales_goods_ids)
         active_sales_goods = non_restricted_active_goods.intersection(sales_goods_ids)
         count_4 = len(active_sales_goods)
-        historical_sales_count = len(sales_goods_ids)
-        ratio_5 = round((len(restricted_sales_goods) / historical_sales_count) * 100, 2) if historical_sales_count > 0 else 0.0
+        restricted_sales_count = len(restricted_sales_goods)
+        count_4_K = count_4 + restricted_sales_count  # 本周在售动销品数（K列：含二次限流动销品）
+        # 二次限流动销品占比：历史动销被限流数量 / (在售动销品数量 + 历史动销被限流数量) × 100%
+        denominator_5 = count_4 + restricted_sales_count
+        ratio_5 = round((restricted_sales_count / denominator_5) * 100, 2) if denominator_5 > 0 else 0.0
         volume_6 = get_recent_sales_volume_for_table(sales_table_name, days=7, end_date=record_date)
         
         process_data = {
@@ -1796,7 +1806,7 @@ def save_indicator_data_to_excel_for_table(table_name, target_date=None):
             'high_risk_active_count': len(at_risk_goods_ids),
             'restricted_data_count': len(restricted_goods_ids),
             'unpriced_data_count': len(unpriced_goods_ids),
-            'restricted_sales_count': len(restricted_sales_goods)
+            'restricted_sales_count': restricted_sales_count
         }
         
         record_date_str = record_date.strftime('%Y-%m-%d')
@@ -1842,14 +1852,14 @@ def save_indicator_data_to_excel_for_table(table_name, target_date=None):
             growth_rate_1 = 0.0
         
         if last_week_active_sales > 0:
-            growth_rate_2 = round(((count_4 - last_week_active_sales) / last_week_active_sales) * 100, 2)
+            growth_rate_2 = round(((count_4_K - last_week_active_sales) / last_week_active_sales) * 100, 2)
         else:
             growth_rate_2 = 0.0
         
         new_row_data = [
             record_date_str, last_week_non_restricted, count_1, growth_rate_1 / 100.0,
             ratio_2 / 100.0, last_week_sales, count_3, None, None,
-            last_week_active_sales, count_4, growth_rate_2 / 100.0, ratio_5 / 100.0,
+            last_week_active_sales, count_4_K, growth_rate_2 / 100.0, ratio_5 / 100.0,
             volume_6, process_data['low_risk_active_count'], process_data['high_risk_active_count'],
             process_data['restricted_data_count'], process_data['unpriced_data_count'],
             process_data['restricted_sales_count']
@@ -1868,25 +1878,24 @@ def save_indicator_data_to_excel_for_table(table_name, target_date=None):
             for sheet_name, sheet_df in excel_data.items():
                 sheet_df.to_excel(writer, sheet_name=sheet_name, index=False)
         
-        # 设置百分比格式
+        # 为所有sheet的D、E、L、M列（除第一行表头）强制保留两位小数的百分位表示
         try:
             from openpyxl import load_workbook
             import openpyxl.utils
             
             wb = load_workbook(excel_file)
-            if table_name in wb.sheetnames:
-                ws = wb[table_name]
-                percentage_cols = [3, 4, 11, 12]
-                
+            percentage_cols = [3, 4, 11, 12]  # D,E,L,M列
+            for sheet_name in wb.sheetnames:
+                ws = wb[sheet_name]
                 for col_idx in percentage_cols:
                     col_letter = openpyxl.utils.get_column_letter(col_idx + 1)
                     for row_idx in range(2, ws.max_row + 1):
                         cell = ws[f'{col_letter}{row_idx}']
                         if cell.value is not None:
                             cell.number_format = '0.00%'
-                
-                wb.save(excel_file)
-                wb.close()
+            
+            wb.save(excel_file)
+            wb.close()
         except Exception as format_error:
             print(f"设置百分比格式时出错: {format_error}")
         
